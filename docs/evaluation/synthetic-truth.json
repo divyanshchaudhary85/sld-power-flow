@@ -1,0 +1,41 @@
+{
+  "id": "two-equipment-synthetic",
+  "components": [
+    {
+      "id": "b",
+      "label": "BUS",
+      "type": "busbar",
+      "page": 1,
+      "bbox": {
+        "x_min": 0.1,
+        "y_min": 0.1,
+        "x_max": 0.16,
+        "y_max": 0.16
+      }
+    },
+    {
+      "id": "l",
+      "label": "LOAD",
+      "type": "load",
+      "page": 1,
+      "bbox": {
+        "x_min": 0.5,
+        "y_min": 0.1,
+        "x_max": 0.56,
+        "y_max": 0.16
+      }
+    }
+  ],
+  "connections": [
+    [
+      {
+        "element": "b",
+        "role": "bus"
+      },
+      {
+        "element": "l",
+        "role": "bus"
+      }
+    ]
+  ]
+}

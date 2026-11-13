@@ -1,0 +1,50 @@
+{
+  "fixture": "two-equipment-synthetic",
+  "mode": "deterministic_fixture",
+  "claim": "Measures deterministic merge/topology code against supplied synthetic observations; not live vision accuracy.",
+  "components": {
+    "truePositives": 2,
+    "predicted": 2,
+    "expected": 2,
+    "precision": 1,
+    "recall": 1,
+    "f1": 1
+  },
+  "text": {
+    "truePositives": 2,
+    "predicted": 2,
+    "expected": 2,
+    "precision": 1,
+    "recall": 1,
+    "f1": 1
+  },
+  "connections": {
+    "truePositives": 1,
+    "predicted": 1,
+    "expected": 1,
+    "precision": 1,
+    "recall": 1,
+    "f1": 1
+  },
+  "evaluated_at": "2026-11-13T11:13:23.060Z",
+  "case_id": "72021022-99fe-4297-a872-68df5ddc39a5",
+  "revision": 0,
+  "review_status": "pending",
+  "human_edits_present": false,
+  "runs": [
+    {
+      "id": "run-test",
+      "provider": "deterministic-test-fixture",
+      "model": "none",
+      "started_at": "2026-11-13T00:00:00Z",
+      "success_count": 2,
+      "tile_count": 2
+    }
+  ],
+  "limitations": [
+    "Only supplied human-labelled truth is scored; ground-truth correctness is not automatically verified.",
+    "Evaluate the unedited extraction draft to measure extraction. Corrected cases measure the combined extraction and human review process.",
+    "Connections are pairwise same-net terminal relationships; a net with n labelled terminals requires n*(n-1)/2 truth pairs.",
+    "This evaluates component type/location, exact normalized label text and terminal connectivity separately. It does not certify engineering attribute accuracy."
+  ]
+}

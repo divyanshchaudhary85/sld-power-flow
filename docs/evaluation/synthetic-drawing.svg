@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000">
+  <rect width="1000" height="1000" fill="white"/>
+  <g fill="none" stroke="#111" stroke-width="3">
+    <path d="M100 135H160" stroke-width="8"/>
+    <path d="M130 135V160H530"/>
+    <path d="M500 100H560L530 160Z"/>
+  </g>
+  <g font-family="sans-serif" font-size="18" fill="#111"><text x="100" y="118">BUS</text><text x="500" y="88">LOAD</text></g>
+  <g font-family="sans-serif" font-size="16" fill="#555">
+    <text x="60" y="400">Deterministic pipeline evaluation fixture</text>
+    <text x="60" y="430">Synthetic observations are supplied separately. No live vision accuracy is asserted.</text>
+    <text x="60" y="460">This fixture has no electrical ratings and is not a runnable engineering study.</text>
+  </g>
+</svg>

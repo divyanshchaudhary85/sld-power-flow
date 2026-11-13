@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:sld-power-flow:extraction-truth:1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "components", "connections"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "components": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["id", "type", "label", "page", "bbox"], "properties": {
+      "id": {"type": "string", "minLength": 1},
+      "type": {"enum": ["busbar", "line", "cable", "transformer_2w", "external_grid", "generator", "static_generator", "load", "motor", "shunt", "circuit_breaker", "disconnector", "fuse", "unknown"]},
+      "label": {"type": ["string", "null"]}, "page": {"type": "integer", "minimum": 1}, "bbox": {"$ref": "#/$defs/box"}
+    }}},
+    "connections": {"type": "array", "items": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"$ref": "#/$defs/endpoint"}}}
+  },
+  "$defs": {
+    "box": {"type": "object", "additionalProperties": false, "required": ["x_min", "y_min", "x_max", "y_max"], "properties": {
+      "x_min": {"type": "number", "minimum": 0, "maximum": 1}, "y_min": {"type": "number", "minimum": 0, "maximum": 1},
+      "x_max": {"type": "number", "minimum": 0, "maximum": 1}, "y_max": {"type": "number", "minimum": 0, "maximum": 1}
+    }},
+    "endpoint": {"type": "object", "additionalProperties": false, "required": ["element", "role"], "properties": {
+      "element": {"type": "string", "minLength": 1}, "role": {"enum": ["bus", "from", "to", "hv", "lv", "a", "b"]}
+    }}
+  }
+}

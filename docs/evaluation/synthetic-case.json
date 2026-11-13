@@ -1,0 +1,1875 @@
+{
+  "schema_version": "1.0.0",
+  "case_id": "72021022-99fe-4297-a872-68df5ddc39a5",
+  "revision": 0,
+  "meta": {
+    "name": {
+      "status": "known",
+      "value": "Untitled study",
+      "provenance": {
+        "source": "user",
+        "changed_at": "2026-11-13T11:13:12.127Z",
+        "supersedes_path": null,
+        "evidence": []
+      },
+      "derivation": null
+    },
+    "network_type": {
+      "status": "missing",
+      "reason": "not_shown",
+      "candidates": [],
+      "evidence": []
+    },
+    "frequency_hz": {
+      "status": "missing",
+      "reason": "not_shown",
+      "candidates": [],
+      "evidence": []
+    },
+    "symbol_set": {
+      "status": "missing",
+      "reason": "not_shown",
+      "candidates": [],
+      "evidence": []
+    },
+    "base_mva": {
+      "status": "missing",
+      "reason": "not_shown",
+      "candidates": [],
+      "evidence": []
+    },
+    "case_origin": {
+      "status": "known",
+      "value": "uploaded",
+      "provenance": {
+        "source": "user",
+        "changed_at": "2026-11-13T11:13:12.127Z",
+        "supersedes_path": null,
+        "evidence": []
+      },
+      "derivation": null
+    },
+    "description": {
+      "status": "known",
+      "value": null,
+      "provenance": {
+        "source": "user",
+        "changed_at": "2026-11-13T11:13:12.127Z",
+        "supersedes_path": null,
+        "evidence": []
+      },
+      "derivation": null
+    },
+    "created_at": "2026-11-13T11:13:12.127Z",
+    "modified_at": "2026-11-13T11:13:12.127Z",
+    "fixture_id": null,
+    "source_case_hash": null
+  },
+  "settings": {
+    "slack_element_id": {
+      "status": "missing",
+      "reason": "not_shown",
+      "candidates": [],
+      "evidence": []
+    },
+    "slack_confirmed": {
+      "status": "missing",
+      "reason": "not_shown",
+      "candidates": [],
+      "evidence": []
+    },
+    "base_confirmed": {
+      "status": "missing",
+      "reason": "not_shown",
+      "candidates": [],
+      "evidence": []
+    },
+    "voltage_min_pu": {
+      "status": "missing",
+      "reason": "not_shown",
+      "candidates": [],
+      "evidence": []
+    },
+    "voltage_max_pu": {
+      "status": "missing",
+      "reason": "not_shown",
+      "candidates": [],
+      "evidence": []
+    },
+    "branch_warning_percent": {
+      "status": "missing",
+      "reason": "not_shown",
+      "candidates": [],
+      "evidence": []
+    },
+    "branch_alarm_percent": {
+      "status": "missing",
+      "reason": "not_shown",
+      "candidates": [],
+      "evidence": []
+    },
+    "transformer_z_min_percent": {
+      "status": "missing",
+      "reason": "not_shown",
+      "candidates": [],
+      "evidence": []
+    },
+    "transformer_z_max_percent": {
+      "status": "missing",
+      "reason": "not_shown",
+      "candidates": [],
+      "evidence": []
+    },
+    "nominal_voltage_tolerance_percent": {
+      "status": "missing",
+      "reason": "not_shown",
+      "candidates": [],
+      "evidence": []
+    },
+    "low_confidence_threshold": {
+      "status": "missing",
+      "reason": "not_shown",
+      "candidates": [],
+      "evidence": []
+    },
+    "voltage_unit_slip_ratio": {
+      "status": "missing",
+      "reason": "not_shown",
+      "candidates": [],
+      "evidence": []
+    },
+    "power_unit_slip_ratio": {
+      "status": "missing",
+      "reason": "not_shown",
+      "candidates": [],
+      "evidence": []
+    },
+    "slack_import_limit_mw": {
+      "status": "missing",
+      "reason": "not_shown",
+      "candidates": [],
+      "evidence": []
+    },
+    "allow_slack_export": {
+      "status": "missing",
+      "reason": "not_shown",
+      "candidates": [],
+      "evidence": []
+    },
+    "solver_tolerance_mva": {
+      "status": "missing",
+      "reason": "not_shown",
+      "candidates": [],
+      "evidence": []
+    },
+    "max_iterations": {
+      "status": "missing",
+      "reason": "not_shown",
+      "candidates": [],
+      "evidence": []
+    },
+    "enforce_q_limits": {
+      "status": "missing",
+      "reason": "not_shown",
+      "candidates": [],
+      "evidence": []
+    },
+    "conventions": {
+      "positive_sequence": true,
+      "balanced": true,
+      "algorithm": "newton_raphson",
+      "voltage_angles": "degrees",
+      "branch_power_sign": "positive_from_bus_into_element",
+      "generator_power_sign": "positive_injection",
+      "load_power_sign": "positive_consumption",
+      "shunt_power_sign": "positive_consumption_inductive_q",
+      "bus_net_power_sign": "positive_injection",
+      "transformer_equivalent": "t",
+      "tap_control": "fixed_user_position",
+      "distributed_slack": false
+    },
+    "additional_rule_thresholds": []
+  },
+  "source_files": [
+    {
+      "file_id": "drawing",
+      "name": "deterministic-fixture.png",
+      "media_type": "image/png",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "byte_size": 1,
+      "browser_blob_key": null,
+      "pages": [
+        {
+          "page": 1,
+          "original_width": 1000,
+          "original_height": 1000,
+          "original_unit": "px",
+          "raster_width": 1000,
+          "raster_height": 1000,
+          "raster_dpi": 300,
+          "rotation_degree": 0,
+          "deskew_transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "title_block": null,
+          "legend": null,
+          "text_spans": [],
+          "tiles": [
+            {
+              "id": "tile-0",
+              "bbox": {
+                "x_min": 0,
+                "y_min": 0,
+                "x_max": 1,
+                "y_max": 1
+              },
+              "raster_width": 1000,
+              "raster_height": 1000,
+              "overlap_fraction": 0.2,
+              "scale": 1,
+              "status": "valid",
+              "extraction_run_id": "run-test"
+            },
+            {
+              "id": "tile-1",
+              "bbox": {
+                "x_min": 0,
+                "y_min": 0,
+                "x_max": 1,
+                "y_max": 1
+              },
+              "raster_width": 1000,
+              "raster_height": 1000,
+              "overlap_fraction": 0.2,
+              "scale": 1,
+              "status": "valid",
+              "extraction_run_id": "run-test"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "extraction": {
+    "runs": [
+      {
+        "id": "run-test",
+        "provider": "deterministic-test-fixture",
+        "model": "none",
+        "request_schema_version": "1",
+        "prompt_version": "1",
+        "started_at": "2026-11-13T00:00:00Z",
+        "ended_at": null,
+        "tile_count": 2,
+        "success_count": 2,
+        "retry_count": 0,
+        "failures": [],
+        "input_tokens": null,
+        "output_tokens": null,
+        "reported_cost": null,
+        "reported_cost_currency": null
+      }
+    ],
+    "observations": [
+      {
+        "id": "tile-0/component/BUS",
+        "tile_id": "tile-0",
+        "detected_type": {
+          "status": "known",
+          "value": "busbar",
+          "provenance": {
+            "source": "drawing",
+            "confidence": 0.95,
+            "evidence": [
+              {
+                "file_id": "drawing",
+                "page": 1,
+                "bbox": {
+                  "x_min": 0.1,
+                  "y_min": 0.1,
+                  "x_max": 0.16,
+                  "y_max": 0.16
+                },
+                "text_span_ids": []
+              }
+            ],
+            "extraction_run_id": "run-test",
+            "reviewed": false
+          },
+          "derivation": null
+        },
+        "label": {
+          "status": "known",
+          "value": "BUS",
+          "provenance": {
+            "source": "drawing",
+            "confidence": 0.95,
+            "evidence": [
+              {
+                "file_id": "drawing",
+                "page": 1,
+                "bbox": {
+                  "x_min": 0.1,
+                  "y_min": 0.1,
+                  "x_max": 0.16,
+                  "y_max": 0.16
+                },
+                "text_span_ids": []
+              }
+            ],
+            "extraction_run_id": "run-test",
+            "reviewed": false
+          },
+          "derivation": null
+        },
+        "attributes": [],
+        "source_ref": {
+          "file_id": "drawing",
+          "page": 1,
+          "bbox": {
+            "x_min": 0.1,
+            "y_min": 0.1,
+            "x_max": 0.16,
+            "y_max": 0.16
+          },
+          "text_span_ids": []
+        },
+        "confidence": 0.95,
+        "terminals": [
+          {
+            "id": "tile-0/component/BUS/terminal/port",
+            "observation_id": "tile-0/component/BUS",
+            "position": {
+              "x": 130,
+              "y": 160
+            },
+            "source_ref": {
+              "file_id": "drawing",
+              "page": 1,
+              "bbox": {
+                "x_min": 0.13,
+                "y_min": 0.16,
+                "x_max": 0.13,
+                "y_max": 0.16
+              },
+              "text_span_ids": []
+            },
+            "attached_observation_id": {
+              "status": "missing",
+              "reason": "not_shown",
+              "candidates": [],
+              "evidence": []
+            }
+          }
+        ],
+        "line_paths": []
+      },
+      {
+        "id": "tile-0/component/LOAD",
+        "tile_id": "tile-0",
+        "detected_type": {
+          "status": "known",
+          "value": "load",
+          "provenance": {
+            "source": "drawing",
+            "confidence": 0.95,
+            "evidence": [
+              {
+                "file_id": "drawing",
+                "page": 1,
+                "bbox": {
+                  "x_min": 0.5,
+                  "y_min": 0.1,
+                  "x_max": 0.56,
+                  "y_max": 0.16
+                },
+                "text_span_ids": []
+              }
+            ],
+            "extraction_run_id": "run-test",
+            "reviewed": false
+          },
+          "derivation": null
+        },
+        "label": {
+          "status": "known",
+          "value": "LOAD",
+          "provenance": {
+            "source": "drawing",
+            "confidence": 0.95,
+            "evidence": [
+              {
+                "file_id": "drawing",
+                "page": 1,
+                "bbox": {
+                  "x_min": 0.5,
+                  "y_min": 0.1,
+                  "x_max": 0.56,
+                  "y_max": 0.16
+                },
+                "text_span_ids": []
+              }
+            ],
+            "extraction_run_id": "run-test",
+            "reviewed": false
+          },
+          "derivation": null
+        },
+        "attributes": [],
+        "source_ref": {
+          "file_id": "drawing",
+          "page": 1,
+          "bbox": {
+            "x_min": 0.5,
+            "y_min": 0.1,
+            "x_max": 0.56,
+            "y_max": 0.16
+          },
+          "text_span_ids": []
+        },
+        "confidence": 0.95,
+        "terminals": [
+          {
+            "id": "tile-0/component/LOAD/terminal/port",
+            "observation_id": "tile-0/component/LOAD",
+            "position": {
+              "x": 530,
+              "y": 160
+            },
+            "source_ref": {
+              "file_id": "drawing",
+              "page": 1,
+              "bbox": {
+                "x_min": 0.53,
+                "y_min": 0.16,
+                "x_max": 0.53,
+                "y_max": 0.16
+              },
+              "text_span_ids": []
+            },
+            "attached_observation_id": {
+              "status": "missing",
+              "reason": "not_shown",
+              "candidates": [],
+              "evidence": []
+            }
+          }
+        ],
+        "line_paths": []
+      },
+      {
+        "id": "tile-1/component/BUS",
+        "tile_id": "tile-1",
+        "detected_type": {
+          "status": "known",
+          "value": "busbar",
+          "provenance": {
+            "source": "drawing",
+            "confidence": 0.95,
+            "evidence": [
+              {
+                "file_id": "drawing",
+                "page": 1,
+                "bbox": {
+                  "x_min": 0.1,
+                  "y_min": 0.1,
+                  "x_max": 0.16,
+                  "y_max": 0.16
+                },
+                "text_span_ids": []
+              }
+            ],
+            "extraction_run_id": "run-test",
+            "reviewed": false
+          },
+          "derivation": null
+        },
+        "label": {
+          "status": "known",
+          "value": "BUS",
+          "provenance": {
+            "source": "drawing",
+            "confidence": 0.95,
+            "evidence": [
+              {
+                "file_id": "drawing",
+                "page": 1,
+                "bbox": {
+                  "x_min": 0.1,
+                  "y_min": 0.1,
+                  "x_max": 0.16,
+                  "y_max": 0.16
+                },
+                "text_span_ids": []
+              }
+            ],
+            "extraction_run_id": "run-test",
+            "reviewed": false
+          },
+          "derivation": null
+        },
+        "attributes": [],
+        "source_ref": {
+          "file_id": "drawing",
+          "page": 1,
+          "bbox": {
+            "x_min": 0.1,
+            "y_min": 0.1,
+            "x_max": 0.16,
+            "y_max": 0.16
+          },
+          "text_span_ids": []
+        },
+        "confidence": 0.95,
+        "terminals": [
+          {
+            "id": "tile-1/component/BUS/terminal/port",
+            "observation_id": "tile-1/component/BUS",
+            "position": {
+              "x": 130,
+              "y": 160
+            },
+            "source_ref": {
+              "file_id": "drawing",
+              "page": 1,
+              "bbox": {
+                "x_min": 0.13,
+                "y_min": 0.16,
+                "x_max": 0.13,
+                "y_max": 0.16
+              },
+              "text_span_ids": []
+            },
+            "attached_observation_id": {
+              "status": "missing",
+              "reason": "not_shown",
+              "candidates": [],
+              "evidence": []
+            }
+          }
+        ],
+        "line_paths": []
+      },
+      {
+        "id": "tile-1/component/LOAD",
+        "tile_id": "tile-1",
+        "detected_type": {
+          "status": "known",
+          "value": "load",
+          "provenance": {
+            "source": "drawing",
+            "confidence": 0.95,
+            "evidence": [
+              {
+                "file_id": "drawing",
+                "page": 1,
+                "bbox": {
+                  "x_min": 0.5,
+                  "y_min": 0.1,
+                  "x_max": 0.56,
+                  "y_max": 0.16
+                },
+                "text_span_ids": []
+              }
+            ],
+            "extraction_run_id": "run-test",
+            "reviewed": false
+          },
+          "derivation": null
+        },
+        "label": {
+          "status": "known",
+          "value": "LOAD",
+          "provenance": {
+            "source": "drawing",
+            "confidence": 0.95,
+            "evidence": [
+              {
+                "file_id": "drawing",
+                "page": 1,
+                "bbox": {
+                  "x_min": 0.5,
+                  "y_min": 0.1,
+                  "x_max": 0.56,
+                  "y_max": 0.16
+                },
+                "text_span_ids": []
+              }
+            ],
+            "extraction_run_id": "run-test",
+            "reviewed": false
+          },
+          "derivation": null
+        },
+        "attributes": [],
+        "source_ref": {
+          "file_id": "drawing",
+          "page": 1,
+          "bbox": {
+            "x_min": 0.5,
+            "y_min": 0.1,
+            "x_max": 0.56,
+            "y_max": 0.16
+          },
+          "text_span_ids": []
+        },
+        "confidence": 0.95,
+        "terminals": [
+          {
+            "id": "tile-1/component/LOAD/terminal/port",
+            "observation_id": "tile-1/component/LOAD",
+            "position": {
+              "x": 530,
+              "y": 160
+            },
+            "source_ref": {
+              "file_id": "drawing",
+              "page": 1,
+              "bbox": {
+                "x_min": 0.53,
+                "y_min": 0.16,
+                "x_max": 0.53,
+                "y_max": 0.16
+              },
+              "text_span_ids": []
+            },
+            "attached_observation_id": {
+              "status": "missing",
+              "reason": "not_shown",
+              "candidates": [],
+              "evidence": []
+            }
+          }
+        ],
+        "line_paths": []
+      },
+      {
+        "id": "tile-0/wire/wire",
+        "tile_id": "tile-0",
+        "detected_type": {
+          "status": "known",
+          "value": "unknown",
+          "provenance": {
+            "source": "drawing",
+            "confidence": 0.95,
+            "evidence": [
+              {
+                "file_id": "drawing",
+                "page": 1,
+                "bbox": {
+                  "x_min": 0.13,
+                  "y_min": 0.16,
+                  "x_max": 0.53,
+                  "y_max": 0.16
+                },
+                "text_span_ids": []
+              }
+            ],
+            "extraction_run_id": "run-test",
+            "reviewed": false
+          },
+          "derivation": null
+        },
+        "label": {
+          "status": "missing",
+          "reason": "not_shown",
+          "candidates": [],
+          "evidence": []
+        },
+        "attributes": [
+          {
+            "name": "perception_kind",
+            "value": {
+              "status": "known",
+              "value": "connection_stroke",
+              "provenance": {
+                "source": "drawing",
+                "confidence": 0.95,
+                "evidence": [
+                  {
+                    "file_id": "drawing",
+                    "page": 1,
+                    "bbox": {
+                      "x_min": 0.13,
+                      "y_min": 0.16,
+                      "x_max": 0.53,
+                      "y_max": 0.16
+                    },
+                    "text_span_ids": []
+                  }
+                ],
+                "extraction_run_id": "run-test",
+                "reviewed": false
+              },
+              "derivation": null
+            }
+          }
+        ],
+        "source_ref": {
+          "file_id": "drawing",
+          "page": 1,
+          "bbox": {
+            "x_min": 0.13,
+            "y_min": 0.16,
+            "x_max": 0.53,
+            "y_max": 0.16
+          },
+          "text_span_ids": []
+        },
+        "confidence": 0.95,
+        "terminals": [
+          {
+            "id": "tile-0/wire/wire/end/0",
+            "observation_id": "tile-0/wire/wire",
+            "position": {
+              "x": 130,
+              "y": 160
+            },
+            "source_ref": {
+              "file_id": "drawing",
+              "page": 1,
+              "bbox": {
+                "x_min": 0.13,
+                "y_min": 0.16,
+                "x_max": 0.13,
+                "y_max": 0.16
+              },
+              "text_span_ids": []
+            },
+            "attached_observation_id": {
+              "status": "known",
+              "value": "tile-0/component/BUS",
+              "provenance": {
+                "source": "drawing",
+                "confidence": 0.95,
+                "evidence": [
+                  {
+                    "file_id": "drawing",
+                    "page": 1,
+                    "bbox": {
+                      "x_min": 0.13,
+                      "y_min": 0.16,
+                      "x_max": 0.53,
+                      "y_max": 0.16
+                    },
+                    "text_span_ids": []
+                  }
+                ],
+                "extraction_run_id": "run-test",
+                "reviewed": false
+              },
+              "derivation": null
+            }
+          },
+          {
+            "id": "tile-0/wire/wire/end/1",
+            "observation_id": "tile-0/wire/wire",
+            "position": {
+              "x": 530,
+              "y": 160
+            },
+            "source_ref": {
+              "file_id": "drawing",
+              "page": 1,
+              "bbox": {
+                "x_min": 0.53,
+                "y_min": 0.16,
+                "x_max": 0.53,
+                "y_max": 0.16
+              },
+              "text_span_ids": []
+            },
+            "attached_observation_id": {
+              "status": "known",
+              "value": "tile-0/component/LOAD",
+              "provenance": {
+                "source": "drawing",
+                "confidence": 0.95,
+                "evidence": [
+                  {
+                    "file_id": "drawing",
+                    "page": 1,
+                    "bbox": {
+                      "x_min": 0.13,
+                      "y_min": 0.16,
+                      "x_max": 0.53,
+                      "y_max": 0.16
+                    },
+                    "text_span_ids": []
+                  }
+                ],
+                "extraction_run_id": "run-test",
+                "reviewed": false
+              },
+              "derivation": null
+            }
+          }
+        ],
+        "line_paths": [
+          [
+            {
+              "x": 130,
+              "y": 160
+            },
+            {
+              "x": 530,
+              "y": 160
+            }
+          ]
+        ]
+      },
+      {
+        "id": "tile-1/wire/wire",
+        "tile_id": "tile-1",
+        "detected_type": {
+          "status": "known",
+          "value": "unknown",
+          "provenance": {
+            "source": "drawing",
+            "confidence": 0.95,
+            "evidence": [
+              {
+                "file_id": "drawing",
+                "page": 1,
+                "bbox": {
+                  "x_min": 0.13,
+                  "y_min": 0.16,
+                  "x_max": 0.53,
+                  "y_max": 0.16
+                },
+                "text_span_ids": []
+              }
+            ],
+            "extraction_run_id": "run-test",
+            "reviewed": false
+          },
+          "derivation": null
+        },
+        "label": {
+          "status": "missing",
+          "reason": "not_shown",
+          "candidates": [],
+          "evidence": []
+        },
+        "attributes": [
+          {
+            "name": "perception_kind",
+            "value": {
+              "status": "known",
+              "value": "connection_stroke",
+              "provenance": {
+                "source": "drawing",
+                "confidence": 0.95,
+                "evidence": [
+                  {
+                    "file_id": "drawing",
+                    "page": 1,
+                    "bbox": {
+                      "x_min": 0.13,
+                      "y_min": 0.16,
+                      "x_max": 0.53,
+                      "y_max": 0.16
+                    },
+                    "text_span_ids": []
+                  }
+                ],
+                "extraction_run_id": "run-test",
+                "reviewed": false
+              },
+              "derivation": null
+            }
+          }
+        ],
+        "source_ref": {
+          "file_id": "drawing",
+          "page": 1,
+          "bbox": {
+            "x_min": 0.13,
+            "y_min": 0.16,
+            "x_max": 0.53,
+            "y_max": 0.16
+          },
+          "text_span_ids": []
+        },
+        "confidence": 0.95,
+        "terminals": [
+          {
+            "id": "tile-1/wire/wire/end/0",
+            "observation_id": "tile-1/wire/wire",
+            "position": {
+              "x": 130,
+              "y": 160
+            },
+            "source_ref": {
+              "file_id": "drawing",
+              "page": 1,
+              "bbox": {
+                "x_min": 0.13,
+                "y_min": 0.16,
+                "x_max": 0.13,
+                "y_max": 0.16
+              },
+              "text_span_ids": []
+            },
+            "attached_observation_id": {
+              "status": "known",
+              "value": "tile-1/component/BUS",
+              "provenance": {
+                "source": "drawing",
+                "confidence": 0.95,
+                "evidence": [
+                  {
+                    "file_id": "drawing",
+                    "page": 1,
+                    "bbox": {
+                      "x_min": 0.13,
+                      "y_min": 0.16,
+                      "x_max": 0.53,
+                      "y_max": 0.16
+                    },
+                    "text_span_ids": []
+                  }
+                ],
+                "extraction_run_id": "run-test",
+                "reviewed": false
+              },
+              "derivation": null
+            }
+          },
+          {
+            "id": "tile-1/wire/wire/end/1",
+            "observation_id": "tile-1/wire/wire",
+            "position": {
+              "x": 530,
+              "y": 160
+            },
+            "source_ref": {
+              "file_id": "drawing",
+              "page": 1,
+              "bbox": {
+                "x_min": 0.53,
+                "y_min": 0.16,
+                "x_max": 0.53,
+                "y_max": 0.16
+              },
+              "text_span_ids": []
+            },
+            "attached_observation_id": {
+              "status": "known",
+              "value": "tile-1/component/LOAD",
+              "provenance": {
+                "source": "drawing",
+                "confidence": 0.95,
+                "evidence": [
+                  {
+                    "file_id": "drawing",
+                    "page": 1,
+                    "bbox": {
+                      "x_min": 0.13,
+                      "y_min": 0.16,
+                      "x_max": 0.53,
+                      "y_max": 0.16
+                    },
+                    "text_span_ids": []
+                  }
+                ],
+                "extraction_run_id": "run-test",
+                "reviewed": false
+              },
+              "derivation": null
+            }
+          }
+        ],
+        "line_paths": [
+          [
+            {
+              "x": 130,
+              "y": 160
+            },
+            {
+              "x": 530,
+              "y": 160
+            }
+          ]
+        ]
+      }
+    ],
+    "unassociated_text": [],
+    "unresolved_endpoints": [],
+    "merge_decisions": [
+      {
+        "observation_ids": [
+          "tile-0/component/BUS",
+          "tile-1/component/BUS"
+        ],
+        "outcome": "merged",
+        "rule_id": "same-page-type-label-complete-link-iou-045-v1",
+        "element_ids": [
+          "element-1"
+        ],
+        "description": "Overlapping tile observations with consistent type and label; all sources retained. Conflicting attributes remain missing."
+      },
+      {
+        "observation_ids": [
+          "tile-0/component/LOAD",
+          "tile-1/component/LOAD"
+        ],
+        "outcome": "merged",
+        "rule_id": "same-page-type-label-complete-link-iou-045-v1",
+        "element_ids": [
+          "element-2"
+        ],
+        "description": "Overlapping tile observations with consistent type and label; all sources retained. Conflicting attributes remain missing."
+      }
+    ],
+    "annotations": []
+  },
+  "connectivity_points": [
+    {
+      "id": "point-1",
+      "position": {
+        "x": 130,
+        "y": 160
+      },
+      "source_ref": {
+        "kind": "drawing",
+        "primary": {
+          "file_id": "drawing",
+          "page": 1,
+          "bbox": {
+            "x_min": 0.13,
+            "y_min": 0.16,
+            "x_max": 0.13,
+            "y_max": 0.16
+          },
+          "text_span_ids": []
+        },
+        "evidence": [
+          {
+            "file_id": "drawing",
+            "page": 1,
+            "bbox": {
+              "x_min": 0.13,
+              "y_min": 0.16,
+              "x_max": 0.13,
+              "y_max": 0.16
+            },
+            "text_span_ids": []
+          },
+          {
+            "file_id": "drawing",
+            "page": 1,
+            "bbox": {
+              "x_min": 0.53,
+              "y_min": 0.16,
+              "x_max": 0.53,
+              "y_max": 0.16
+            },
+            "text_span_ids": []
+          },
+          {
+            "file_id": "drawing",
+            "page": 1,
+            "bbox": {
+              "x_min": 0.13,
+              "y_min": 0.16,
+              "x_max": 0.53,
+              "y_max": 0.16
+            },
+            "text_span_ids": []
+          },
+          {
+            "file_id": "drawing",
+            "page": 1,
+            "bbox": {
+              "x_min": 0.13,
+              "y_min": 0.16,
+              "x_max": 0.53,
+              "y_max": 0.16
+            },
+            "text_span_ids": []
+          }
+        ]
+      },
+      "kind": "junction",
+      "evidence": [
+        {
+          "file_id": "drawing",
+          "page": 1,
+          "bbox": {
+            "x_min": 0.13,
+            "y_min": 0.16,
+            "x_max": 0.13,
+            "y_max": 0.16
+          },
+          "text_span_ids": []
+        },
+        {
+          "file_id": "drawing",
+          "page": 1,
+          "bbox": {
+            "x_min": 0.53,
+            "y_min": 0.16,
+            "x_max": 0.53,
+            "y_max": 0.16
+          },
+          "text_span_ids": []
+        },
+        {
+          "file_id": "drawing",
+          "page": 1,
+          "bbox": {
+            "x_min": 0.13,
+            "y_min": 0.16,
+            "x_max": 0.53,
+            "y_max": 0.16
+          },
+          "text_span_ids": []
+        },
+        {
+          "file_id": "drawing",
+          "page": 1,
+          "bbox": {
+            "x_min": 0.13,
+            "y_min": 0.16,
+            "x_max": 0.53,
+            "y_max": 0.16
+          },
+          "text_span_ids": []
+        }
+      ]
+    }
+  ],
+  "elements": [
+    {
+      "id": "element-1",
+      "type": {
+        "status": "known",
+        "value": "busbar",
+        "provenance": {
+          "source": "drawing",
+          "confidence": 0.95,
+          "evidence": [
+            {
+              "file_id": "drawing",
+              "page": 1,
+              "bbox": {
+                "x_min": 0.1,
+                "y_min": 0.1,
+                "x_max": 0.16,
+                "y_max": 0.16
+              },
+              "text_span_ids": []
+            }
+          ],
+          "extraction_run_id": "run-test",
+          "reviewed": false
+        },
+        "derivation": null
+      },
+      "label": {
+        "status": "known",
+        "value": "BUS",
+        "provenance": {
+          "source": "drawing",
+          "confidence": 0.95,
+          "evidence": [
+            {
+              "file_id": "drawing",
+              "page": 1,
+              "bbox": {
+                "x_min": 0.1,
+                "y_min": 0.1,
+                "x_max": 0.16,
+                "y_max": 0.16
+              },
+              "text_span_ids": []
+            },
+            {
+              "file_id": "drawing",
+              "page": 1,
+              "bbox": {
+                "x_min": 0.1,
+                "y_min": 0.1,
+                "x_max": 0.16,
+                "y_max": 0.16
+              },
+              "text_span_ids": []
+            }
+          ],
+          "extraction_run_id": "run-test",
+          "reviewed": false
+        },
+        "derivation": null
+      },
+      "in_service": {
+        "status": "missing",
+        "reason": "not_shown",
+        "candidates": [],
+        "evidence": []
+      },
+      "source_ref": {
+        "kind": "drawing",
+        "primary": {
+          "file_id": "drawing",
+          "page": 1,
+          "bbox": {
+            "x_min": 0.1,
+            "y_min": 0.1,
+            "x_max": 0.16,
+            "y_max": 0.16
+          },
+          "text_span_ids": []
+        },
+        "evidence": [
+          {
+            "file_id": "drawing",
+            "page": 1,
+            "bbox": {
+              "x_min": 0.1,
+              "y_min": 0.1,
+              "x_max": 0.16,
+              "y_max": 0.16
+            },
+            "text_span_ids": []
+          },
+          {
+            "file_id": "drawing",
+            "page": 1,
+            "bbox": {
+              "x_min": 0.1,
+              "y_min": 0.1,
+              "x_max": 0.16,
+              "y_max": 0.16
+            },
+            "text_span_ids": []
+          }
+        ]
+      },
+      "layout": {
+        "position": {
+          "x": 130,
+          "y": 130
+        },
+        "rotation_degree": 0,
+        "width": 60,
+        "height": 60,
+        "route_points": [],
+        "page_group": "drawing:1",
+        "bay_group": null,
+        "updated_at": "2026-11-13T11:13:12.129Z"
+      },
+      "review": {
+        "status": "unreviewed",
+        "reviewed_revision": null,
+        "reviewed_at": null
+      },
+      "station": {
+        "status": "missing",
+        "reason": "not_shown",
+        "candidates": [],
+        "evidence": []
+      },
+      "bay": {
+        "status": "missing",
+        "reason": "not_shown",
+        "candidates": [],
+        "evidence": []
+      },
+      "notes": {
+        "status": "missing",
+        "reason": "not_shown",
+        "candidates": [],
+        "evidence": []
+      },
+      "terminals": {
+        "bus": {
+          "id": "element-1:bus",
+          "role": "bus",
+          "connection_point": {
+            "status": "known",
+            "value": "point-1",
+            "provenance": {
+              "source": "drawing",
+              "confidence": 0.95,
+              "evidence": [
+                {
+                  "file_id": "drawing",
+                  "page": 1,
+                  "bbox": {
+                    "x_min": 0.13,
+                    "y_min": 0.16,
+                    "x_max": 0.13,
+                    "y_max": 0.16
+                  },
+                  "text_span_ids": []
+                },
+                {
+                  "file_id": "drawing",
+                  "page": 1,
+                  "bbox": {
+                    "x_min": 0.53,
+                    "y_min": 0.16,
+                    "x_max": 0.53,
+                    "y_max": 0.16
+                  },
+                  "text_span_ids": []
+                },
+                {
+                  "file_id": "drawing",
+                  "page": 1,
+                  "bbox": {
+                    "x_min": 0.13,
+                    "y_min": 0.16,
+                    "x_max": 0.53,
+                    "y_max": 0.16
+                  },
+                  "text_span_ids": []
+                },
+                {
+                  "file_id": "drawing",
+                  "page": 1,
+                  "bbox": {
+                    "x_min": 0.13,
+                    "y_min": 0.16,
+                    "x_max": 0.53,
+                    "y_max": 0.16
+                  },
+                  "text_span_ids": []
+                }
+              ],
+              "extraction_run_id": "run-test",
+              "reviewed": false
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "drawing",
+            "primary": {
+              "file_id": "drawing",
+              "page": 1,
+              "bbox": {
+                "x_min": 0.1,
+                "y_min": 0.1,
+                "x_max": 0.16,
+                "y_max": 0.16
+              },
+              "text_span_ids": []
+            },
+            "evidence": [
+              {
+                "file_id": "drawing",
+                "page": 1,
+                "bbox": {
+                  "x_min": 0.1,
+                  "y_min": 0.1,
+                  "x_max": 0.16,
+                  "y_max": 0.16
+                },
+                "text_span_ids": []
+              }
+            ]
+          },
+          "drawn_anchor": {
+            "x": 130,
+            "y": 160
+          }
+        }
+      },
+      "data": {
+        "nominal_kv": {
+          "status": "missing",
+          "reason": "not_shown",
+          "candidates": [],
+          "evidence": []
+        },
+        "voltage_min_pu": {
+          "status": "missing",
+          "reason": "not_shown",
+          "candidates": [],
+          "evidence": []
+        },
+        "voltage_max_pu": {
+          "status": "missing",
+          "reason": "not_shown",
+          "candidates": [],
+          "evidence": []
+        }
+      }
+    },
+    {
+      "id": "element-2",
+      "type": {
+        "status": "known",
+        "value": "load",
+        "provenance": {
+          "source": "drawing",
+          "confidence": 0.95,
+          "evidence": [
+            {
+              "file_id": "drawing",
+              "page": 1,
+              "bbox": {
+                "x_min": 0.5,
+                "y_min": 0.1,
+                "x_max": 0.56,
+                "y_max": 0.16
+              },
+              "text_span_ids": []
+            }
+          ],
+          "extraction_run_id": "run-test",
+          "reviewed": false
+        },
+        "derivation": null
+      },
+      "label": {
+        "status": "known",
+        "value": "LOAD",
+        "provenance": {
+          "source": "drawing",
+          "confidence": 0.95,
+          "evidence": [
+            {
+              "file_id": "drawing",
+              "page": 1,
+              "bbox": {
+                "x_min": 0.5,
+                "y_min": 0.1,
+                "x_max": 0.56,
+                "y_max": 0.16
+              },
+              "text_span_ids": []
+            },
+            {
+              "file_id": "drawing",
+              "page": 1,
+              "bbox": {
+                "x_min": 0.5,
+                "y_min": 0.1,
+                "x_max": 0.56,
+                "y_max": 0.16
+              },
+              "text_span_ids": []
+            }
+          ],
+          "extraction_run_id": "run-test",
+          "reviewed": false
+        },
+        "derivation": null
+      },
+      "in_service": {
+        "status": "missing",
+        "reason": "not_shown",
+        "candidates": [],
+        "evidence": []
+      },
+      "source_ref": {
+        "kind": "drawing",
+        "primary": {
+          "file_id": "drawing",
+          "page": 1,
+          "bbox": {
+            "x_min": 0.5,
+            "y_min": 0.1,
+            "x_max": 0.56,
+            "y_max": 0.16
+          },
+          "text_span_ids": []
+        },
+        "evidence": [
+          {
+            "file_id": "drawing",
+            "page": 1,
+            "bbox": {
+              "x_min": 0.5,
+              "y_min": 0.1,
+              "x_max": 0.56,
+              "y_max": 0.16
+            },
+            "text_span_ids": []
+          },
+          {
+            "file_id": "drawing",
+            "page": 1,
+            "bbox": {
+              "x_min": 0.5,
+              "y_min": 0.1,
+              "x_max": 0.56,
+              "y_max": 0.16
+            },
+            "text_span_ids": []
+          }
+        ]
+      },
+      "layout": {
+        "position": {
+          "x": 530,
+          "y": 130
+        },
+        "rotation_degree": 0,
+        "width": 60,
+        "height": 60,
+        "route_points": [],
+        "page_group": "drawing:1",
+        "bay_group": null,
+        "updated_at": "2026-11-13T11:13:12.129Z"
+      },
+      "review": {
+        "status": "unreviewed",
+        "reviewed_revision": null,
+        "reviewed_at": null
+      },
+      "station": {
+        "status": "missing",
+        "reason": "not_shown",
+        "candidates": [],
+        "evidence": []
+      },
+      "bay": {
+        "status": "missing",
+        "reason": "not_shown",
+        "candidates": [],
+        "evidence": []
+      },
+      "notes": {
+        "status": "missing",
+        "reason": "not_shown",
+        "candidates": [],
+        "evidence": []
+      },
+      "terminals": {
+        "bus": {
+          "id": "element-2:bus",
+          "role": "bus",
+          "connection_point": {
+            "status": "known",
+            "value": "point-1",
+            "provenance": {
+              "source": "drawing",
+              "confidence": 0.95,
+              "evidence": [
+                {
+                  "file_id": "drawing",
+                  "page": 1,
+                  "bbox": {
+                    "x_min": 0.13,
+                    "y_min": 0.16,
+                    "x_max": 0.13,
+                    "y_max": 0.16
+                  },
+                  "text_span_ids": []
+                },
+                {
+                  "file_id": "drawing",
+                  "page": 1,
+                  "bbox": {
+                    "x_min": 0.53,
+                    "y_min": 0.16,
+                    "x_max": 0.53,
+                    "y_max": 0.16
+                  },
+                  "text_span_ids": []
+                },
+                {
+                  "file_id": "drawing",
+                  "page": 1,
+                  "bbox": {
+                    "x_min": 0.13,
+                    "y_min": 0.16,
+                    "x_max": 0.53,
+                    "y_max": 0.16
+                  },
+                  "text_span_ids": []
+                },
+                {
+                  "file_id": "drawing",
+                  "page": 1,
+                  "bbox": {
+                    "x_min": 0.13,
+                    "y_min": 0.16,
+                    "x_max": 0.53,
+                    "y_max": 0.16
+                  },
+                  "text_span_ids": []
+                }
+              ],
+              "extraction_run_id": "run-test",
+              "reviewed": false
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "drawing",
+            "primary": {
+              "file_id": "drawing",
+              "page": 1,
+              "bbox": {
+                "x_min": 0.5,
+                "y_min": 0.1,
+                "x_max": 0.56,
+                "y_max": 0.16
+              },
+              "text_span_ids": []
+            },
+            "evidence": [
+              {
+                "file_id": "drawing",
+                "page": 1,
+                "bbox": {
+                  "x_min": 0.5,
+                  "y_min": 0.1,
+                  "x_max": 0.56,
+                  "y_max": 0.16
+                },
+                "text_span_ids": []
+              }
+            ]
+          },
+          "drawn_anchor": {
+            "x": 530,
+            "y": 160
+          }
+        }
+      },
+      "data": {
+        "p_mw": {
+          "status": "missing",
+          "reason": "not_shown",
+          "candidates": [],
+          "evidence": []
+        },
+        "q_mvar": {
+          "status": "missing",
+          "reason": "not_shown",
+          "candidates": [],
+          "evidence": []
+        },
+        "scaling_factor": {
+          "status": "missing",
+          "reason": "not_shown",
+          "candidates": [],
+          "evidence": []
+        },
+        "sn_mva": {
+          "status": "missing",
+          "reason": "not_shown",
+          "candidates": [],
+          "evidence": []
+        },
+        "power_factor": {
+          "status": "missing",
+          "reason": "not_shown",
+          "candidates": [],
+          "evidence": []
+        },
+        "reactive_kind": {
+          "status": "missing",
+          "reason": "not_shown",
+          "candidates": [],
+          "evidence": []
+        },
+        "model": {
+          "status": "missing",
+          "reason": "not_shown",
+          "candidates": [],
+          "evidence": []
+        }
+      }
+    }
+  ],
+  "review": {
+    "status": "pending",
+    "confirmed_model_revision": null,
+    "confirmed_input_hash": null,
+    "confirmed_at": null,
+    "unresolved_element_ids": [
+      "element-1",
+      "element-2"
+    ],
+    "decisions": []
+  },
+  "data_suggestions": [
+    {
+      "id": "study-setting-voltage_min_pu",
+      "target_path": "/settings/voltage_min_pu",
+      "candidate_value": 0.95,
+      "source": "default",
+      "source_id": "study-settings-v1",
+      "source_version": "1",
+      "rationale": "Suggested starting study setting. Review and accept explicitly before use.",
+      "status": "offered"
+    },
+    {
+      "id": "study-setting-voltage_max_pu",
+      "target_path": "/settings/voltage_max_pu",
+      "candidate_value": 1.05,
+      "source": "default",
+      "source_id": "study-settings-v1",
+      "source_version": "1",
+      "rationale": "Suggested starting study setting. Review and accept explicitly before use.",
+      "status": "offered"
+    },
+    {
+      "id": "study-setting-branch_warning_percent",
+      "target_path": "/settings/branch_warning_percent",
+      "candidate_value": 80,
+      "source": "default",
+      "source_id": "study-settings-v1",
+      "source_version": "1",
+      "rationale": "Suggested starting study setting. Review and accept explicitly before use.",
+      "status": "offered"
+    },
+    {
+      "id": "study-setting-branch_alarm_percent",
+      "target_path": "/settings/branch_alarm_percent",
+      "candidate_value": 100,
+      "source": "default",
+      "source_id": "study-settings-v1",
+      "source_version": "1",
+      "rationale": "Suggested starting study setting. Review and accept explicitly before use.",
+      "status": "offered"
+    },
+    {
+      "id": "study-setting-transformer_z_min_percent",
+      "target_path": "/settings/transformer_z_min_percent",
+      "candidate_value": 2,
+      "source": "default",
+      "source_id": "study-settings-v1",
+      "source_version": "1",
+      "rationale": "Suggested starting study setting. Review and accept explicitly before use.",
+      "status": "offered"
+    },
+    {
+      "id": "study-setting-transformer_z_max_percent",
+      "target_path": "/settings/transformer_z_max_percent",
+      "candidate_value": 25,
+      "source": "default",
+      "source_id": "study-settings-v1",
+      "source_version": "1",
+      "rationale": "Suggested starting study setting. Review and accept explicitly before use.",
+      "status": "offered"
+    },
+    {
+      "id": "study-setting-nominal_voltage_tolerance_percent",
+      "target_path": "/settings/nominal_voltage_tolerance_percent",
+      "candidate_value": 1,
+      "source": "default",
+      "source_id": "study-settings-v1",
+      "source_version": "1",
+      "rationale": "Suggested starting study setting. Review and accept explicitly before use.",
+      "status": "offered"
+    },
+    {
+      "id": "study-setting-low_confidence_threshold",
+      "target_path": "/settings/low_confidence_threshold",
+      "candidate_value": 0.85,
+      "source": "default",
+      "source_id": "study-settings-v1",
+      "source_version": "1",
+      "rationale": "Suggested starting study setting. Review and accept explicitly before use.",
+      "status": "offered"
+    },
+    {
+      "id": "study-setting-voltage_unit_slip_ratio",
+      "target_path": "/settings/voltage_unit_slip_ratio",
+      "candidate_value": 1000,
+      "source": "default",
+      "source_id": "study-settings-v1",
+      "source_version": "1",
+      "rationale": "Suggested starting study setting. Review and accept explicitly before use.",
+      "status": "offered"
+    },
+    {
+      "id": "study-setting-power_unit_slip_ratio",
+      "target_path": "/settings/power_unit_slip_ratio",
+      "candidate_value": 1000,
+      "source": "default",
+      "source_id": "study-settings-v1",
+      "source_version": "1",
+      "rationale": "Suggested starting study setting. Review and accept explicitly before use.",
+      "status": "offered"
+    },
+    {
+      "id": "study-setting-slack_import_limit_mw",
+      "target_path": "/settings/slack_import_limit_mw",
+      "candidate_value": null,
+      "source": "default",
+      "source_id": "study-settings-v1",
+      "source_version": "1",
+      "rationale": "Suggested starting study setting. Review and accept explicitly before use.",
+      "status": "offered"
+    },
+    {
+      "id": "study-setting-allow_slack_export",
+      "target_path": "/settings/allow_slack_export",
+      "candidate_value": false,
+      "source": "default",
+      "source_id": "study-settings-v1",
+      "source_version": "1",
+      "rationale": "Suggested starting study setting. Review and accept explicitly before use.",
+      "status": "offered"
+    },
+    {
+      "id": "study-setting-solver_tolerance_mva",
+      "target_path": "/settings/solver_tolerance_mva",
+      "candidate_value": 1e-8,
+      "source": "default",
+      "source_id": "study-settings-v1",
+      "source_version": "1",
+      "rationale": "Suggested starting study setting. Review and accept explicitly before use.",
+      "status": "offered"
+    },
+    {
+      "id": "study-setting-max_iterations",
+      "target_path": "/settings/max_iterations",
+      "candidate_value": 30,
+      "source": "default",
+      "source_id": "study-settings-v1",
+      "source_version": "1",
+      "rationale": "Suggested starting study setting. Review and accept explicitly before use.",
+      "status": "offered"
+    },
+    {
+      "id": "study-setting-enforce_q_limits",
+      "target_path": "/settings/enforce_q_limits",
+      "candidate_value": false,
+      "source": "default",
+      "source_id": "study-settings-v1",
+      "source_version": "1",
+      "rationale": "Suggested starting study setting. Review and accept explicitly before use.",
+      "status": "offered"
+    }
+  ],
+  "validation": null,
+  "operation": {
+    "base_snapshot": null,
+    "events": [],
+    "acknowledgements": [],
+    "display_preferences": {
+      "theme": "dark",
+      "breaker_colour_convention": "shape_only",
+      "voltage_colouring": false,
+      "tables": [],
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "zoom": 1
+      },
+      "display_revision": 0
+    },
+    "island_policy": {
+      "mode": "preparation_strict",
+      "authorized_isolated_element_ids": [],
+      "authorizing_event_ids": [],
+      "energized_island_slacks": []
+    }
+  },
+  "solution": null,
+  "export_history": []
+}

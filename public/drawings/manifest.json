@@ -1,0 +1,35 @@
+[
+  {
+    "name": "synthetic-training.pdf",
+    "sha256": "ae40c248e044965617260e6c3c2a632450d1161c970f852e0e49cf8d889f5a28",
+    "bytes": 4400,
+    "pages": 2,
+    "pixels_per_page_at_300_dpi": [
+      3000,
+      2100
+    ],
+    "content": "Own synthetic teaching drawing; not a solved case and not a vision response."
+  },
+  {
+    "name": "synthetic-training.png",
+    "sha256": "e8e500f5535072f1b311a2d965e75fc98f6dfb4a8a3d885226329944b4f82697",
+    "bytes": 147749,
+    "pages": 1,
+    "pixels_per_page_at_300_dpi": [
+      3000,
+      2100
+    ],
+    "content": "Own synthetic teaching drawing; not a solved case and not a vision response."
+  },
+  {
+    "name": "synthetic-training.tiff",
+    "sha256": "1450e62dd483ef8f7c8d156c049ad22025e9b6d203766aee45af2fd3b6f25c48",
+    "bytes": 605824,
+    "pages": 2,
+    "pixels_per_page_at_300_dpi": [
+      3000,
+      2100
+    ],
+    "content": "Own synthetic teaching drawing; not a solved case and not a vision response."
+  }
+]
