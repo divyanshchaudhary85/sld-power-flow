@@ -4,7 +4,9 @@ A browser-local study workspace for turning a reviewed single-line diagram into 
 
 **Phase 1 foundation:** real pandapower in a Pyodide Web Worker, IEEE 9/14-bus samples, native-reference comparisons, a versioned canonical case, and a visitor-key vision connection proof. The full upload/review/operator workflow is developed in later phases.
 
-Live site target: [GitHub Pages](https://divyanshchaudhary85.github.io/sld-power-flow/). Deployment and proof status are recorded in [the Phase 1 report](docs/phase-1.md).
+Live site: [GitHub Pages](https://divyanshchaudhary85.github.io/sld-power-flow/). Deployment and proof status are recorded in [the Phase 1 report](docs/phase-1.md).
+
+![Deployed Phase 1 workspace solving the IEEE 9-bus case](docs/images/phase-1-live-case9.jpg)
 
 ## Try the foundation
 

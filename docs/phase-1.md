@@ -20,13 +20,13 @@ The user approved the Phase 0 plan and both interpretations on 13 November 2026:
 | TypeScript and production build | Passed |
 | ESLint | Passed |
 | Frontend/model/worker tests | 31 passed |
-| Native Python adapter tests | 13 passed |
+| Native Python adapter tests | 14 passed |
 | Native IEEE 9 canonical round trip | Maximum bus voltage difference `3.3306690738754696e-16 pu` |
 | Native IEEE 14 canonical round trip | Maximum bus voltage difference `0.0 pu` |
 | Pyodide IEEE 9 vs native | Maximum difference `6.661338147750939e-16 pu` |
 | Pyodide IEEE 14 vs native | Maximum difference `6.661338147750939e-16 pu` |
-| Network-disabled Node/Pyodide initialization | 19.01 s in the recorded run |
-| Warm Node/Pyodide solve request | 0.657 s (9-bus), 1.167 s (14-bus) |
+| Network-disabled Node/Pyodide initialization | 15.45 s in the final recorded run |
+| Warm Node/Pyodide solve request | 0.721 s (9-bus), 0.819 s (14-bus) |
 | CI workflow syntax/actionlint | Passed |
 
 Timing figures describe one measured local run, not a performance guarantee. The Phase 3 target includes a 50-bus solve and redraw and is not established here. Runtime evidence is generated in `test-results/runtime-proof.json`; CI retains it as an artifact. Four upstream case14 tap-metadata deprecation warnings do not change the passing numerical comparisons.
@@ -35,10 +35,12 @@ The native/Node checks do not substitute for the deployed browser proofs. Live-b
 
 ## Live acceptance status
 
-- GitHub Pages deployment: pending.
-- Deployed browser IEEE 9/14 proof: pending.
+- GitHub Pages deployment: passed. [Verify/build and deploy run](https://github.com/divyanshchaudhary85/sld-power-flow/actions/runs/43409058002), source commit `06a40f8220362a0668110fbb7c3159a7323edce5`.
+- Deployed browser IEEE 9/14 proof: passed in Chrome on 13 November 2026. Both converged in 3 iterations and displayed maximum all-bus voltage error `6.66e-16 pu`, below `1e-6 pu`. First runtime initialization: 20.11 s. Request-to-result: 0.746 s (9-bus), 0.651 s (14-bus). These are individual observations, not a performance guarantee.
 - Deployed direct-browser OpenAI image response: pending user key test.
 - Phase 1 tag: not created; acceptance is incomplete.
+
+Screenshots: [IEEE 9 in dark theme](images/phase-1-live-case9.jpg), [IEEE 14 in light theme](images/phase-1-live-case14.jpg). Neither screenshot contains a key or a private case. The browser import interaction could not be verified because the Chrome extension lacks local-file URL access; no extension permissions were changed. Structural import/review behavior is covered by model tests; the full browser file-picker path remains unverified.
 
 ## Demo script
 
