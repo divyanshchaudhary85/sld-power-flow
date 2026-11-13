@@ -10,6 +10,7 @@ private/
 work/
 public/runtime/
 public/schema/
+public/pdfjs/
 public/notices/dependencies.json
 test-results/
 playwright-report/

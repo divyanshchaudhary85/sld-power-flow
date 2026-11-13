@@ -37,34 +37,38 @@ The approved isolation policy distinguishes malformed source-less networks from 
 
 Import from `src/model/index.ts`:
 
-| Function | Result |
-| --- | --- |
-| `validateStudyDocument(input)` | `{ valid: true, document }` or `{ valid: false, issues }`; never substitutes values |
-| `assertStudyDocument(input)` | Narrows the value to `StudyDocument` or throws `ModelValidationError` |
-| `parseStudyDocument(text)` | Parses and validates imported JSON; errors identify JSON Pointer paths |
-| `inspectJsonValue(input)` | Reports values that cannot be represented faithfully as JSON |
-| `inspectStructuralReferences(document)` | Checks the structural links of an already schema-valid document |
-| `canonicalStringify(value)` | Stable JSON: sorted object keys, preserved array order, finite values only |
-| `electricalSnapshot(document)` | Returns the projection used for solving/fingerprinting |
-| `computeInputHash(document)` | Promise of a SHA-256 lowercase hexadecimal digest |
-| `confirmReview(document, timestamp?)` | Clones and stamps explicit review of the current revision and exact input hash |
-| `isReviewCurrent(document)` | Checks review status, revision and input hash before a solve |
-| `commitEngineeringEdit(document, edit, timestamp?)` | Returns an edited clone with incremented revision and invalidated downstream state |
-| `attachSolution(document, run)` | Returns a cloned document only if the run revision/hash matches current inputs |
+| Function                                            | Result                                                                              |
+| --------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `validateStudyDocument(input)`                      | `{ valid: true, document }` or `{ valid: false, issues }`; never substitutes values |
+| `assertStudyDocument(input)`                        | Narrows the value to `StudyDocument` or throws `ModelValidationError`               |
+| `parseStudyDocument(text)`                          | Parses and validates imported JSON; errors identify JSON Pointer paths              |
+| `inspectJsonValue(input)`                           | Reports values that cannot be represented faithfully as JSON                        |
+| `inspectStructuralReferences(document)`             | Checks the structural links of an already schema-valid document                     |
+| `canonicalStringify(value)`                         | Stable JSON: sorted object keys, preserved array order, finite values only          |
+| `electricalSnapshot(document)`                      | Returns the projection used for solving/fingerprinting                              |
+| `computeInputHash(document)`                        | Promise of a SHA-256 lowercase hexadecimal digest                                   |
+| `confirmReview(document, timestamp?)`               | Clones and stamps explicit review of the current revision and exact input hash      |
+| `isReviewCurrent(document)`                         | Checks review status, revision and input hash before a solve                        |
+| `commitEngineeringEdit(document, edit, timestamp?)` | Returns an edited clone with incremented revision and invalidated downstream state  |
+| `attachSolution(document, run)`                     | Returns a cloned document only if the run revision/hash matches current inputs      |
 
-Validation issues contain `code`, `path` and a plain-language `message`. These are structural boundary errors, not the `Finding` objects produced by the future engineering rule catalog.
+Validation issues contain `code`, `path` and a plain-language `message`. These are structural boundary errors, distinct from the `Finding` objects produced by the implemented [engineering rule catalog](phase-2.md).
 
 ## Fingerprinting and worker contract
 
 The fingerprint covers schema version, network type/frequency/base inputs, all study settings, sorted connectivity-point IDs, sorted equipment electrical inputs, terminal connections and the island policy. It excludes labels, visual layout, source file bytes, review events, UI preferences, previous results and event history. Within included fields, provenance is included.
 
-Use the TypeScript fingerprint at dispatch time. Send `{ document, inputHash, jobId }` to the worker. The Python adapter must return the supplied `inputHash` and the dispatched document revision. It must not calculate a nominally equivalent digest using Python JSON serialization: floating-point number formatting differs between runtimes. Native fixture generation may leave `solution: null`; the browser produces its own fingerprint when dispatching a real solve.
+Use the TypeScript fingerprint at dispatch time. The Worker solve request carries `{ type: "solve", requestId, document, inputHash }`; `requestId` identifies the in-flight job. The Python adapter returns the supplied `inputHash` and the dispatched document revision. It must not substitute a nominally equivalent digest using Python JSON serialization: floating-point number formatting differs between runtimes. Native fixture generation leaves `solution: null`; the browser produces its own fingerprint when dispatching a real solve.
 
 `attachSolution` is the final race check. A worker response from before an edit cannot overwrite the current case even if it finishes later. The caller must also compare job IDs to avoid replacing a newer solve of identical inputs with an older request's progress state.
 
 Review uses the same browser fingerprint. A trusted bundled reference fixture may be explicitly stamped with `confirmReview` after it is validated; a user-imported case must not be silently reviewed. Its user confirmation calls `confirmReview`, and both the dispatch layer and worker check `isReviewCurrent` before solving. A hash emitted by Python's JSON serializer is not accepted as proof of matching browser inputs.
 
-`commitEngineeringEdit` is the correction path: it increments revision, clears validation, makes review pending, and marks a retained result `superseded`. It does not mutate its input. It should not be used for pan/zoom/theme changes. The Phase 3 operator-action path must explicitly preserve previously confirmed topology review where appropriate and write its event before dispatching a new solve.
+`commitEngineeringEdit` is the correction path: it increments revision, clears validation, makes review pending, and marks a retained result `superseded`. It does not mutate its input. It should not be used for pan/zoom/theme changes. The implemented operator-action path in `src/operations.ts` verifies the exact preceding review, writes the confirmed action and any newly authorized outage, then stamps the resulting inputs before a new solve.
+
+The workspace import path additionally clears the imported active solution, validation, review and base snapshot. A file's asserted approval cannot bypass the human gate through Reset. Local base capture records the electrical snapshot and its reviewed island policy in an associated compare event; resetting it preserves the corresponding reference-source choices.
+
+`src/model/endpointReview.ts` resolves drawing endpoints through a deliberate canonical net/terminal connection, or preserves a non-electrical endpoint as an annotation with a stated reason. Source observations remain in the document; the correction records a `ReviewDecision` and requires confirmation again. A mere change to the equipment terminal list does not silently dismiss an unresolved perception record.
 
 ## Results
 
@@ -74,6 +78,6 @@ Result-quality dependencies must conservatively include accepted defaults across
 
 ## Validation scope
 
-The model tests exercise real schema compilation, malformed/unknown/nonfinite data, draft fields, duplicate and broken references, fingerprint sensitivity, edit invalidation and stale worker responses. Reference fixtures are also validated by the Phase 1 solver integration tests. These checks establish the data boundary; they do not constitute the Phase 2 engineering rule catalog or prove any electrical answer.
+The model tests exercise real schema compilation, malformed/unknown/nonfinite data, draft fields, duplicate and broken references, fingerprint sensitivity, edit invalidation and stale worker responses. Reference fixtures are also validated by solver integration tests. These checks establish the data boundary; the separate validation tests exercise the 24-rule catalog, and native/real-runtime tests establish numerical behavior. Endpoint and operator tests cover explicit corrections, isolation, review preservation and stale asynchronous completions. See [release verification](release-verification.md) for executed evidence and remaining checks.
 
 The validator uses the dedicated [Ajv draft 2020-12 entry point](https://ajv.js.org/json-schema.html#draft-2020-12) and explicitly installs the separate format validators, as required by [Ajv v8's API](https://ajv.js.org/v6-to-v8-migration.html).

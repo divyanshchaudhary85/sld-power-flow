@@ -15,19 +15,19 @@ The user approved the Phase 0 plan and both interpretations on 13 November 2026:
 
 ## Measured local evidence
 
-| Check | Result |
-| --- | --- |
-| TypeScript and production build | Passed |
-| ESLint | Passed |
-| Frontend/model/worker tests | 31 passed |
-| Native Python adapter tests | 14 passed |
-| Native IEEE 9 canonical round trip | Maximum bus voltage difference `3.3306690738754696e-16 pu` |
-| Native IEEE 14 canonical round trip | Maximum bus voltage difference `0.0 pu` |
-| Pyodide IEEE 9 vs native | Maximum difference `6.661338147750939e-16 pu` |
-| Pyodide IEEE 14 vs native | Maximum difference `6.661338147750939e-16 pu` |
-| Network-disabled Node/Pyodide initialization | 15.45 s in the final recorded run |
-| Warm Node/Pyodide solve request | 0.721 s (9-bus), 0.819 s (14-bus) |
-| CI workflow syntax/actionlint | Passed |
+| Check                                        | Result                                                     |
+| -------------------------------------------- | ---------------------------------------------------------- |
+| TypeScript and production build              | Passed                                                     |
+| ESLint                                       | Passed                                                     |
+| Frontend/model/worker tests                  | 31 passed                                                  |
+| Native Python adapter tests                  | 14 passed                                                  |
+| Native IEEE 9 canonical round trip           | Maximum bus voltage difference `3.3306690738754696e-16 pu` |
+| Native IEEE 14 canonical round trip          | Maximum bus voltage difference `0.0 pu`                    |
+| Pyodide IEEE 9 vs native                     | Maximum difference `6.661338147750939e-16 pu`              |
+| Pyodide IEEE 14 vs native                    | Maximum difference `6.661338147750939e-16 pu`              |
+| Network-disabled Node/Pyodide initialization | 15.45 s in the final recorded run                          |
+| Warm Node/Pyodide solve request              | 0.721 s (9-bus), 0.819 s (14-bus)                          |
+| CI workflow syntax/actionlint                | Passed                                                     |
 
 Timing figures describe one measured local run, not a performance guarantee. The Phase 3 target includes a 50-bus solve and redraw and is not established here. Runtime evidence is generated in `test-results/runtime-proof.json`; CI retains it as an artifact. Four upstream case14 tap-metadata deprecation warnings do not change the passing numerical comparisons.
 

@@ -1,10 +1,12 @@
 {
   "name": "sld-power-flow",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.6.0",
   "type": "module",
   "license": "MIT",
-  "engines": { "node": ">=22.12.0 <23 || >=24" },
+  "engines": {
+    "node": ">=22.13.0 <23 || >=24"
+  },
   "scripts": {
     "predev": "node scripts/prepare-static.mjs",
     "dev": "vite --host 127.0.0.1",
@@ -14,25 +16,37 @@
     "lint": "eslint src tests/*.test.ts",
     "test": "vitest run",
     "provision:runtime": "node scripts/provision-runtime.mjs",
-    "test:runtime": "node tests/runtime.proof.mjs"
+    "test:runtime": "node tests/runtime.proof.mjs",
+    "format": "prettier --write src tests/*.test.ts scripts/*.mjs *.json *.ts docs/*.md README.md"
   },
   "dependencies": {
+    "@pdf-lib/fontkit": "1.1.1",
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "exceljs": "4.4.0",
+    "jszip": "3.10.2",
+    "pdf-lib": "1.17.1",
+    "pdfjs-dist": "6.5.438",
     "react": "19.3.1",
     "react-dom": "19.3.1",
-    "ajv": "8.20.0",
-    "ajv-formats": "3.0.1"
+    "utif": "3.1.0"
   },
   "devDependencies": {
+    "@types/node": "26.6.6",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
-    "@types/node": "26.6.6",
     "@vitejs/plugin-react": "6.3.0",
     "eslint": "10.14.0",
-    "typescript-eslint": "8.72.2",
     "eslint-plugin-react-hooks": "7.1.1",
+    "prettier": "3.10.1",
     "typescript": "5.9.3",
+    "typescript-eslint": "8.72.2",
     "vite": "8.3.8",
     "vitest": "5.1.0",
     "ws": "8.23.0"
+  },
+  "overrides": {
+    "minimatch": "11.0.1",
+    "uuid": "11.1.1"
   }
 }

@@ -1,8 +1,18 @@
 /** The same runtime bootstrap is exercised in the browser Worker and Node proof. */
-export async function initializeRuntime({ indexURL, manifest, loadPyodide, readBytes, onProgress = () => {} }) {
-  if (manifest.schema_version !== 1) throw new Error('Unsupported solver runtime manifest.');
+export async function initializeRuntime({
+  indexURL,
+  manifest,
+  loadPyodide,
+  readBytes,
+  onProgress = () => {},
+}) {
+  if (manifest.schema_version !== 1)
+    throw new Error("Unsupported solver runtime manifest.");
   const started = performance.now();
-  onProgress({ stage: 'loading-python', message: 'Loading self-hosted Python / WebAssembly…' });
+  onProgress({
+    stage: "loading-python",
+    message: "Loading self-hosted Python / WebAssembly…",
+  });
   const pyodide = await loadPyodide({
     indexURL,
     packageBaseUrl: indexURL,
@@ -11,23 +21,43 @@ export async function initializeRuntime({ indexURL, manifest, loadPyodide, readB
     stdout: () => {},
     stderr: () => {},
   });
-  if (pyodide.version !== manifest.pyodide_version) throw new Error('The Python runtime version differs from the pinned manifest.');
-  onProgress({ stage: 'loading-packages', message: 'Loading numerical libraries…' });
+  if (pyodide.version !== manifest.pyodide_version)
+    throw new Error(
+      "The Python runtime version differs from the pinned manifest.",
+    );
+  onProgress({
+    stage: "loading-packages",
+    message: "Loading numerical libraries…",
+  });
   await pyodide.loadPackage(manifest.load_packages, {
-    messageCallback: message => onProgress({ stage: 'loading-packages', message }),
-    errorCallback: message => onProgress({ stage: 'loading-packages', message }),
+    messageCallback: (message) =>
+      onProgress({ stage: "loading-packages", message }),
+    errorCallback: (message) =>
+      onProgress({ stage: "loading-packages", message }),
     checkIntegrity: true,
   });
-  const sitePackages = pyodide.runPython("import site; site.getsitepackages()[0]");
+  const sitePackages = pyodide.runPython(
+    "import site; site.getsitepackages()[0]",
+  );
   for (let index = 0; index < manifest.wheels.length; index++) {
     const wheel = manifest.wheels[index];
-    onProgress({ stage: 'installing-wheels', message: `Installing ${wheel.name} ${wheel.version}`, completed: index, total: manifest.wheels.length });
+    onProgress({
+      stage: "installing-wheels",
+      message: `Installing ${wheel.name} ${wheel.version}`,
+      completed: index,
+      total: manifest.wheels.length,
+    });
     const bytes = await readBytes(wheel.path);
     await verifyDigest(bytes, wheel.sha256, wheel.path);
-    pyodide.unpackArchive(bytes, 'wheel', { extractDir: sitePackages });
+    pyodide.unpackArchive(bytes, "wheel", { extractDir: sitePackages });
   }
   // Validate the complete declared dependency closure without any package-index requests.
-  pyodide.globals.set('_sld_expected_versions_json', JSON.stringify(Object.fromEntries(manifest.wheels.map(w => [w.name, w.version]))));
+  pyodide.globals.set(
+    "_sld_expected_versions_json",
+    JSON.stringify(
+      Object.fromEntries(manifest.wheels.map((w) => [w.name, w.version])),
+    ),
+  );
   pyodide.runPython(`
 import importlib, importlib.metadata, json
 from packaging.requirements import Requirement
@@ -45,39 +75,97 @@ for _name, _version in _sld_expected.items():
         if _req.specifier and Version(_actual) not in _req.specifier:
             raise RuntimeError(f"Unsatisfied runtime dependency: {_name}: {_req} (installed {_actual})")
 `);
-  pyodide.globals.delete('_sld_expected_versions_json');
-  onProgress({ stage: 'loading-adapter', message: 'Loading and checking the pandapower adapter…' });
+  pyodide.globals.delete("_sld_expected_versions_json");
+  onProgress({
+    stage: "loading-adapter",
+    message: "Loading and checking the pandapower adapter…",
+  });
   const adapter = await readBytes(manifest.adapter.path);
   await verifyDigest(adapter, manifest.adapter.sha256, manifest.adapter.path);
-  pyodide.FS.mkdirTree('/app');
-  pyodide.FS.writeFile('/app/solver_adapter.py', adapter);
-  pyodide.runPython("import sys; sys.path.insert(0, '/app'); from solver_adapter import solve_document; import pandapower");
-  const installedVersion = pyodide.runPython('pandapower.__version__');
-  if (installedVersion !== manifest.pandapower_version) throw new Error('The solver version differs from the pinned manifest.');
+  pyodide.FS.mkdirTree("/app");
+  pyodide.FS.writeFile("/app/solver_adapter.py", adapter);
+  if (manifest.exporter) {
+    const exporter = await readBytes(manifest.exporter.path);
+    await verifyDigest(
+      exporter,
+      manifest.exporter.sha256,
+      manifest.exporter.path,
+    );
+    pyodide.FS.writeFile("/app/exporters.py", exporter);
+  }
+  pyodide.runPython(
+    "import sys; sys.path.insert(0, '/app'); from solver_adapter import solve_document; import pandapower",
+  );
+  const installedVersion = pyodide.runPython("pandapower.__version__");
+  if (installedVersion !== manifest.pandapower_version)
+    throw new Error("The solver version differs from the pinned manifest.");
   const loadMs = performance.now() - started;
-  onProgress({ stage: 'ready', message: `pandapower ${installedVersion} is ready.`, loadMs });
+  onProgress({
+    stage: "ready",
+    message: `pandapower ${installedVersion} is ready.`,
+    loadMs,
+  });
   return { pyodide, manifest, loadMs };
 }
 
-export async function verifyDigest(bytes, expected, label) {
-  const digest = await crypto.subtle.digest('SHA-256', bytes);
-  const actual = Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
-  if (actual !== expected) throw new Error(`Solver asset integrity check failed: ${label}`);
+export function exportRuntime(runtime, document, format, inputHash) {
+  const { pyodide } = runtime;
+  pyodide.globals.set("_export_document", JSON.stringify(document));
+  pyodide.globals.set("_export_format", format);
+  try {
+    const result = JSON.parse(
+      pyodide.runPython(
+        "import exporters; json.dumps(exporters.export_document(json.loads(_export_document), _export_format), allow_nan=False)",
+      ),
+    );
+    return {
+      ...result,
+      input_hash: inputHash,
+      model_revision: document.revision,
+    };
+  } finally {
+    pyodide.globals.delete("_export_document");
+    pyodide.globals.delete("_export_format");
+  }
+}
+export function diagnoseRuntime(runtime, document) {
+  const { pyodide } = runtime;
+  pyodide.globals.set("_diagnose_document", JSON.stringify(document));
+  try {
+    return JSON.parse(
+      pyodide.runPython(
+        "from solver_adapter import diagnose_document; json.dumps(diagnose_document(json.loads(_diagnose_document)), allow_nan=False)",
+      ),
+    );
+  } finally {
+    pyodide.globals.delete("_diagnose_document");
+  }
 }
 
-export function solveRuntime(runtime, document, inputHash = '') {
+export async function verifyDigest(bytes, expected, label) {
+  const digest = await crypto.subtle.digest("SHA-256", bytes);
+  const actual = Array.from(new Uint8Array(digest), (byte) =>
+    byte.toString(16).padStart(2, "0"),
+  ).join("");
+  if (actual !== expected)
+    throw new Error(`Solver asset integrity check failed: ${label}`);
+}
+
+export function solveRuntime(runtime, document, inputHash = "") {
   const { pyodide, manifest } = runtime;
-  pyodide.globals.set('_sld_document_json', JSON.stringify(document));
-  pyodide.globals.set('_sld_runtime_version', manifest.pyodide_version);
-  pyodide.globals.set('_sld_lock_digest', manifest.package_lock_digest);
-  pyodide.globals.set('_sld_input_hash', inputHash);
+  pyodide.globals.set("_sld_document_json", JSON.stringify(document));
+  pyodide.globals.set("_sld_runtime_version", manifest.pyodide_version);
+  pyodide.globals.set("_sld_lock_digest", manifest.package_lock_digest);
+  pyodide.globals.set("_sld_input_hash", inputHash);
   try {
-    const json = pyodide.runPython(`json.dumps(solve_document(json.loads(_sld_document_json), _sld_input_hash or None, runtime='pyodide', runtime_version=_sld_runtime_version, package_lock_digest=_sld_lock_digest), allow_nan=False)`);
+    const json = pyodide.runPython(
+      `json.dumps(solve_document(json.loads(_sld_document_json), _sld_input_hash or None, runtime='pyodide', runtime_version=_sld_runtime_version, package_lock_digest=_sld_lock_digest), allow_nan=False)`,
+    );
     return JSON.parse(json);
   } finally {
-    pyodide.globals.delete('_sld_document_json');
-    pyodide.globals.delete('_sld_runtime_version');
-    pyodide.globals.delete('_sld_lock_digest');
-    pyodide.globals.delete('_sld_input_hash');
+    pyodide.globals.delete("_sld_document_json");
+    pyodide.globals.delete("_sld_runtime_version");
+    pyodide.globals.delete("_sld_lock_digest");
+    pyodide.globals.delete("_sld_input_hash");
   }
 }

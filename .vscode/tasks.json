@@ -1,0 +1,114 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Install JavaScript dependencies",
+      "type": "shell",
+      "command": "npm",
+      "windows": { "command": "npm.cmd" },
+      "args": ["ci"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Install Python dependencies",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "windows": { "command": "${workspaceFolder}/.venv/Scripts/python.exe" },
+      "args": ["-m", "pip", "install", "-r", "requirements-lock.txt"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Provision browser runtime",
+      "type": "shell",
+      "command": "npm",
+      "windows": { "command": "npm.cmd", "options": { "env": { "PYTHON": "${workspaceFolder}/.venv/Scripts/python.exe" } } },
+      "options": { "env": { "PYTHON": "${workspaceFolder}/.venv/bin/python" } },
+      "args": ["run", "provision:runtime"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Start development server",
+      "type": "shell",
+      "command": "npm",
+      "windows": { "command": "npm.cmd" },
+      "args": ["run", "dev"],
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "Lint",
+      "type": "shell",
+      "command": "npm",
+      "windows": { "command": "npm.cmd" },
+      "args": ["run", "lint"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Type-check",
+      "type": "shell",
+      "command": "npm",
+      "windows": { "command": "npm.cmd" },
+      "args": ["run", "typecheck"],
+      "problemMatcher": ["$tsc"]
+    },
+    {
+      "label": "Front-end unit tests",
+      "type": "shell",
+      "command": "npm",
+      "windows": { "command": "npm.cmd" },
+      "args": ["test"],
+      "group": { "kind": "test", "isDefault": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "Native solver tests",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "windows": { "command": "${workspaceFolder}/.venv/Scripts/python.exe" },
+      "args": ["-m", "pytest", "tests/python"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Browser runtime proof",
+      "type": "shell",
+      "command": "npm",
+      "windows": { "command": "npm.cmd" },
+      "args": ["run", "test:runtime"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Verify runtime RAW exports",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "windows": { "command": "${workspaceFolder}/.venv/Scripts/python.exe" },
+      "args": ["tests/python/verify_runtime_raw.py"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Build static site",
+      "type": "shell",
+      "command": "npm",
+      "windows": { "command": "npm.cmd" },
+      "args": ["run", "build"],
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": ["$tsc"]
+    },
+    {
+      "label": "Preview production build",
+      "type": "shell",
+      "command": "npm",
+      "windows": { "command": "npm.cmd" },
+      "args": ["run", "preview"],
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "Verify all",
+      "dependsOrder": "sequence",
+      "dependsOn": ["Lint", "Type-check", "Front-end unit tests", "Native solver tests", "Provision browser runtime", "Browser runtime proof", "Verify runtime RAW exports", "Build static site"],
+      "problemMatcher": []
+    }
+  ]
+}
