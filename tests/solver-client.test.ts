@@ -1,7 +1,9 @@
 import { describe, expect, it, vi } from "vitest";
 import template from "../schema/fixture-template.json";
 import type { SolutionRun, StudyDocument } from "../src/model/types";
-import { confirmReview } from "../src/model/revision";
+import { confirmReview, computeInputHash } from "../src/model/revision";
+import { captureBase } from "../src/operations";
+import { readFileSync } from "node:fs";
 import { BrowserSolverAdapter } from "../src/solver/client";
 import type { SolverRequest, SolverResponse } from "../src/solver/protocol";
 
@@ -224,6 +226,49 @@ describe("solver Worker lifecycle and result freshness", () => {
     const retry = adapter.initialize();
     workers[1].ready();
     await expect(retry).resolves.toMatchObject({ solverVersion: "3.3.3" });
+    adapter.dispose();
+  });
+  it("keeps base/history in the caller while dispatching the same exact electrical inputs", async () => {
+    const input = await captureBase(
+      await confirmReview(
+        JSON.parse(
+          readFileSync("public/fixtures/case50.json", "utf8"),
+        ) as StudyDocument,
+      ),
+    );
+    const original = structuredClone(input),
+      originalHash = await computeInputHash(input);
+    const { adapter, workers } = harness(),
+      ready = adapter.initialize();
+    workers[0].ready();
+    await ready;
+    const promise = adapter.solve(input);
+    await vi.waitFor(() =>
+      expect(workers[0].requests.some((r) => r.type === "solve")).toBe(true),
+    );
+    const request = workers[0].requests.find(
+      (r) => r.type === "solve",
+    ) as Extract<SolverRequest, { type: "solve" }>;
+    expect(request.document.operation.base_snapshot).toBeNull();
+    expect(request.document.operation.events).toEqual(input.operation.events);
+    expect(request.document.operation.island_policy).toEqual(
+      input.operation.island_policy,
+    );
+    expect(request.inputHash).toBe(originalHash);
+    expect(await computeInputHash(request.document)).toBe(originalHash);
+    expect(JSON.stringify(request.document).length).toBeLessThan(
+      JSON.stringify(input).length * 0.7,
+    );
+    expect(input).toEqual(original);
+    workers[0].send({
+      type: "solution",
+      requestId: request.requestId,
+      revision: request.document.revision,
+      inputHash: request.inputHash,
+      solution: protocolResult(request),
+      elapsedMs: 1,
+    });
+    await promise;
     adapter.dispose();
   });
 });

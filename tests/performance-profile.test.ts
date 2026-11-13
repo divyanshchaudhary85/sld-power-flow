@@ -14,6 +14,7 @@ import {
   validateStudyDocument,
 } from "../src/model/validation";
 import type { StudyDocument } from "../src/model/types";
+import { captureBase } from "../src/operations";
 
 it.skipIf(!process.env.PERFORMANCE_PROFILE)(
   "records actual Node hot-path timings without timing assertions",
@@ -21,6 +22,7 @@ it.skipIf(!process.env.PERFORMANCE_PROFILE)(
     const document = JSON.parse(
       readFileSync("public/fixtures/case50.json", "utf8"),
     ) as StudyDocument;
+    const withBase = await captureBase(await confirmReview(document));
     const operations: Record<string, () => unknown> = {
       structuredClone: () => structuredClone(document),
       inspectJsonValue: () => inspectJsonValue(document),
@@ -31,6 +33,8 @@ it.skipIf(!process.env.PERFORMANCE_PROFILE)(
       listMissingData: () => listMissingData(document),
       validateNetwork: () => validateNetwork(document),
       confirmReview: () => confirmReview(document),
+      validateWithBase: () => validateStudyDocument(withBase),
+      confirmWithBase: () => confirmReview(withBase),
     };
     const timings: Record<string, unknown> = {};
     for (const [name, operation] of Object.entries(operations)) {

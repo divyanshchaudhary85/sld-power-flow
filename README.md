@@ -6,7 +6,7 @@ A browser-local workspace that turns a reviewed single-line diagram into a trace
 
 [Open the live application](https://divyanshchaudhary85.github.io/sld-power-flow/) · [Open the project in your IDE](START-HERE.md) · [Release verification and limitations](docs/release-verification.md)
 
-![SLD Power Flow operator console](docs/images/study-console.jpg)
+![Local source-drawing review in SLD Power Flow](docs/images/drawing-review.jpg)
 
 ## What is implemented
 

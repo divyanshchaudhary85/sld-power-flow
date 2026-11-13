@@ -122,6 +122,13 @@ export class BrowserSolverAdapter implements SolverAdapter {
     if (options.signal?.aborted) throw new SolverCancelledError();
     // Snapshot before any await: callers may continue editing their current case.
     const snapshot = structuredClone(document);
+    // These sections are deliberately excluded from electricalSnapshot and are not
+    // solver inputs. Keep them in the caller's case, not in every Worker/Python copy.
+    // Event history remains: outage authorization refers to its event IDs.
+    snapshot.operation.base_snapshot = null;
+    snapshot.solution = null;
+    snapshot.validation = null;
+    snapshot.export_history = [];
     const generation = ++this.generation;
     this.rejectSolves(
       new SolverCancelledError("A newer study superseded this solver request."),

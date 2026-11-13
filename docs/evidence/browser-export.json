@@ -1,0 +1,106 @@
+{
+  "file": "sld-study-rev-0 (1).zip",
+  "zip_crc": "passed",
+  "files": [
+    "IEEE-9-bus-reference.json",
+    "IEEE-9-bus-reference.mat",
+    "IEEE-9-bus-reference.raw",
+    "solution.xlsx",
+    "tables/",
+    "tables/buses.csv",
+    "tables/branches.csv",
+    "tables/transformers.csv",
+    "tables/generators.csv",
+    "tables/loads.csv",
+    "tables/shunts.csv",
+    "tables/summary.csv",
+    "tables/assumptions.csv",
+    "tables/findings.csv",
+    "study-report.pdf",
+    "canonical-case.json",
+    "README.txt"
+  ],
+  "case": "IEEE 9-bus reference",
+  "revision": 0,
+  "status": "converged",
+  "input_hash": "96fc97f837b374a48fac539533f779ab42b1c5ba488915d4ac5c73c5418a373e",
+  "exports": 6,
+  "sha256": "15976be5c8a31147caaceb7a97cf826ee2250322f891e5ddd3e1b8f7d2d2c622",
+  "native_validation_at": "2026-11-13T11:34:57.013511Z",
+  "native_round_trip_tolerance_pu": 0.0001,
+  "download_bundle_checks": [
+    {
+      "file": "sld-study-rev-0 (1).zip",
+      "sha256": "15976be5c8a31147caaceb7a97cf826ee2250322f891e5ddd3e1b8f7d2d2c622",
+      "zip_crc": "passed",
+      "entry_count": 17,
+      "file_count": 16,
+      "csv_file_count": 9,
+      "bus_count": 9,
+      "canonical_solution_input_hash": "96fc97f837b374a48fac539533f779ab42b1c5ba488915d4ac5c73c5418a373e",
+      "round_trips": [
+        {
+          "format": "pandapower-json",
+          "file": "IEEE-9-bus-reference.json",
+          "bytes": 104353,
+          "maximum_voltage_error_pu": 7.771561172376096e-16,
+          "passed": true,
+          "reader": "pandapower 3.3.3"
+        },
+        {
+          "format": "matpower",
+          "file": "IEEE-9-bus-reference.mat",
+          "bytes": 1063,
+          "maximum_voltage_error_pu": 7.771561172376096e-16,
+          "passed": true,
+          "reader": "pandapower 3.3.3"
+        },
+        {
+          "format": "psse-raw",
+          "file": "IEEE-9-bus-reference.raw",
+          "bytes": 3256,
+          "maximum_voltage_error_pu": 7.771561172376096e-16,
+          "passed": true,
+          "reader": "grg-pssedata 0.1.4 + pandapower bridge"
+        }
+      ]
+    },
+    {
+      "file": "sld-study-rev-0.zip",
+      "sha256": "20837355cfae0bc37fc67ed20028e8f76745d7904c54e1144df37f9cc7440d9b",
+      "zip_crc": "passed",
+      "entry_count": 17,
+      "file_count": 16,
+      "csv_file_count": 9,
+      "bus_count": 9,
+      "canonical_solution_input_hash": "96fc97f837b374a48fac539533f779ab42b1c5ba488915d4ac5c73c5418a373e",
+      "round_trips": [
+        {
+          "format": "pandapower-json",
+          "file": "IEEE-9-bus-reference.json",
+          "bytes": 104353,
+          "maximum_voltage_error_pu": 7.771561172376096e-16,
+          "passed": true,
+          "reader": "pandapower 3.3.3"
+        },
+        {
+          "format": "matpower",
+          "file": "IEEE-9-bus-reference.mat",
+          "bytes": 1063,
+          "maximum_voltage_error_pu": 7.771561172376096e-16,
+          "passed": true,
+          "reader": "pandapower 3.3.3"
+        },
+        {
+          "format": "psse-raw",
+          "file": "IEEE-9-bus-reference.raw",
+          "bytes": 3256,
+          "maximum_voltage_error_pu": 7.771561172376096e-16,
+          "passed": true,
+          "reader": "grg-pssedata 0.1.4 + pandapower bridge"
+        }
+      ]
+    }
+  ],
+  "psse_software_verified": false
+}

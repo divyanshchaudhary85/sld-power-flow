@@ -100,11 +100,11 @@ on this Windows host. The raw timings and native voltage comparisons are in
 the browser performance proof must be reported separately.
 
 The final network-disabled Node/Pyodide proof solved the synthetic 50-bus case
-in 979 ms after runtime load, with maximum native voltage difference below
+in 1,309 ms after runtime load in the final recorded run, with maximum native voltage difference below
 1e-15 pu. That is a measured WebAssembly solve, still excluding DOM redraw.
 IEEE9, IEEE14 and the breaker fixture also passed that runtime proof.
 
-The complete native Python suite passed 28 tests. Six upstream deprecation and
+The complete native Python suite passed 33 tests. Six upstream deprecation and
 dtype warnings were emitted; no numerical test failed. `pip check` reported no
 broken dependency requirements.
 
@@ -128,3 +128,7 @@ References: [pandapower MAT converter](https://pandapower.readthedocs.io/en/v3.3
 [pandapower diagnostics](https://pandapower.readthedocs.io/en/v3.3.3/powerflow/diagnostic.html),
 [grg parser documentation](https://grg-pssedata.readthedocs.io/en/latest/grg_pssedata.html),
 [grg source and licence](https://github.com/lanl-ansi/grg-pssedata).
+
+## Actual browser download check
+
+Both generated IEEE 9-bus ZIP downloads were read back from disk. Each contained all six requested export formats plus canonical JSON and conversion notes. The three native formats in each ZIP were independently re-imported and solved: all six comparisons differed from the contained canonical solution by at most `7.771561172376096e-16 pu`. The workbook had nine sheets and nine bus rows; the PDF reopened with the expected sections. See [the recorded browser-export evidence](evidence/browser-export.json). The final compact report layout is separately rendered and checked at code level after the browser automation interruption.

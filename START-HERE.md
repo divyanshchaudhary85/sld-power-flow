@@ -1,6 +1,6 @@
 # Start here
 
-Open this `sld-power-flow` folder in your IDE: the folder containing `package.json`, `src/`, `python/` and this file. It contains both the browser application and the native reference/test code. There is no application server or database service to start.
+Open this project folder in your IDE: the folder containing `package.json`, `src/`, `python/` and this file. It contains both the browser application and the native reference/test code. There is no application server or database service to start.
 
 The application supports a reviewed, balanced positive-sequence AC study. Its operator controls simulate a case; they never operate physical equipment. You can learn and run the supplied cases without an API key. Real drawing extraction is optional and requires your own provider key plus explicit consent; its real-world accuracy remains unmeasured.
 
@@ -64,21 +64,21 @@ For a drawing workflow, read [drawing ingestion and extraction](docs/extraction.
 
 ## Where to read and change code
 
-| Goal | Start with |
-| --- | --- |
-| Understand the whole flow | [Architecture guide](docs/architecture.md) |
-| Change layout or UI behavior | `src/App.tsx`, `src/ui/`, `src/styles.css` |
-| Understand an input or result field | `src/model/types.ts`, `schema/study-document.schema.json` |
-| Edit engineering inputs safely | `src/model/editing.ts`, `src/model/revision.ts` |
-| Add or diagnose an engineering rule | `src/validation/`, `tests/validation.test.ts` |
-| Understand missing values/default acceptance | `src/completion/` |
-| Trace an operator action or async solve | `src/operations.ts`, `src/useWorkspace.ts`, `tests/operations.test.ts` |
-| Change actual numerical conversion | `python/solver_adapter.py`, `tests/python/test_adapter.py` |
-| Understand the browser Python runtime | `src/solver/`, [runtime guide](docs/browser-runtime.md) |
-| Work on perception and reconstruction | `src/ingestion/`, `src/extraction/`, [extraction guide](docs/extraction.md) |
-| Resolve a dangling drawing wire | `src/model/endpointReview.ts`, `src/ui/EndpointReview.tsx` |
-| Understand keyboard-safe confirmations | `src/ui/ConfirmDialog.tsx`, `tests/confirm-dialog.test.ts` |
-| Change exports | `src/exports/`, `python/exporters.py`, [native export contract](python/EXPORTS.md) |
+| Goal                                         | Start with                                                                         |
+| -------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Understand the whole flow                    | [Architecture guide](docs/architecture.md)                                         |
+| Change layout or UI behavior                 | `src/App.tsx`, `src/ui/`, `src/styles.css`                                         |
+| Understand an input or result field          | `src/model/types.ts`, `schema/study-document.schema.json`                          |
+| Edit engineering inputs safely               | `src/model/editing.ts`, `src/model/revision.ts`                                    |
+| Add or diagnose an engineering rule          | `src/validation/`, `tests/validation.test.ts`                                      |
+| Understand missing values/default acceptance | `src/completion/`                                                                  |
+| Trace an operator action or async solve      | `src/operations.ts`, `src/useWorkspace.ts`, `tests/operations.test.ts`             |
+| Change actual numerical conversion           | `python/solver_adapter.py`, `tests/python/test_adapter.py`                         |
+| Understand the browser Python runtime        | `src/solver/`, [runtime guide](docs/browser-runtime.md)                            |
+| Work on perception and reconstruction        | `src/ingestion/`, `src/extraction/`, [extraction guide](docs/extraction.md)        |
+| Resolve a dangling drawing wire              | `src/model/endpointReview.ts`, `src/ui/EndpointReview.tsx`                         |
+| Understand keyboard-safe confirmations       | `src/ui/ConfirmDialog.tsx`, `tests/confirm-dialog.test.ts`                         |
+| Change exports                               | `src/exports/`, `python/exporters.py`, [native export contract](python/EXPORTS.md) |
 
 A useful first code exercise is to alter a display label or add a narrowly scoped rule test. For an engineering behavior change, make a failing test with a known case first, then implement it. Preserve the canonical schema, provenance and revision checks.
 
@@ -100,14 +100,14 @@ npm run build
 npm run preview
 ```
 
-| Check | What it establishes |
-| --- | --- |
-| Lint / type-check | Code conventions and TypeScript consistency |
-| Vitest | Model boundaries, rules, operator races, ingestion/extraction logic, browser adapter behavior and export shaping |
-| Native pytest | Actual pandapower conversion/solve, diagnostics and numerical export checks |
-| Runtime proof | Real Pyodide/pandapower parity against committed native references, with network blocked during the test |
-| Runtime RAW verification | Independent parsing of actual WebAssembly-generated RAW files followed by a native re-solve |
-| Browser interaction | Rendering, Worker loading, keyboard/pointer flows and action-to-redraw timing in the actual browser |
+| Check                    | What it establishes                                                                                              |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| Lint / type-check        | Code conventions and TypeScript consistency                                                                      |
+| Vitest                   | Model boundaries, rules, operator races, ingestion/extraction logic, browser adapter behavior and export shaping |
+| Native pytest            | Actual pandapower conversion/solve, diagnostics and numerical export checks                                      |
+| Runtime proof            | Real Pyodide/pandapower parity against committed native references, with network blocked during the test         |
+| Runtime RAW verification | Independent parsing of actual WebAssembly-generated RAW files followed by a native re-solve                      |
+| Browser interaction      | Rendering, Worker loading, keyboard/pointer flows and action-to-redraw timing in the actual browser              |
 
 `npm test -- tests/operations.test.ts` and `.venv/bin/python -m pytest tests/python/test_adapter.py` are useful focused commands. The RAW verifier requires files created by the immediately preceding runtime proof. Re-run `provision:runtime` after changing `python/solver_adapter.py` or `python/exporters.py`; otherwise the browser uses the preceding copied adapter. Reference fixtures are reviewed test inputs: do not regenerate them to make a failing comparison pass. `npm run format` formats source using the pinned Prettier version; review that diff independently from a functional change.
 

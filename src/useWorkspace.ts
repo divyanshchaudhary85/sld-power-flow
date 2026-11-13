@@ -39,8 +39,15 @@ export async function validatedDocument(
   document: StudyDocument,
   extra: Finding[] = [],
 ): Promise<StudyDocument> {
-  const next = structuredClone(document),
-    at = new Date().toISOString();
+  return validateOwnedDocument(structuredClone(document), extra);
+}
+
+/** Only receives an unshared transaction-local snapshot; public validation clones first. */
+async function validateOwnedDocument(
+  next: StudyDocument,
+  extra: Finding[] = [],
+): Promise<StudyDocument> {
+  const at = new Date().toISOString();
   const findings = [
     ...new Map(
       [
@@ -99,11 +106,12 @@ export async function runWorkspaceSolve(
   let snapshot = structuredClone(options.document);
   // A pending or failed request must never keep the preceding run's numbers current.
   snapshot.solution = null;
-  commit(snapshot);
+  // Clear old results immediately without publishing our private preparation object.
+  commit({ ...options.document, solution: null });
+  let publishedResult = false;
   try {
-    snapshot = await validatedDocument(snapshot);
+    snapshot = await validateOwnedDocument(snapshot);
     if (!isCurrent()) return;
-    commit(snapshot);
     const blockers = snapshot.validation!.findings.filter(
       (finding) => finding.blocks_solve,
     );
@@ -111,14 +119,18 @@ export async function runWorkspaceSolve(
       throw new Error(
         `${blockers.length} blocking finding(s). Open Validate or Complete data to resolve them.`,
       );
-    const reviewed = await isReviewCurrent(snapshot);
-    if (!isCurrent()) return;
+    // Validation just hashed this private snapshot. Only validation metadata changed,
+    // so a second hash here would inspect the same inputs. The adapter and Worker
+    // still independently validate/hash their own incoming snapshots.
+    const reviewed =
+      snapshot.review.status === "confirmed" &&
+      snapshot.review.confirmed_model_revision === snapshot.revision &&
+      snapshot.review.confirmed_input_hash === snapshot.validation!.input_hash;
     if (!reviewed)
       throw new Error("Review and confirm this exact case before solving.");
     if (!snapshot.operation.base_snapshot) {
       snapshot = await captureBase(snapshot);
       if (!isCurrent()) return;
-      commit(snapshot);
     }
     const run = await adapter.solve(snapshot);
     if (!isCurrent()) return;
@@ -143,23 +155,32 @@ export async function runWorkspaceSolve(
       message: `${run.status} · ${run.iterations ?? "—"} iterations`,
     });
     commit(solved);
+    publishedResult = true;
     await waitForPaint();
     if (!isCurrent()) return;
     const total = Math.max(0, now() - start);
     if (run.timing) {
-      solved = structuredClone(solved);
-      solved.solution!.timing = {
-        ...run.timing,
-        total_ms: total,
-        redraw_ms: Math.max(0, total - run.timing.total_ms),
-        measurement_environment:
-          "Browser UI action to two animation frames after results committed",
+      solved = {
+        ...solved,
+        solution: {
+          ...solved.solution!,
+          timing: {
+            ...run.timing,
+            total_ms: total,
+            redraw_ms: Math.max(0, total - run.timing.total_ms),
+            measurement_environment:
+              "Browser UI action to two animation frames after results committed",
+          },
+        },
       };
       commit(solved);
     }
     onElapsed(total);
   } catch (error) {
-    if (isCurrent()) onError(errorMessage(error, "Study failed."));
+    if (isCurrent()) {
+      if (!publishedResult) commit(snapshot);
+      onError(errorMessage(error, "Study failed."));
+    }
   } finally {
     if (isCurrent()) onBusy(false);
   }

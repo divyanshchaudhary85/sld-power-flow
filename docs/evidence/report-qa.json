@@ -1,0 +1,26 @@
+{
+  "checked_on": "2026-11-13",
+  "environment": "Node Vitest, not a browser layout recheck",
+  "case": "IEEE 9-bus, actual native-solved canonical case",
+  "diagram": "public/drawings/synthetic-training.png was supplied by the temporary test; this is not the case9 diagram rendered by the application",
+  "report": {
+    "pages": 14,
+    "generation_ms": 4305.123,
+    "bytes": 202134,
+    "all_assumption_rows": 373,
+    "reopened_with": ["pdf-lib", "pypdf"],
+    "visual_check": "Poppler PNGs inspected for bus/source tables, branch-end powers/currents/losses, and two-column assumptions register"
+  },
+  "continuation_stress_case": {
+    "pages": 20,
+    "inputs": "Two approximately 12000-character cells: accepted description value and source reference",
+    "result": "Both end markers present in extracted PDF text after whitespace normalization; oversized cells continue through page/column headers"
+  },
+  "checks": {
+    "temporary_report_tests": "2 passed; scratch test removed after verification",
+    "retained_wrap_tests": "2 passed",
+    "workbook": "Reopened with ExcelJS; 10 rows in Buses including header and nonempty assumptions sheet",
+    "result_quality": "Default-dependent result rows marked with an asterisk and explanatory legend"
+  },
+  "limitations": "Final revised PDF layout was verified headlessly. The earlier browser ZIP download was independently observed, but this last report layout was not rechecked in the browser. Performance is a local measurement, not a guaranteed duration."
+}

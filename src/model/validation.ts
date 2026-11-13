@@ -123,6 +123,16 @@ const fastSchema = {
         },
       },
     },
+    BaseSnapshot: {
+      ...schema.$defs.BaseSnapshot,
+      properties: {
+        ...schema.$defs.BaseSnapshot.properties,
+        elements: {
+          ...schema.$defs.BaseSnapshot.properties.elements,
+          items: true,
+        },
+      },
+    },
   },
 };
 const fastAjv = new Ajv2020({
@@ -150,11 +160,14 @@ const elementValidators = new Map(
 );
 function validateTaggedDocument(input: unknown): input is StudyDocument {
   if (!validateEnvelope(input)) return false;
-  return input.elements.every(
-    (element) =>
-      element &&
-      typeof element === "object" &&
-      elementValidators.get(element.type?.value)?.(element) === true,
+  const validElement = (element: StudyDocument["elements"][number]) =>
+    element &&
+    typeof element === "object" &&
+    elementValidators.get(element.type?.value)?.(element) === true;
+  return (
+    input.elements.every(validElement) &&
+    (!input.operation.base_snapshot ||
+      input.operation.base_snapshot.elements.every(validElement))
   );
 }
 

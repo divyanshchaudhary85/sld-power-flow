@@ -104,3 +104,7 @@ Automated parser/solver checks and browser interaction are different evidence. C
 Vite builds a static `dist/` with base path `/sld-power-flow/`. `scripts/prepare-static.mjs` copies browser-needed schema/PDF assets, verifies both bundled Inter fonts and writes package/font notices. GitHub Actions runs lint, TypeScript, frontend tests, native tests, real runtime/RAW proofs and build before publishing the main-branch artifact to Pages. [CI details](ci.md) explain the permissions and immutable action pins.
 
 For the day-to-day commands and IDE tasks, return to [Start here](../START-HERE.md).
+
+## UI implementation choices
+
+The suggested diagram and styling libraries were optional. This version uses owned SVG components and ordinary CSS so the review canvas, operator diagram, PDF drawing and synthetic fixtures share one symbol implementation and one coordinate model. At the declared 50-bus scope, native HTML tables provide sorting, filtering, keyboard selection and horizontal scrolling without another table state layer. Long assumptions registers are paginated in PDF exports. PDF.js, UTIF, ExcelJS, pdf-lib and JSZip handle their specific file formats; numerical results still come exclusively from the solver worker. These choices keep the approved panel design and make the project easier to read in an IDE.
