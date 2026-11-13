@@ -1,15 +1,35 @@
 {
-  "generated_at": "2026-11-13T10:20:42.926390Z",
+  "generated_at": "2026-11-13T11:11:14.745042Z",
   "tests": [
     {
       "fixture": "case9",
       "maximum_voltage_error_pu": 3.3306690738754696e-16,
-      "native_round_trip": "passed"
+      "native_round_trip": "passed",
+      "native_warm_solve_ms": null
     },
     {
       "fixture": "case14",
       "maximum_voltage_error_pu": 0.0,
-      "native_round_trip": "passed"
+      "native_round_trip": "passed",
+      "native_warm_solve_ms": null
+    },
+    {
+      "fixture": "case9-breaker",
+      "maximum_voltage_error_pu": 3.3306690738754696e-16,
+      "native_round_trip": "passed",
+      "native_warm_solve_ms": null
+    },
+    {
+      "fixture": "case50",
+      "maximum_voltage_error_pu": 0.0,
+      "native_round_trip": "passed",
+      "native_warm_solve_ms": [
+        736.8882000009762,
+        733.6454999895068,
+        628.468700000667,
+        681.6878000099678,
+        686.5627000079257
+      ]
     }
   ]
 }

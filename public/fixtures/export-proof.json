@@ -1,0 +1,46 @@
+{
+  "generated_at": "2026-11-13T11:13:26.948005Z",
+  "pandapower_version": "3.3.3",
+  "tolerance_pu": 0.0001,
+  "independent_raw_reader": "grg-pssedata 0.1.4 (BSD-3-Clause)",
+  "raw_reader_caveats": "Test-only shims supply two omitted imports and a reporting ID. Known validator false positives for unused zero owner/control/table IDs are acknowledged. Parsing and electrical values are unchanged.",
+  "psse_software_verified": false,
+  "tests": [
+    {
+      "fixture": "case9",
+      "format": "pandapower-json",
+      "maximum_voltage_error_pu": 0.0,
+      "passed": true
+    },
+    {
+      "fixture": "case9",
+      "format": "matpower",
+      "maximum_voltage_error_pu": 0.0,
+      "passed": true
+    },
+    {
+      "fixture": "case9",
+      "format": "psse-raw",
+      "maximum_voltage_error_pu": 0.0,
+      "passed": true
+    },
+    {
+      "fixture": "case14",
+      "format": "pandapower-json",
+      "maximum_voltage_error_pu": 0.0,
+      "passed": true
+    },
+    {
+      "fixture": "case14",
+      "format": "matpower",
+      "maximum_voltage_error_pu": 0.0,
+      "passed": true
+    },
+    {
+      "fixture": "case14",
+      "format": "psse-raw",
+      "maximum_voltage_error_pu": 0.0,
+      "passed": true
+    }
+  ]
+}

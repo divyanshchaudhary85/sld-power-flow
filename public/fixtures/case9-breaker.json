@@ -1,0 +1,5960 @@
+{
+  "schema_version": "1.0.0",
+  "case_id": "case9-breaker",
+  "revision": 0,
+  "meta": {
+    "name": {
+      "status": "known",
+      "value": "IEEE 9-bus with load isolation breaker",
+      "provenance": {
+        "source": "library",
+        "library_id": "sld-power-flow.synthetic-fixtures",
+        "library_version": "1",
+        "item_id": "case9-breaker",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "network_type": {
+      "status": "known",
+      "value": "transmission_subtransmission",
+      "provenance": {
+        "source": "library",
+        "library_id": "sld-power-flow.synthetic-fixtures",
+        "library_version": "1",
+        "item_id": "case-template",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "frequency_hz": {
+      "status": "known",
+      "value": 60.0,
+      "provenance": {
+        "source": "library",
+        "library_id": "sld-power-flow.synthetic-fixtures",
+        "library_version": "1",
+        "item_id": "case9-breaker",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "symbol_set": {
+      "status": "known",
+      "value": "IEC",
+      "provenance": {
+        "source": "library",
+        "library_id": "sld-power-flow.synthetic-fixtures",
+        "library_version": "1",
+        "item_id": "case-template",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "base_mva": {
+      "status": "known",
+      "value": 100.0,
+      "provenance": {
+        "source": "library",
+        "library_id": "sld-power-flow.synthetic-fixtures",
+        "library_version": "1",
+        "item_id": "case9-breaker",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "case_origin": {
+      "status": "known",
+      "value": "sample",
+      "provenance": {
+        "source": "library",
+        "library_id": "sld-power-flow.synthetic-fixtures",
+        "library_version": "1",
+        "item_id": "case-template",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "description": {
+      "status": "known",
+      "value": "Bundled reference case from pandapower; solved live in the browser.",
+      "provenance": {
+        "source": "library",
+        "library_id": "sld-power-flow.synthetic-fixtures",
+        "library_version": "1",
+        "item_id": "case9-breaker",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "created_at": "2026-11-13T00:00:00Z",
+    "modified_at": "2026-11-13T00:00:00Z",
+    "fixture_id": "case9-breaker",
+    "source_case_hash": "940cadb5418818893cd8b43de6e440e97a27f1026584b1fa9a7231ea414573d4"
+  },
+  "settings": {
+    "slack_element_id": {
+      "status": "known",
+      "value": "grid-0",
+      "provenance": {
+        "source": "library",
+        "library_id": "sld-power-flow.synthetic-fixtures",
+        "library_version": "1",
+        "item_id": "case9-breaker",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "slack_confirmed": {
+      "status": "known",
+      "value": true,
+      "provenance": {
+        "source": "library",
+        "library_id": "sld-power-flow.synthetic-fixtures",
+        "library_version": "1",
+        "item_id": "case9-breaker",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "base_confirmed": {
+      "status": "known",
+      "value": true,
+      "provenance": {
+        "source": "library",
+        "library_id": "sld-power-flow.synthetic-fixtures",
+        "library_version": "1",
+        "item_id": "case9-breaker",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "voltage_min_pu": {
+      "status": "known",
+      "value": 0.95,
+      "provenance": {
+        "source": "default",
+        "default_id": "reference-study-options",
+        "default_version": "1",
+        "accepted_at": "2026-11-13T00:00:00Z",
+        "rationale": "Explicit study option for bundled reference proof."
+      },
+      "derivation": null
+    },
+    "voltage_max_pu": {
+      "status": "known",
+      "value": 1.05,
+      "provenance": {
+        "source": "default",
+        "default_id": "reference-study-options",
+        "default_version": "1",
+        "accepted_at": "2026-11-13T00:00:00Z",
+        "rationale": "Explicit study option for bundled reference proof."
+      },
+      "derivation": null
+    },
+    "branch_warning_percent": {
+      "status": "known",
+      "value": 80,
+      "provenance": {
+        "source": "default",
+        "default_id": "reference-study-options",
+        "default_version": "1",
+        "accepted_at": "2026-11-13T00:00:00Z",
+        "rationale": "Explicit study option for bundled reference proof."
+      },
+      "derivation": null
+    },
+    "branch_alarm_percent": {
+      "status": "known",
+      "value": 100,
+      "provenance": {
+        "source": "default",
+        "default_id": "reference-study-options",
+        "default_version": "1",
+        "accepted_at": "2026-11-13T00:00:00Z",
+        "rationale": "Explicit study option for bundled reference proof."
+      },
+      "derivation": null
+    },
+    "transformer_z_min_percent": {
+      "status": "known",
+      "value": 2,
+      "provenance": {
+        "source": "default",
+        "default_id": "reference-study-options",
+        "default_version": "1",
+        "accepted_at": "2026-11-13T00:00:00Z",
+        "rationale": "Explicit study option for bundled reference proof."
+      },
+      "derivation": null
+    },
+    "transformer_z_max_percent": {
+      "status": "known",
+      "value": 25,
+      "provenance": {
+        "source": "default",
+        "default_id": "reference-study-options",
+        "default_version": "1",
+        "accepted_at": "2026-11-13T00:00:00Z",
+        "rationale": "Explicit study option for bundled reference proof."
+      },
+      "derivation": null
+    },
+    "nominal_voltage_tolerance_percent": {
+      "status": "known",
+      "value": 1,
+      "provenance": {
+        "source": "default",
+        "default_id": "reference-study-options",
+        "default_version": "1",
+        "accepted_at": "2026-11-13T00:00:00Z",
+        "rationale": "Explicit study option for bundled reference proof."
+      },
+      "derivation": null
+    },
+    "low_confidence_threshold": {
+      "status": "known",
+      "value": 0.85,
+      "provenance": {
+        "source": "default",
+        "default_id": "reference-study-options",
+        "default_version": "1",
+        "accepted_at": "2026-11-13T00:00:00Z",
+        "rationale": "Explicit study option for bundled reference proof."
+      },
+      "derivation": null
+    },
+    "voltage_unit_slip_ratio": {
+      "status": "known",
+      "value": 1000,
+      "provenance": {
+        "source": "default",
+        "default_id": "reference-study-options",
+        "default_version": "1",
+        "accepted_at": "2026-11-13T00:00:00Z",
+        "rationale": "Explicit study option for bundled reference proof."
+      },
+      "derivation": null
+    },
+    "power_unit_slip_ratio": {
+      "status": "known",
+      "value": 1000,
+      "provenance": {
+        "source": "default",
+        "default_id": "reference-study-options",
+        "default_version": "1",
+        "accepted_at": "2026-11-13T00:00:00Z",
+        "rationale": "Explicit study option for bundled reference proof."
+      },
+      "derivation": null
+    },
+    "slack_import_limit_mw": {
+      "status": "known",
+      "value": null,
+      "provenance": {
+        "source": "default",
+        "default_id": "reference-study-options",
+        "default_version": "1",
+        "accepted_at": "2026-11-13T00:00:00Z",
+        "rationale": "Explicit study option for bundled reference proof."
+      },
+      "derivation": null
+    },
+    "allow_slack_export": {
+      "status": "known",
+      "value": false,
+      "provenance": {
+        "source": "default",
+        "default_id": "reference-study-options",
+        "default_version": "1",
+        "accepted_at": "2026-11-13T00:00:00Z",
+        "rationale": "Explicit study option for bundled reference proof."
+      },
+      "derivation": null
+    },
+    "solver_tolerance_mva": {
+      "status": "known",
+      "value": 1e-08,
+      "provenance": {
+        "source": "default",
+        "default_id": "reference-study-options",
+        "default_version": "1",
+        "accepted_at": "2026-11-13T00:00:00Z",
+        "rationale": "Explicit study option for bundled reference proof."
+      },
+      "derivation": null
+    },
+    "max_iterations": {
+      "status": "known",
+      "value": 30,
+      "provenance": {
+        "source": "default",
+        "default_id": "reference-study-options",
+        "default_version": "1",
+        "accepted_at": "2026-11-13T00:00:00Z",
+        "rationale": "Explicit study option for bundled reference proof."
+      },
+      "derivation": null
+    },
+    "enforce_q_limits": {
+      "status": "known",
+      "value": false,
+      "provenance": {
+        "source": "default",
+        "default_id": "reference-study-options",
+        "default_version": "1",
+        "accepted_at": "2026-11-13T00:00:00Z",
+        "rationale": "Explicit study option for bundled reference proof."
+      },
+      "derivation": null
+    },
+    "conventions": {
+      "positive_sequence": true,
+      "balanced": true,
+      "algorithm": "newton_raphson",
+      "voltage_angles": "degrees",
+      "branch_power_sign": "positive_from_bus_into_element",
+      "generator_power_sign": "positive_injection",
+      "load_power_sign": "positive_consumption",
+      "shunt_power_sign": "positive_consumption_inductive_q",
+      "bus_net_power_sign": "positive_injection",
+      "transformer_equivalent": "t",
+      "tap_control": "fixed_user_position",
+      "distributed_slack": false
+    },
+    "additional_rule_thresholds": []
+  },
+  "source_files": [],
+  "extraction": {
+    "runs": [],
+    "observations": [],
+    "unassociated_text": [],
+    "unresolved_endpoints": [],
+    "merge_decisions": [],
+    "annotations": []
+  },
+  "connectivity_points": [
+    {
+      "id": "point-0",
+      "position": {
+        "x": 850,
+        "y": 390
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "kind": "junction",
+      "evidence": []
+    },
+    {
+      "id": "point-1",
+      "position": {
+        "x": 773,
+        "y": 570
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "kind": "junction",
+      "evidence": []
+    },
+    {
+      "id": "point-2",
+      "position": {
+        "x": 577,
+        "y": 666
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "kind": "junction",
+      "evidence": []
+    },
+    {
+      "id": "point-3",
+      "position": {
+        "x": 355,
+        "y": 632
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "kind": "junction",
+      "evidence": []
+    },
+    {
+      "id": "point-4",
+      "position": {
+        "x": 210,
+        "y": 486
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "kind": "junction",
+      "evidence": []
+    },
+    {
+      "id": "point-5",
+      "position": {
+        "x": 210,
+        "y": 294
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "kind": "junction",
+      "evidence": []
+    },
+    {
+      "id": "point-6",
+      "position": {
+        "x": 355,
+        "y": 148
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "kind": "junction",
+      "evidence": []
+    },
+    {
+      "id": "point-7",
+      "position": {
+        "x": 577,
+        "y": 114
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "kind": "junction",
+      "evidence": []
+    },
+    {
+      "id": "point-8",
+      "position": {
+        "x": 773,
+        "y": 210
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "kind": "junction",
+      "evidence": []
+    },
+    {
+      "id": "point-isolatable-load",
+      "position": {
+        "x": 330,
+        "y": 486
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "kind": "terminal_point",
+      "evidence": []
+    }
+  ],
+  "elements": [
+    {
+      "id": "bus-0",
+      "label": {
+        "status": "known",
+        "value": "1",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "type": {
+        "status": "known",
+        "value": "busbar",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "in_service": {
+        "status": "known",
+        "value": true,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "layout": {
+        "position": {
+          "x": 850,
+          "y": 390
+        },
+        "rotation_degree": 0,
+        "width": null,
+        "height": null,
+        "route_points": [],
+        "page_group": null,
+        "bay_group": null,
+        "updated_at": "2026-11-13T00:00:00Z"
+      },
+      "review": {
+        "status": "confirmed",
+        "reviewed_revision": 0,
+        "reviewed_at": "2026-11-13T00:00:00Z"
+      },
+      "station": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "bay": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "notes": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "terminals": {
+        "bus": {
+          "id": "bus-0:bus",
+          "role": "bus",
+          "connection_point": {
+            "status": "known",
+            "value": "point-0",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        }
+      },
+      "data": {
+        "nominal_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "voltage_min_pu": {
+          "status": "known",
+          "value": 0.9,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "voltage_max_pu": {
+          "status": "known",
+          "value": 1.1,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        }
+      }
+    },
+    {
+      "id": "bus-1",
+      "label": {
+        "status": "known",
+        "value": "2",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "type": {
+        "status": "known",
+        "value": "busbar",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "in_service": {
+        "status": "known",
+        "value": true,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "layout": {
+        "position": {
+          "x": 773,
+          "y": 570
+        },
+        "rotation_degree": 0,
+        "width": null,
+        "height": null,
+        "route_points": [],
+        "page_group": null,
+        "bay_group": null,
+        "updated_at": "2026-11-13T00:00:00Z"
+      },
+      "review": {
+        "status": "confirmed",
+        "reviewed_revision": 0,
+        "reviewed_at": "2026-11-13T00:00:00Z"
+      },
+      "station": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "bay": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "notes": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "terminals": {
+        "bus": {
+          "id": "bus-1:bus",
+          "role": "bus",
+          "connection_point": {
+            "status": "known",
+            "value": "point-1",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        }
+      },
+      "data": {
+        "nominal_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "voltage_min_pu": {
+          "status": "known",
+          "value": 0.9,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "voltage_max_pu": {
+          "status": "known",
+          "value": 1.1,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        }
+      }
+    },
+    {
+      "id": "bus-2",
+      "label": {
+        "status": "known",
+        "value": "3",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "type": {
+        "status": "known",
+        "value": "busbar",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "in_service": {
+        "status": "known",
+        "value": true,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "layout": {
+        "position": {
+          "x": 577,
+          "y": 666
+        },
+        "rotation_degree": 0,
+        "width": null,
+        "height": null,
+        "route_points": [],
+        "page_group": null,
+        "bay_group": null,
+        "updated_at": "2026-11-13T00:00:00Z"
+      },
+      "review": {
+        "status": "confirmed",
+        "reviewed_revision": 0,
+        "reviewed_at": "2026-11-13T00:00:00Z"
+      },
+      "station": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "bay": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "notes": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "terminals": {
+        "bus": {
+          "id": "bus-2:bus",
+          "role": "bus",
+          "connection_point": {
+            "status": "known",
+            "value": "point-2",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        }
+      },
+      "data": {
+        "nominal_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "voltage_min_pu": {
+          "status": "known",
+          "value": 0.9,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "voltage_max_pu": {
+          "status": "known",
+          "value": 1.1,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        }
+      }
+    },
+    {
+      "id": "bus-3",
+      "label": {
+        "status": "known",
+        "value": "4",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "type": {
+        "status": "known",
+        "value": "busbar",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "in_service": {
+        "status": "known",
+        "value": true,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "layout": {
+        "position": {
+          "x": 355,
+          "y": 632
+        },
+        "rotation_degree": 0,
+        "width": null,
+        "height": null,
+        "route_points": [],
+        "page_group": null,
+        "bay_group": null,
+        "updated_at": "2026-11-13T00:00:00Z"
+      },
+      "review": {
+        "status": "confirmed",
+        "reviewed_revision": 0,
+        "reviewed_at": "2026-11-13T00:00:00Z"
+      },
+      "station": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "bay": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "notes": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "terminals": {
+        "bus": {
+          "id": "bus-3:bus",
+          "role": "bus",
+          "connection_point": {
+            "status": "known",
+            "value": "point-3",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        }
+      },
+      "data": {
+        "nominal_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "voltage_min_pu": {
+          "status": "known",
+          "value": 0.9,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "voltage_max_pu": {
+          "status": "known",
+          "value": 1.1,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        }
+      }
+    },
+    {
+      "id": "bus-4",
+      "label": {
+        "status": "known",
+        "value": "5",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "type": {
+        "status": "known",
+        "value": "busbar",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "in_service": {
+        "status": "known",
+        "value": true,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "layout": {
+        "position": {
+          "x": 210,
+          "y": 486
+        },
+        "rotation_degree": 0,
+        "width": null,
+        "height": null,
+        "route_points": [],
+        "page_group": null,
+        "bay_group": null,
+        "updated_at": "2026-11-13T00:00:00Z"
+      },
+      "review": {
+        "status": "confirmed",
+        "reviewed_revision": 0,
+        "reviewed_at": "2026-11-13T00:00:00Z"
+      },
+      "station": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "bay": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "notes": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "terminals": {
+        "bus": {
+          "id": "bus-4:bus",
+          "role": "bus",
+          "connection_point": {
+            "status": "known",
+            "value": "point-4",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        }
+      },
+      "data": {
+        "nominal_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "voltage_min_pu": {
+          "status": "known",
+          "value": 0.9,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "voltage_max_pu": {
+          "status": "known",
+          "value": 1.1,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        }
+      }
+    },
+    {
+      "id": "bus-5",
+      "label": {
+        "status": "known",
+        "value": "6",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "type": {
+        "status": "known",
+        "value": "busbar",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "in_service": {
+        "status": "known",
+        "value": true,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "layout": {
+        "position": {
+          "x": 210,
+          "y": 294
+        },
+        "rotation_degree": 0,
+        "width": null,
+        "height": null,
+        "route_points": [],
+        "page_group": null,
+        "bay_group": null,
+        "updated_at": "2026-11-13T00:00:00Z"
+      },
+      "review": {
+        "status": "confirmed",
+        "reviewed_revision": 0,
+        "reviewed_at": "2026-11-13T00:00:00Z"
+      },
+      "station": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "bay": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "notes": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "terminals": {
+        "bus": {
+          "id": "bus-5:bus",
+          "role": "bus",
+          "connection_point": {
+            "status": "known",
+            "value": "point-5",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        }
+      },
+      "data": {
+        "nominal_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "voltage_min_pu": {
+          "status": "known",
+          "value": 0.9,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "voltage_max_pu": {
+          "status": "known",
+          "value": 1.1,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        }
+      }
+    },
+    {
+      "id": "bus-6",
+      "label": {
+        "status": "known",
+        "value": "7",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "type": {
+        "status": "known",
+        "value": "busbar",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "in_service": {
+        "status": "known",
+        "value": true,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "layout": {
+        "position": {
+          "x": 355,
+          "y": 148
+        },
+        "rotation_degree": 0,
+        "width": null,
+        "height": null,
+        "route_points": [],
+        "page_group": null,
+        "bay_group": null,
+        "updated_at": "2026-11-13T00:00:00Z"
+      },
+      "review": {
+        "status": "confirmed",
+        "reviewed_revision": 0,
+        "reviewed_at": "2026-11-13T00:00:00Z"
+      },
+      "station": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "bay": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "notes": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "terminals": {
+        "bus": {
+          "id": "bus-6:bus",
+          "role": "bus",
+          "connection_point": {
+            "status": "known",
+            "value": "point-6",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        }
+      },
+      "data": {
+        "nominal_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "voltage_min_pu": {
+          "status": "known",
+          "value": 0.9,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "voltage_max_pu": {
+          "status": "known",
+          "value": 1.1,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        }
+      }
+    },
+    {
+      "id": "bus-7",
+      "label": {
+        "status": "known",
+        "value": "8",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "type": {
+        "status": "known",
+        "value": "busbar",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "in_service": {
+        "status": "known",
+        "value": true,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "layout": {
+        "position": {
+          "x": 577,
+          "y": 114
+        },
+        "rotation_degree": 0,
+        "width": null,
+        "height": null,
+        "route_points": [],
+        "page_group": null,
+        "bay_group": null,
+        "updated_at": "2026-11-13T00:00:00Z"
+      },
+      "review": {
+        "status": "confirmed",
+        "reviewed_revision": 0,
+        "reviewed_at": "2026-11-13T00:00:00Z"
+      },
+      "station": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "bay": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "notes": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "terminals": {
+        "bus": {
+          "id": "bus-7:bus",
+          "role": "bus",
+          "connection_point": {
+            "status": "known",
+            "value": "point-7",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        }
+      },
+      "data": {
+        "nominal_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "voltage_min_pu": {
+          "status": "known",
+          "value": 0.9,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "voltage_max_pu": {
+          "status": "known",
+          "value": 1.1,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        }
+      }
+    },
+    {
+      "id": "bus-8",
+      "label": {
+        "status": "known",
+        "value": "9",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "type": {
+        "status": "known",
+        "value": "busbar",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "in_service": {
+        "status": "known",
+        "value": true,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "layout": {
+        "position": {
+          "x": 773,
+          "y": 210
+        },
+        "rotation_degree": 0,
+        "width": null,
+        "height": null,
+        "route_points": [],
+        "page_group": null,
+        "bay_group": null,
+        "updated_at": "2026-11-13T00:00:00Z"
+      },
+      "review": {
+        "status": "confirmed",
+        "reviewed_revision": 0,
+        "reviewed_at": "2026-11-13T00:00:00Z"
+      },
+      "station": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "bay": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "notes": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "terminals": {
+        "bus": {
+          "id": "bus-8:bus",
+          "role": "bus",
+          "connection_point": {
+            "status": "known",
+            "value": "point-8",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        }
+      },
+      "data": {
+        "nominal_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "voltage_min_pu": {
+          "status": "known",
+          "value": 0.9,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "voltage_max_pu": {
+          "status": "known",
+          "value": 1.1,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        }
+      }
+    },
+    {
+      "id": "line-0",
+      "label": {
+        "status": "known",
+        "value": "line-0",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "type": {
+        "status": "known",
+        "value": "line",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "in_service": {
+        "status": "known",
+        "value": true,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "layout": {
+        "position": {
+          "x": 850,
+          "y": 390
+        },
+        "rotation_degree": 0,
+        "width": null,
+        "height": null,
+        "route_points": [],
+        "page_group": null,
+        "bay_group": null,
+        "updated_at": "2026-11-13T00:00:00Z"
+      },
+      "review": {
+        "status": "confirmed",
+        "reviewed_revision": 0,
+        "reviewed_at": "2026-11-13T00:00:00Z"
+      },
+      "station": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "bay": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "notes": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "terminals": {
+        "from": {
+          "id": "line-0:from",
+          "role": "from",
+          "connection_point": {
+            "status": "known",
+            "value": "point-0",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        },
+        "to": {
+          "id": "line-0:to",
+          "role": "to",
+          "connection_point": {
+            "status": "known",
+            "value": "point-3",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        }
+      },
+      "data": {
+        "length_km": {
+          "status": "known",
+          "value": 1.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "r_ohm_per_km": {
+          "status": "known",
+          "value": 0.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "x_ohm_per_km": {
+          "status": "known",
+          "value": 68.55839999999999,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "b_us_per_km": {
+          "status": "known",
+          "value": 0.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "g_us_per_km": {
+          "status": "known",
+          "value": 0.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "max_current_ka": {
+          "status": "known",
+          "value": 0.41836976028234,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "derating_factor": {
+          "status": "known",
+          "value": 1.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "parallel_count": {
+          "status": "known",
+          "value": 1,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "standard_type": {
+          "status": "known",
+          "value": null,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "from_nominal_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "to_nominal_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        }
+      }
+    },
+    {
+      "id": "line-1",
+      "label": {
+        "status": "known",
+        "value": "line-1",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "type": {
+        "status": "known",
+        "value": "line",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "in_service": {
+        "status": "known",
+        "value": true,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "layout": {
+        "position": {
+          "x": 355,
+          "y": 632
+        },
+        "rotation_degree": 0,
+        "width": null,
+        "height": null,
+        "route_points": [],
+        "page_group": null,
+        "bay_group": null,
+        "updated_at": "2026-11-13T00:00:00Z"
+      },
+      "review": {
+        "status": "confirmed",
+        "reviewed_revision": 0,
+        "reviewed_at": "2026-11-13T00:00:00Z"
+      },
+      "station": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "bay": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "notes": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "terminals": {
+        "from": {
+          "id": "line-1:from",
+          "role": "from",
+          "connection_point": {
+            "status": "known",
+            "value": "point-3",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        },
+        "to": {
+          "id": "line-1:to",
+          "role": "to",
+          "connection_point": {
+            "status": "known",
+            "value": "point-4",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        }
+      },
+      "data": {
+        "length_km": {
+          "status": "known",
+          "value": 1.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "r_ohm_per_km": {
+          "status": "known",
+          "value": 20.23425,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "x_ohm_per_km": {
+          "status": "known",
+          "value": 109.503,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "b_us_per_km": {
+          "status": "known",
+          "value": 132.74522159210252,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "g_us_per_km": {
+          "status": "known",
+          "value": 0.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "max_current_ka": {
+          "status": "known",
+          "value": 0.41836976028234,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "derating_factor": {
+          "status": "known",
+          "value": 1.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "parallel_count": {
+          "status": "known",
+          "value": 1,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "standard_type": {
+          "status": "known",
+          "value": null,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "from_nominal_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "to_nominal_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        }
+      }
+    },
+    {
+      "id": "line-2",
+      "label": {
+        "status": "known",
+        "value": "line-2",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "type": {
+        "status": "known",
+        "value": "line",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "in_service": {
+        "status": "known",
+        "value": true,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "layout": {
+        "position": {
+          "x": 210,
+          "y": 486
+        },
+        "rotation_degree": 0,
+        "width": null,
+        "height": null,
+        "route_points": [],
+        "page_group": null,
+        "bay_group": null,
+        "updated_at": "2026-11-13T00:00:00Z"
+      },
+      "review": {
+        "status": "confirmed",
+        "reviewed_revision": 0,
+        "reviewed_at": "2026-11-13T00:00:00Z"
+      },
+      "station": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "bay": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "notes": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "terminals": {
+        "from": {
+          "id": "line-2:from",
+          "role": "from",
+          "connection_point": {
+            "status": "known",
+            "value": "point-4",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        },
+        "to": {
+          "id": "line-2:to",
+          "role": "to",
+          "connection_point": {
+            "status": "known",
+            "value": "point-5",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        }
+      },
+      "data": {
+        "length_km": {
+          "status": "known",
+          "value": 1.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "r_ohm_per_km": {
+          "status": "known",
+          "value": 46.41975,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "x_ohm_per_km": {
+          "status": "known",
+          "value": 202.3425,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "b_us_per_km": {
+          "status": "known",
+          "value": 300.777147658055,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "g_us_per_km": {
+          "status": "known",
+          "value": 0.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "max_current_ka": {
+          "status": "known",
+          "value": 0.2510218561694,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "derating_factor": {
+          "status": "known",
+          "value": 1.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "parallel_count": {
+          "status": "known",
+          "value": 1,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "standard_type": {
+          "status": "known",
+          "value": null,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "from_nominal_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "to_nominal_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        }
+      }
+    },
+    {
+      "id": "line-3",
+      "label": {
+        "status": "known",
+        "value": "line-3",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "type": {
+        "status": "known",
+        "value": "line",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "in_service": {
+        "status": "known",
+        "value": true,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "layout": {
+        "position": {
+          "x": 577,
+          "y": 666
+        },
+        "rotation_degree": 0,
+        "width": null,
+        "height": null,
+        "route_points": [],
+        "page_group": null,
+        "bay_group": null,
+        "updated_at": "2026-11-13T00:00:00Z"
+      },
+      "review": {
+        "status": "confirmed",
+        "reviewed_revision": 0,
+        "reviewed_at": "2026-11-13T00:00:00Z"
+      },
+      "station": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "bay": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "notes": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "terminals": {
+        "from": {
+          "id": "line-3:from",
+          "role": "from",
+          "connection_point": {
+            "status": "known",
+            "value": "point-2",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        },
+        "to": {
+          "id": "line-3:to",
+          "role": "to",
+          "connection_point": {
+            "status": "known",
+            "value": "point-5",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        }
+      },
+      "data": {
+        "length_km": {
+          "status": "known",
+          "value": 1.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "r_ohm_per_km": {
+          "status": "known",
+          "value": 0.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "x_ohm_per_km": {
+          "status": "known",
+          "value": 69.74865,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "b_us_per_km": {
+          "status": "known",
+          "value": 0.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "g_us_per_km": {
+          "status": "known",
+          "value": 0.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "max_current_ka": {
+          "status": "known",
+          "value": 0.50204371233881,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "derating_factor": {
+          "status": "known",
+          "value": 1.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "parallel_count": {
+          "status": "known",
+          "value": 1,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "standard_type": {
+          "status": "known",
+          "value": null,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "from_nominal_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "to_nominal_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        }
+      }
+    },
+    {
+      "id": "line-4",
+      "label": {
+        "status": "known",
+        "value": "line-4",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "type": {
+        "status": "known",
+        "value": "line",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "in_service": {
+        "status": "known",
+        "value": true,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "layout": {
+        "position": {
+          "x": 210,
+          "y": 294
+        },
+        "rotation_degree": 0,
+        "width": null,
+        "height": null,
+        "route_points": [],
+        "page_group": null,
+        "bay_group": null,
+        "updated_at": "2026-11-13T00:00:00Z"
+      },
+      "review": {
+        "status": "confirmed",
+        "reviewed_revision": 0,
+        "reviewed_at": "2026-11-13T00:00:00Z"
+      },
+      "station": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "bay": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "notes": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "terminals": {
+        "from": {
+          "id": "line-4:from",
+          "role": "from",
+          "connection_point": {
+            "status": "known",
+            "value": "point-5",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        },
+        "to": {
+          "id": "line-4:to",
+          "role": "to",
+          "connection_point": {
+            "status": "known",
+            "value": "point-6",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        }
+      },
+      "data": {
+        "length_km": {
+          "status": "known",
+          "value": 1.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "r_ohm_per_km": {
+          "status": "known",
+          "value": 14.163975,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "x_ohm_per_km": {
+          "status": "known",
+          "value": 119.9772,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "b_us_per_km": {
+          "status": "known",
+          "value": 175.59336273892043,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "g_us_per_km": {
+          "status": "known",
+          "value": 0.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "max_current_ka": {
+          "status": "known",
+          "value": 0.2510218561694,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "derating_factor": {
+          "status": "known",
+          "value": 1.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "parallel_count": {
+          "status": "known",
+          "value": 1,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "standard_type": {
+          "status": "known",
+          "value": null,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "from_nominal_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "to_nominal_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        }
+      }
+    },
+    {
+      "id": "line-5",
+      "label": {
+        "status": "known",
+        "value": "line-5",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "type": {
+        "status": "known",
+        "value": "line",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "in_service": {
+        "status": "known",
+        "value": true,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "layout": {
+        "position": {
+          "x": 355,
+          "y": 148
+        },
+        "rotation_degree": 0,
+        "width": null,
+        "height": null,
+        "route_points": [],
+        "page_group": null,
+        "bay_group": null,
+        "updated_at": "2026-11-13T00:00:00Z"
+      },
+      "review": {
+        "status": "confirmed",
+        "reviewed_revision": 0,
+        "reviewed_at": "2026-11-13T00:00:00Z"
+      },
+      "station": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "bay": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "notes": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "terminals": {
+        "from": {
+          "id": "line-5:from",
+          "role": "from",
+          "connection_point": {
+            "status": "known",
+            "value": "point-6",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        },
+        "to": {
+          "id": "line-5:to",
+          "role": "to",
+          "connection_point": {
+            "status": "known",
+            "value": "point-7",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        }
+      },
+      "data": {
+        "length_km": {
+          "status": "known",
+          "value": 1.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "r_ohm_per_km": {
+          "status": "known",
+          "value": 10.117125,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "x_ohm_per_km": {
+          "status": "known",
+          "value": 85.698,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "b_us_per_km": {
+          "status": "known",
+          "value": 125.18378491913465,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "g_us_per_km": {
+          "status": "known",
+          "value": 0.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "max_current_ka": {
+          "status": "known",
+          "value": 0.41836976028234,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "derating_factor": {
+          "status": "known",
+          "value": 1.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "parallel_count": {
+          "status": "known",
+          "value": 1,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "standard_type": {
+          "status": "known",
+          "value": null,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "from_nominal_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "to_nominal_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        }
+      }
+    },
+    {
+      "id": "line-6",
+      "label": {
+        "status": "known",
+        "value": "line-6",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "type": {
+        "status": "known",
+        "value": "line",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "in_service": {
+        "status": "known",
+        "value": true,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "layout": {
+        "position": {
+          "x": 577,
+          "y": 114
+        },
+        "rotation_degree": 0,
+        "width": null,
+        "height": null,
+        "route_points": [],
+        "page_group": null,
+        "bay_group": null,
+        "updated_at": "2026-11-13T00:00:00Z"
+      },
+      "review": {
+        "status": "confirmed",
+        "reviewed_revision": 0,
+        "reviewed_at": "2026-11-13T00:00:00Z"
+      },
+      "station": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "bay": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "notes": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "terminals": {
+        "from": {
+          "id": "line-6:from",
+          "role": "from",
+          "connection_point": {
+            "status": "known",
+            "value": "point-7",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        },
+        "to": {
+          "id": "line-6:to",
+          "role": "to",
+          "connection_point": {
+            "status": "known",
+            "value": "point-1",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        }
+      },
+      "data": {
+        "length_km": {
+          "status": "known",
+          "value": 1.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "r_ohm_per_km": {
+          "status": "known",
+          "value": 0.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "x_ohm_per_km": {
+          "status": "known",
+          "value": 74.390625,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "b_us_per_km": {
+          "status": "known",
+          "value": 0.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "g_us_per_km": {
+          "status": "known",
+          "value": 0.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "max_current_ka": {
+          "status": "known",
+          "value": 0.41836976028234,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "derating_factor": {
+          "status": "known",
+          "value": 1.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "parallel_count": {
+          "status": "known",
+          "value": 1,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "standard_type": {
+          "status": "known",
+          "value": null,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "from_nominal_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "to_nominal_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        }
+      }
+    },
+    {
+      "id": "line-7",
+      "label": {
+        "status": "known",
+        "value": "line-7",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "type": {
+        "status": "known",
+        "value": "line",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "in_service": {
+        "status": "known",
+        "value": true,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "layout": {
+        "position": {
+          "x": 577,
+          "y": 114
+        },
+        "rotation_degree": 0,
+        "width": null,
+        "height": null,
+        "route_points": [],
+        "page_group": null,
+        "bay_group": null,
+        "updated_at": "2026-11-13T00:00:00Z"
+      },
+      "review": {
+        "status": "confirmed",
+        "reviewed_revision": 0,
+        "reviewed_at": "2026-11-13T00:00:00Z"
+      },
+      "station": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "bay": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "notes": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "terminals": {
+        "from": {
+          "id": "line-7:from",
+          "role": "from",
+          "connection_point": {
+            "status": "known",
+            "value": "point-7",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        },
+        "to": {
+          "id": "line-7:to",
+          "role": "to",
+          "connection_point": {
+            "status": "known",
+            "value": "point-8",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        }
+      },
+      "data": {
+        "length_km": {
+          "status": "known",
+          "value": 1.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "r_ohm_per_km": {
+          "status": "known",
+          "value": 38.088,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "x_ohm_per_km": {
+          "status": "known",
+          "value": 191.63025000000002,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "b_us_per_km": {
+          "status": "known",
+          "value": 257.0888468809074,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "g_us_per_km": {
+          "status": "known",
+          "value": 0.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "max_current_ka": {
+          "status": "known",
+          "value": 0.41836976028234,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "derating_factor": {
+          "status": "known",
+          "value": 1.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "parallel_count": {
+          "status": "known",
+          "value": 1,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "standard_type": {
+          "status": "known",
+          "value": null,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "from_nominal_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "to_nominal_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        }
+      }
+    },
+    {
+      "id": "line-8",
+      "label": {
+        "status": "known",
+        "value": "line-8",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "type": {
+        "status": "known",
+        "value": "line",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "in_service": {
+        "status": "known",
+        "value": true,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "layout": {
+        "position": {
+          "x": 773,
+          "y": 210
+        },
+        "rotation_degree": 0,
+        "width": null,
+        "height": null,
+        "route_points": [],
+        "page_group": null,
+        "bay_group": null,
+        "updated_at": "2026-11-13T00:00:00Z"
+      },
+      "review": {
+        "status": "confirmed",
+        "reviewed_revision": 0,
+        "reviewed_at": "2026-11-13T00:00:00Z"
+      },
+      "station": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "bay": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "notes": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "terminals": {
+        "from": {
+          "id": "line-8:from",
+          "role": "from",
+          "connection_point": {
+            "status": "known",
+            "value": "point-8",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        },
+        "to": {
+          "id": "line-8:to",
+          "role": "to",
+          "connection_point": {
+            "status": "known",
+            "value": "point-3",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        }
+      },
+      "data": {
+        "length_km": {
+          "status": "known",
+          "value": 1.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "r_ohm_per_km": {
+          "status": "known",
+          "value": 11.9025,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "x_ohm_per_km": {
+          "status": "known",
+          "value": 101.17125,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "b_us_per_km": {
+          "status": "known",
+          "value": 147.86809493803824,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "g_us_per_km": {
+          "status": "known",
+          "value": 0.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "max_current_ka": {
+          "status": "known",
+          "value": 0.41836976028234,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "derating_factor": {
+          "status": "known",
+          "value": 1.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "parallel_count": {
+          "status": "known",
+          "value": 1,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "standard_type": {
+          "status": "known",
+          "value": null,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "from_nominal_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "to_nominal_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        }
+      }
+    },
+    {
+      "id": "grid-0",
+      "label": {
+        "status": "known",
+        "value": "grid-0",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "type": {
+        "status": "known",
+        "value": "external_grid",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "in_service": {
+        "status": "known",
+        "value": true,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "layout": {
+        "position": {
+          "x": 850,
+          "y": 390
+        },
+        "rotation_degree": 0,
+        "width": null,
+        "height": null,
+        "route_points": [],
+        "page_group": null,
+        "bay_group": null,
+        "updated_at": "2026-11-13T00:00:00Z"
+      },
+      "review": {
+        "status": "confirmed",
+        "reviewed_revision": 0,
+        "reviewed_at": "2026-11-13T00:00:00Z"
+      },
+      "station": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "bay": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "notes": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "terminals": {
+        "bus": {
+          "id": "grid-0:bus",
+          "role": "bus",
+          "connection_point": {
+            "status": "known",
+            "value": "point-0",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        }
+      },
+      "data": {
+        "voltage_setpoint_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "angle_degree": {
+          "status": "known",
+          "value": 0.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "infeed_rating_mva": {
+          "status": "missing",
+          "reason": "not_shown",
+          "candidates": [],
+          "evidence": []
+        },
+        "p_dispatch_mw": {
+          "status": "known",
+          "value": null,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "mode": {
+          "status": "known",
+          "value": "slack",
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "min_p_mw": {
+          "status": "known",
+          "value": 10.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "max_p_mw": {
+          "status": "known",
+          "value": 250.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "min_q_mvar": {
+          "status": "known",
+          "value": -300.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "max_q_mvar": {
+          "status": "known",
+          "value": 300.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        }
+      }
+    },
+    {
+      "id": "gen-0",
+      "label": {
+        "status": "known",
+        "value": "gen-0",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "type": {
+        "status": "known",
+        "value": "generator",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "in_service": {
+        "status": "known",
+        "value": true,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "layout": {
+        "position": {
+          "x": 773,
+          "y": 570
+        },
+        "rotation_degree": 0,
+        "width": null,
+        "height": null,
+        "route_points": [],
+        "page_group": null,
+        "bay_group": null,
+        "updated_at": "2026-11-13T00:00:00Z"
+      },
+      "review": {
+        "status": "confirmed",
+        "reviewed_revision": 0,
+        "reviewed_at": "2026-11-13T00:00:00Z"
+      },
+      "station": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "bay": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "notes": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "terminals": {
+        "bus": {
+          "id": "gen-0:bus",
+          "role": "bus",
+          "connection_point": {
+            "status": "known",
+            "value": "point-1",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        }
+      },
+      "data": {
+        "p_mw": {
+          "status": "known",
+          "value": 163.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "voltage_setpoint_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "sn_mva": {
+          "status": "missing",
+          "reason": "not_shown",
+          "candidates": [],
+          "evidence": []
+        },
+        "mode": {
+          "status": "known",
+          "value": "pv",
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "slack_angle_degree": {
+          "status": "known",
+          "value": null,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "min_p_mw": {
+          "status": "known",
+          "value": 10.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "max_p_mw": {
+          "status": "known",
+          "value": 300.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "min_q_mvar": {
+          "status": "known",
+          "value": -300.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "max_q_mvar": {
+          "status": "known",
+          "value": 300.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        }
+      }
+    },
+    {
+      "id": "gen-1",
+      "label": {
+        "status": "known",
+        "value": "gen-1",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "type": {
+        "status": "known",
+        "value": "generator",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "in_service": {
+        "status": "known",
+        "value": true,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "layout": {
+        "position": {
+          "x": 577,
+          "y": 666
+        },
+        "rotation_degree": 0,
+        "width": null,
+        "height": null,
+        "route_points": [],
+        "page_group": null,
+        "bay_group": null,
+        "updated_at": "2026-11-13T00:00:00Z"
+      },
+      "review": {
+        "status": "confirmed",
+        "reviewed_revision": 0,
+        "reviewed_at": "2026-11-13T00:00:00Z"
+      },
+      "station": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "bay": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "notes": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "terminals": {
+        "bus": {
+          "id": "gen-1:bus",
+          "role": "bus",
+          "connection_point": {
+            "status": "known",
+            "value": "point-2",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        }
+      },
+      "data": {
+        "p_mw": {
+          "status": "known",
+          "value": 85.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "voltage_setpoint_kv": {
+          "status": "known",
+          "value": 345.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "sn_mva": {
+          "status": "missing",
+          "reason": "not_shown",
+          "candidates": [],
+          "evidence": []
+        },
+        "mode": {
+          "status": "known",
+          "value": "pv",
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "slack_angle_degree": {
+          "status": "known",
+          "value": null,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "min_p_mw": {
+          "status": "known",
+          "value": 10.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "max_p_mw": {
+          "status": "known",
+          "value": 270.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "min_q_mvar": {
+          "status": "known",
+          "value": -300.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "max_q_mvar": {
+          "status": "known",
+          "value": 300.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        }
+      }
+    },
+    {
+      "id": "load-0",
+      "label": {
+        "status": "known",
+        "value": "load-0",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "type": {
+        "status": "known",
+        "value": "load",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "in_service": {
+        "status": "known",
+        "value": true,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "layout": {
+        "position": {
+          "x": 330,
+          "y": 486
+        },
+        "rotation_degree": 0,
+        "width": null,
+        "height": null,
+        "route_points": [],
+        "page_group": null,
+        "bay_group": null,
+        "updated_at": "2026-11-13T00:00:00Z"
+      },
+      "review": {
+        "status": "confirmed",
+        "reviewed_revision": 0,
+        "reviewed_at": "2026-11-13T00:00:00Z"
+      },
+      "station": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "bay": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "notes": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "terminals": {
+        "bus": {
+          "id": "load-0:bus",
+          "role": "bus",
+          "connection_point": {
+            "status": "known",
+            "value": "point-isolatable-load",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        }
+      },
+      "data": {
+        "p_mw": {
+          "status": "known",
+          "value": 90.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "q_mvar": {
+          "status": "known",
+          "value": 30.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "scaling_factor": {
+          "status": "known",
+          "value": 1.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "sn_mva": {
+          "status": "known",
+          "value": null,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "power_factor": {
+          "status": "known",
+          "value": null,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "reactive_kind": {
+          "status": "known",
+          "value": "lagging",
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "model": {
+          "status": "known",
+          "value": "constant_pq",
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        }
+      }
+    },
+    {
+      "id": "load-1",
+      "label": {
+        "status": "known",
+        "value": "load-1",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "type": {
+        "status": "known",
+        "value": "load",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "in_service": {
+        "status": "known",
+        "value": true,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "layout": {
+        "position": {
+          "x": 355,
+          "y": 148
+        },
+        "rotation_degree": 0,
+        "width": null,
+        "height": null,
+        "route_points": [],
+        "page_group": null,
+        "bay_group": null,
+        "updated_at": "2026-11-13T00:00:00Z"
+      },
+      "review": {
+        "status": "confirmed",
+        "reviewed_revision": 0,
+        "reviewed_at": "2026-11-13T00:00:00Z"
+      },
+      "station": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "bay": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "notes": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "terminals": {
+        "bus": {
+          "id": "load-1:bus",
+          "role": "bus",
+          "connection_point": {
+            "status": "known",
+            "value": "point-6",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        }
+      },
+      "data": {
+        "p_mw": {
+          "status": "known",
+          "value": 100.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "q_mvar": {
+          "status": "known",
+          "value": 35.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "scaling_factor": {
+          "status": "known",
+          "value": 1.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "sn_mva": {
+          "status": "known",
+          "value": null,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "power_factor": {
+          "status": "known",
+          "value": null,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "reactive_kind": {
+          "status": "known",
+          "value": "lagging",
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "model": {
+          "status": "known",
+          "value": "constant_pq",
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        }
+      }
+    },
+    {
+      "id": "load-2",
+      "label": {
+        "status": "known",
+        "value": "load-2",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "type": {
+        "status": "known",
+        "value": "load",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "in_service": {
+        "status": "known",
+        "value": true,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "layout": {
+        "position": {
+          "x": 773,
+          "y": 210
+        },
+        "rotation_degree": 0,
+        "width": null,
+        "height": null,
+        "route_points": [],
+        "page_group": null,
+        "bay_group": null,
+        "updated_at": "2026-11-13T00:00:00Z"
+      },
+      "review": {
+        "status": "confirmed",
+        "reviewed_revision": 0,
+        "reviewed_at": "2026-11-13T00:00:00Z"
+      },
+      "station": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "bay": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "notes": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "terminals": {
+        "bus": {
+          "id": "load-2:bus",
+          "role": "bus",
+          "connection_point": {
+            "status": "known",
+            "value": "point-8",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        }
+      },
+      "data": {
+        "p_mw": {
+          "status": "known",
+          "value": 125.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "q_mvar": {
+          "status": "known",
+          "value": 50.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "scaling_factor": {
+          "status": "known",
+          "value": 1.0,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "sn_mva": {
+          "status": "known",
+          "value": null,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "power_factor": {
+          "status": "known",
+          "value": null,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "reactive_kind": {
+          "status": "known",
+          "value": "lagging",
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "model": {
+          "status": "known",
+          "value": "constant_pq",
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        }
+      }
+    },
+    {
+      "id": "breaker-load",
+      "label": {
+        "status": "known",
+        "value": "Load isolation breaker",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "type": {
+        "status": "known",
+        "value": "circuit_breaker",
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "in_service": {
+        "status": "known",
+        "value": true,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "source_ref": {
+        "kind": "synthetic",
+        "fixture_id": "case9-breaker",
+        "generated_drawing": null
+      },
+      "layout": {
+        "position": {
+          "x": 270,
+          "y": 486
+        },
+        "rotation_degree": 0,
+        "width": null,
+        "height": null,
+        "route_points": [],
+        "page_group": null,
+        "bay_group": null,
+        "updated_at": "2026-11-13T00:00:00Z"
+      },
+      "review": {
+        "status": "confirmed",
+        "reviewed_revision": 0,
+        "reviewed_at": "2026-11-13T00:00:00Z"
+      },
+      "station": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "bay": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "notes": {
+        "status": "known",
+        "value": null,
+        "provenance": {
+          "source": "library",
+          "library_id": "sld-power-flow.synthetic-fixtures",
+          "library_version": "1",
+          "item_id": "case9-breaker",
+          "accepted_at": "2026-11-13T00:00:00Z"
+        },
+        "derivation": null
+      },
+      "terminals": {
+        "a": {
+          "id": "breaker-load:a",
+          "role": "a",
+          "connection_point": {
+            "status": "known",
+            "value": "point-4",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        },
+        "b": {
+          "id": "breaker-load:b",
+          "role": "b",
+          "connection_point": {
+            "status": "known",
+            "value": "point-isolatable-load",
+            "provenance": {
+              "source": "library",
+              "library_id": "sld-power-flow.synthetic-fixtures",
+              "library_version": "1",
+              "item_id": "case9-breaker",
+              "accepted_at": "2026-11-13T00:00:00Z"
+            },
+            "derivation": null
+          },
+          "source_ref": {
+            "kind": "synthetic",
+            "fixture_id": "case9-breaker",
+            "generated_drawing": null
+          },
+          "drawn_anchor": null
+        }
+      },
+      "data": {
+        "state": {
+          "status": "known",
+          "value": "closed",
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "normal_state": {
+          "status": "known",
+          "value": "closed",
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "rated_current_ka": {
+          "status": "missing",
+          "reason": "not_shown",
+          "candidates": [],
+          "evidence": []
+        },
+        "rated_voltage_kv": {
+          "status": "known",
+          "value": null,
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        },
+        "electrical_model": {
+          "status": "known",
+          "value": "ideal",
+          "provenance": {
+            "source": "library",
+            "library_id": "sld-power-flow.synthetic-fixtures",
+            "library_version": "1",
+            "item_id": "case9-breaker",
+            "accepted_at": "2026-11-13T00:00:00Z"
+          },
+          "derivation": null
+        }
+      }
+    }
+  ],
+  "review": {
+    "status": "confirmed",
+    "confirmed_model_revision": 0,
+    "confirmed_input_hash": "791a2a3747764fc20e9822ee38c135e1ab9a47672e229372cd52b933013dad3e",
+    "confirmed_at": "2026-11-13T00:00:00Z",
+    "unresolved_element_ids": [],
+    "decisions": []
+  },
+  "data_suggestions": [],
+  "validation": null,
+  "operation": {
+    "base_snapshot": null,
+    "events": [],
+    "acknowledgements": [],
+    "display_preferences": {
+      "theme": "dark",
+      "breaker_colour_convention": "shape_only",
+      "voltage_colouring": false,
+      "tables": [],
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "zoom": 1
+      },
+      "display_revision": 0
+    },
+    "island_policy": {
+      "mode": "preparation_strict",
+      "authorized_isolated_element_ids": [],
+      "authorizing_event_ids": [],
+      "energized_island_slacks": []
+    }
+  },
+  "solution": null,
+  "export_history": []
+}

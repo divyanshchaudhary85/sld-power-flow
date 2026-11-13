@@ -16,7 +16,7 @@
     "numba": false,
     "lightsim2grid": false
   },
-  "generated_at": "2026-11-13T10:20:42.921730Z",
+  "generated_at": "2026-11-13T11:11:01.844197Z",
   "buses": [
     {
       "busbar_id": "bus-0",

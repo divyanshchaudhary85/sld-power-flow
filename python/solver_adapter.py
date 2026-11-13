@@ -159,6 +159,7 @@ def to_pandapower(document):
     if len(roots) > 50:
         raise ModelError("Version 1 supports at most 50 reduced electrical buses")
     nominal = {}
+    nominal_origins = {}
 
     def set_voltage(point, kv, origin):
         if kv is None:
@@ -169,6 +170,7 @@ def to_pandapower(document):
         if root in nominal and not math.isclose(nominal[root], kv, rel_tol=1e-8, abs_tol=1e-9):
             raise ModelError(f"Conflicting nominal kV on closed electrical node ({origin})")
         nominal[root] = float(kv)
+        nominal_origins.setdefault(root, set()).add(origin)
 
     equal_voltage_links = []
     for e in elements:
@@ -193,9 +195,11 @@ def to_pandapower(document):
             a, b = uf.find(a), uf.find(b)
             if a in nominal and b not in nominal:
                 nominal[b] = nominal[a]
+                nominal_origins[b] = set(nominal_origins[a])
                 changed = True
             elif b in nominal and a not in nominal:
                 nominal[a] = nominal[b]
+                nominal_origins[a] = set(nominal_origins[b])
                 changed = True
             elif require_equal and a in nominal and b in nominal and not math.isclose(nominal[a], nominal[b], rel_tol=1e-8):
                 raise ModelError("Line connects unequal nominal voltages")
@@ -367,6 +371,8 @@ def to_pandapower(document):
                         "terminal_ids": [t["id"] for t in e["terminals"].values()]})
     return {"net": net, "mappings": mapping, "root_to_bus": root_to_bus, "groups": groups,
             "busbars": busbars, "point_to_bus": {p: root_to_bus[uf.find(p)] for p in point_ids},
+            "bus_components": {root_to_bus[root]: i for i, component in enumerate(components) for root in component},
+            "bus_voltage_origins": {root_to_bus[root]: sorted(origins) for root, origins in nominal_origins.items()},
             "element_to_native": element_to_native, "kinds": kinds, "active": active,
             "excluded_ids": excluded_ids, "slack_ids": slack_ids,
             "energized_points": [p for p in point_ids if uf.find(p) in energized_roots]}
@@ -378,11 +384,19 @@ def number(x, reason="not_reported"):
     return {"status": "available", "value": float(x)}
 
 
-def _quality(document):
+def _quality(document, context=None, results=None):
+    """Track provenance separately from conservative electrical dependencies.
+
+    Result paths are JSON Pointer prefixes. A table-level path is emitted only
+    when every row has identical dependencies, avoiding quadratic payloads in
+    a large connected network. Otherwise each row has its own explicit path.
+    """
     found = {"default": [], "library": [], "user": []}
+    fields = set()
     def visit(obj, path):
         if isinstance(obj, dict):
             if obj.get("status") == "known" and "provenance" in obj:
+                fields.add(path)
                 source = obj["provenance"]["source"]
                 if source in found:
                     found[source].append(path)
@@ -393,9 +407,75 @@ def _quality(document):
                 visit(v, path + "/" + str(i))
     for section in ("meta", "settings", "elements"):
         visit(document[section], "/" + section)
-    return {"defaulted_input_paths": found["default"], "library_input_paths": found["library"],
-            "user_input_paths": found["user"], "dependencies": [{"result_path": "/results", "input_paths": sum(found.values(), []),
-            "method": "conservative_connected_component"}]}
+    quality = {"defaulted_input_paths": found["default"], "library_input_paths": found["library"],
+               "user_input_paths": found["user"], "dependencies": []}
+    if context is None or results is None:
+        return quality
+    global_fields = fields & {"/meta/base_mva", "/meta/frequency_hz", "/settings/solver_tolerance_mva",
+                              "/settings/max_iterations", "/settings/enforce_q_limits"}
+    element_fields = {i: set() for i in range(len(document["elements"]))}
+    for path in fields:
+        parts = path.split("/")
+        if len(parts) > 3 and parts[1] == "elements":
+            # Labels, layout, station and review metadata cannot change a
+            # power-flow value. Only engineering/connection fields can.
+            if parts[3] in ("data", "type", "in_service") or (
+                    parts[3] == "terminals" and len(parts) > 5 and parts[5] == "connection_point"):
+                element_fields[int(parts[2])].add(path)
+    component_fields = {component: set(global_fields) for component in context["bus_components"].values()}
+    element_components = {}
+    for i, element in enumerate(document["elements"]):
+        eid = element["id"]
+        components = {context["bus_components"][context["point_to_bus"][optional(t["connection_point"])]]
+                      for t in element["terminals"].values()}
+        element_components[eid] = components
+        inputs = element_fields[i]
+        if context["kinds"][eid] in ("circuit_breaker", "disconnector", "fuse"):
+            inputs = {p for p in inputs if not "/data/" in p or p.endswith(("/state", "/electrical_model"))}
+        elif not context["active"][eid]:
+            # An out-of-service branch does not electrically couple its ends.
+            # Its state and voltage bases still participate in model building.
+            inputs = {p for p in inputs if p.endswith(("/in_service", "/from_nominal_kv", "/to_nominal_kv",
+                                                     "/vn_hv_kv", "/vn_lv_kv", "/nominal_kv"))}
+        for component in components:
+            component_fields[component].update(inputs)
+    selected = optional(document["settings"]["slack_element_id"])
+    for component in element_components.get(selected, set()):
+        if "/settings/slack_element_id" in fields:
+            component_fields[component].add("/settings/slack_element_id")
+    # A terminal-only island can inherit its nominal base across an open
+    # switch. Include that actual base provenance without importing the other
+    # island's load/dispatch/impedance inputs.
+    element_indices = {e["id"]: i for i, e in enumerate(document["elements"])}
+    for bus, origins in context["bus_voltage_origins"].items():
+        for eid in origins:
+            component_fields[context["bus_components"][bus]].update(
+                p for p in element_fields[element_indices[eid]]
+                if p.endswith(("/nominal_kv", "/from_nominal_kv", "/to_nominal_kv", "/vn_hv_kv", "/vn_lv_kv")))
+
+    def dependency(path, inputs):
+        return {"result_path": path, "input_paths": sorted(inputs), "method": "conservative_connected_component"}
+
+    for table, rows in results.items():
+        if table == "system":
+            # Aggregate totals span all electrical components, including
+            # intentionally isolated demand reported as unserved.
+            quality["dependencies"].append(dependency("/results/system", set().union(*component_fields.values())))
+            continue
+        entries = []
+        for i, row in enumerate(rows):
+            if table == "buses":
+                bus = int(row["solver_bus_id"].split(":")[1])
+                components = {context["bus_components"][bus]}
+            else:
+                components = element_components[row["element_id"]]
+            inputs = set().union(*(component_fields[c] for c in components))
+            entries.append(dependency(f"/results/{table}/{i}", inputs))
+        if len(entries) > 1 and all(e["input_paths"] == entries[0]["input_paths"] for e in entries[1:]):
+            quality["dependencies"].append(dependency(f"/results/{table}", entries[0]["input_paths"]))
+        else:
+            quality["dependencies"].extend(entries)
+    return quality
 
 
 def solve_document(document, supplied_input_hash=None, *, runtime="native", runtime_version=None,
@@ -432,9 +512,11 @@ def solve_document(document, supplied_input_hash=None, *, runtime="native", runt
         run["status"] = "converged"
         run["iterations"] = int(net._ppc["iterations"])
         run["results"] = _results(document, context, run["iterations"])
+        run["quality"] = _quality(document, context, run["results"])
     except pp.LoadflowNotConverged as exc:
         run["status"] = "nonconverged"
         run["diagnostics"].append(_finding(document, run["id"], "SOLVE.NONCONVERGED", str(exc)))
+        run["diagnostics"].extend(diagnose_document(document, solution_run_id=run["id"]))
     except (ModelError, ValueError, KeyError, TypeError, np.linalg.LinAlgError) as exc:
         run["diagnostics"].append(_finding(document, run["id"], "SOLVE.INVALID_MODEL", str(exc)))
     end = time.perf_counter()
@@ -451,6 +533,111 @@ def _finding(doc, run_id, rule, message):
             "locations": [], "suggested_fix": "Review connectivity, source assignment and required engineering inputs.",
             "observed_value": None, "limit": None, "model_revision": doc["revision"], "solution_run_id": run_id,
             "status": "active", "cause_finding_ids": []}
+
+
+def diagnose_document(document, solution_run_id=None):
+    """Run pinned pandapower 3.3.3 diagnostics on a disposable native network.
+
+    JIT comparison is inapplicable because this app explicitly disables numba.
+    Every other registered library diagnostic runs; failures of a diagnostic
+    become a warning instead of pretending that check passed.
+    """
+    from pandapower.diagnostic import Diagnostic
+    from pandapower.diagnostic.diagnostic_functions import default_diagnostic_functions, default_argument_values
+    try:
+        context = to_pandapower(document)
+    except (ModelError, ValueError, KeyError, TypeError) as exc:
+        return [_finding(document, solution_run_id, "NATIVE_MODEL_PRECONDITION", str(exc))]
+    diag = Diagnostic(add_default_functions=False)
+    diag.kwargs = copy.deepcopy(default_argument_values)
+    diag.kwargs["nom_voltage_tolerance"] = value(document["settings"]["nominal_voltage_tolerance_percent"], "nominal_voltage_tolerance_percent") / 100
+    for name, instance, argument_names in default_diagnostic_functions:
+        if name != "numba_comparison":
+            # 3.3.3 registers the long spelling but the implementation reads
+            # the abbreviated spelling. Bind the documented check explicitly.
+            if name == "nominal_voltages_dont_match":
+                argument_names = ["nom_voltage_tolerance"]
+            diag.register_function(copy.deepcopy(instance), argument_names, name)
+    settings = document["settings"]
+    def diagnostic_run(net, **kwargs):
+        options = {"algorithm": "nr", "calculate_voltage_angles": True, "init": "dc",
+                   "max_iteration": int(value(settings["max_iterations"], "max_iterations")),
+                   "tolerance_mva": value(settings["solver_tolerance_mva"], "solver_tolerance_mva"),
+                   "enforce_q_lims": value(settings["enforce_q_limits"], "enforce_q_limits"),
+                   "trafo_model": "t", "numba": False, "lightsim2grid": False}
+        for key in ("init", "max_iteration", "tolerance_mva", "algorithm"):
+            if key in kwargs:
+                options[key] = kwargs[key]
+        pp.runpp(net, **options)
+    results = diag.diagnose_network(context["net"], report_style=None, run=diagnostic_run)
+    reverse = {}
+    for eid, native in context["element_to_native"].items():
+        reverse.setdefault(native, []).append(eid)
+    for eid, element in ((e["id"], e) for e in document["elements"]):
+        for terminal in element["terminals"].values():
+            point = optional(terminal["connection_point"])
+            if point in context["point_to_bus"]:
+                reverse.setdefault(("bus", context["point_to_bus"][point]), []).append(eid)
+    elements = {e["id"]: e for e in document["elements"]}
+    fixes = {
+        "missing_bus_indices": "Reconnect each affected terminal to a defined connectivity point.",
+        "disconnected_elements": "Reconnect the island to the selected slack or record an intentional outage.",
+        "different_voltage_levels_connected": "Check nominal voltage and use a transformer between unlike voltage levels.",
+        "implausible_impedance_values": "Verify impedance units and values against the equipment data.",
+        "nominal_voltages_dont_match": "Correct transformer winding voltage and its HV/LV connections.",
+        "invalid_values": "Correct the affected native input parameter and its unit.",
+        "multiple_voltage_controlling_elements_per_bus": "Review duplicate voltage controllers at this electrical node.",
+        "no_ext_grid": "Confirm an in-service grid or slack generator exists.",
+        "wrong_reference_system": "Check the generator-injection and load-consumption sign conventions.",
+    }
+    error_rules = {"missing_bus_indices", "different_voltage_levels_connected", "nominal_voltages_dont_match",
+                   "invalid_values", "multiple_voltage_controlling_elements_per_bus", "no_ext_grid"}
+    findings = []
+    for rule, payload in results.items():
+        if payload is False or payload is None or payload == {} or payload == []:
+            continue
+        affected = set()
+        def collect(obj, table=None):
+            if isinstance(obj, dict):
+                for key, child in obj.items():
+                    normalized = {"buses": "bus", "lines": "line", "trafos": "trafo",
+                                  "loads": "load", "gens": "gen", "sgens": "sgen", "switches": "switch",
+                                  "ext_grids": "ext_grid"}.get(key, key)
+                    next_table = normalized if normalized in context["net"] else table
+                    if "bus" in str(key) and rule == "multiple_voltage_controlling_elements_per_bus":
+                        next_table = "bus"
+                    if table and isinstance(key, (int, np.integer)):
+                        affected.update(reverse.get((table, int(key)), []))
+                    collect(child, next_table)
+            elif isinstance(obj, (list, tuple, np.ndarray)):
+                if rule in ("invalid_values", "missing_bus_indices") and obj and isinstance(obj[0], (int, np.integer)):
+                    affected.update(reverse.get((table, int(obj[0])), []))
+                else:
+                    for child in obj:
+                        collect(child, table)
+            elif table and isinstance(obj, (int, np.integer)) and not isinstance(obj, bool):
+                affected.update(reverse.get((table, int(obj)), []))
+        collect(payload)
+        finding = _finding(document, solution_run_id, "PP_" + rule.upper(),
+                           "pandapower: " + rule.replace("_", " ") + ". " + fixes.get(rule, "Review the network and diagnostic details."))
+        finding["element_ids"] = sorted(affected)
+        finding["locations"] = [elements[e]["source_ref"] for e in sorted(affected)
+                                if elements[e]["source_ref"].get("kind") == "drawing"]
+        blocking = rule in error_rules
+        if rule == "invalid_values":
+            # Library upper-bound plausibility checks (<15% R, <20% Z) are
+            # advisories, not solver impossibilities (IEEE14 uses scaled bases).
+            blocking = any(row[-1] not in ("<15", "<20") for rows in payload.values() for row in rows)
+        finding["severity"] = "error" if blocking else "warning"
+        finding["blocks_solve"] = blocking
+        finding["suggested_fix"] = fixes.get(rule, "Review the affected network inputs; this library heuristic is not a substitute for engineering review.")
+        findings.append(finding)
+    for rule, error in diag.diag_errors.items():
+        finding = _finding(document, solution_run_id, "NATIVE_DIAGNOSTIC_ERROR", f"pandapower could not complete {rule}: {error}")
+        finding.update(severity="warning", blocks_solve=False,
+                       suggested_fix="Review the model and retry diagnostics. This check has not passed.")
+        findings.append(finding)
+    return findings
 
 
 def _results(document, context, iterations):
