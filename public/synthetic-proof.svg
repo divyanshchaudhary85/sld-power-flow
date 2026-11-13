@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="white"/>
+<g fill="#111" font-family="sans-serif"><text x="48" y="52" font-size="22">SYNTHETIC PERCEPTION TEST — NOT AN ENGINEERING CASE</text><text x="150" y="150" font-size="28">BUS A</text><text x="666" y="150" font-size="28">BUS B</text><text x="440" y="250" font-size="24">LINE 1</text><text x="635" y="453" font-size="28">LOAD 1</text></g>
+<g fill="none" stroke="#111"><path d="M180 180v150M740 180v150" stroke-width="10"/><path d="M180 275H740V390" stroke-width="5"/><path d="M720 375l20 35 20-35z" stroke-width="4"/></g>
+</svg>
