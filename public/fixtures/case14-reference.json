@@ -1,0 +1,139 @@
+{
+  "fixture_id": "case14",
+  "pandapower_version": "3.3.3",
+  "options": {
+    "algorithm": "nr",
+    "calculate_voltage_angles": true,
+    "init": "dc",
+    "max_iteration": 30,
+    "tolerance_mva": 1e-08,
+    "trafo_model": "t",
+    "trafo_loading": "current",
+    "enforce_q_lims": false,
+    "check_connectivity": true,
+    "voltage_depend_loads": false,
+    "distributed_slack": false,
+    "numba": false,
+    "lightsim2grid": false
+  },
+  "generated_at": "2026-11-13T10:20:42.921730Z",
+  "buses": [
+    {
+      "busbar_id": "bus-0",
+      "voltage_pu": 1.06,
+      "voltage_kv": 143.1,
+      "angle_degree": 0.0,
+      "net_p_mw": 232.39327211124953,
+      "net_q_mvar": -16.549300594136557
+    },
+    {
+      "busbar_id": "bus-1",
+      "voltage_pu": 1.045,
+      "voltage_kv": 141.075,
+      "angle_degree": -4.982589136891917,
+      "net_p_mw": 18.3,
+      "net_q_mvar": 30.857099874653617
+    },
+    {
+      "busbar_id": "bus-2",
+      "voltage_pu": 1.0100000000000002,
+      "voltage_kv": 136.35000000000002,
+      "angle_degree": -12.725099929145312,
+      "net_p_mw": -94.2,
+      "net_q_mvar": 6.075348379380532
+    },
+    {
+      "busbar_id": "bus-3",
+      "voltage_pu": 1.0176708538933494,
+      "voltage_kv": 137.38556527560218,
+      "angle_degree": -10.312901084520604,
+      "net_p_mw": -47.79999999999998,
+      "net_q_mvar": 3.8999999999999986
+    },
+    {
+      "busbar_id": "bus-4",
+      "voltage_pu": 1.0195138600273221,
+      "voltage_kv": 137.6343711036885,
+      "angle_degree": -8.773853887936493,
+      "net_p_mw": -7.599999999999994,
+      "net_q_mvar": -1.6000000000000014
+    },
+    {
+      "busbar_id": "bus-5",
+      "voltage_pu": 1.0699999999999998,
+      "voltage_kv": 0.22255999999999995,
+      "angle_degree": -14.220946419601129,
+      "net_p_mw": -11.199999999999989,
+      "net_q_mvar": 5.230944006002513
+    },
+    {
+      "busbar_id": "bus-6",
+      "voltage_pu": 1.061519532935358,
+      "voltage_kv": 14.861273461095012,
+      "angle_degree": -13.359627348677858,
+      "net_p_mw": -0.0,
+      "net_q_mvar": -0.0
+    },
+    {
+      "busbar_id": "bus-7",
+      "voltage_pu": 1.0900000000000005,
+      "voltage_kv": 13.080000000000005,
+      "angle_degree": -13.359627348677858,
+      "net_p_mw": -0.0,
+      "net_q_mvar": 17.623451093079964
+    },
+    {
+      "busbar_id": "bus-8",
+      "voltage_pu": 1.055931721116363,
+      "voltage_kv": 0.2196337979922035,
+      "angle_degree": -14.938521264738876,
+      "net_p_mw": -29.5,
+      "net_q_mvar": 4.5848441935355275
+    },
+    {
+      "busbar_id": "bus-9",
+      "voltage_pu": 1.0509846254362183,
+      "voltage_kv": 0.2186048020907334,
+      "angle_degree": -15.097288425294584,
+      "net_p_mw": -9.0,
+      "net_q_mvar": -5.799999999999997
+    },
+    {
+      "busbar_id": "bus-10",
+      "voltage_pu": 1.05690651886699,
+      "voltage_kv": 0.2198365559243339,
+      "angle_degree": -14.790621987212665,
+      "net_p_mw": -3.5,
+      "net_q_mvar": -1.7999999999999972
+    },
+    {
+      "busbar_id": "bus-11",
+      "voltage_pu": 1.0551885633309621,
+      "voltage_kv": 0.2194792211728401,
+      "angle_degree": -15.075584475225702,
+      "net_p_mw": -6.099999999999994,
+      "net_q_mvar": -1.6000000000000014
+    },
+    {
+      "busbar_id": "bus-12",
+      "voltage_pu": 1.0503817137828937,
+      "voltage_kv": 0.2184793964668419,
+      "angle_degree": -15.156276290923367,
+      "net_p_mw": -13.5,
+      "net_q_mvar": -5.799999999999997
+    },
+    {
+      "busbar_id": "bus-13",
+      "voltage_pu": 1.035529946214874,
+      "voltage_kv": 0.21539022881269376,
+      "angle_degree": -16.033644484110408,
+      "net_p_mw": -14.899999999999977,
+      "net_q_mvar": -5.0
+    }
+  ],
+  "system": {
+    "total_generation_mw": 272.39327211124953,
+    "total_served_load_mw": 259.0,
+    "total_loss_mw": 13.393272328896877
+  }
+}

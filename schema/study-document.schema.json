@@ -1,0 +1,7552 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:sld-power-flow:study-document:1.0.0",
+  "title": "SLD Power Flow StudyDocument - Phase 0 proposal",
+  "$ref": "#/$defs/StudyDocument",
+  "$defs": {
+    "ID": {
+      "type": "string",
+      "minLength": 1
+    },
+    "Timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Revision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "Point": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ],
+      "additionalProperties": false
+    },
+    "Box": {
+      "type": "object",
+      "properties": {
+        "x_min": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "y_min": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "x_max": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "y_max": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "x_min",
+        "y_min",
+        "x_max",
+        "y_max"
+      ],
+      "additionalProperties": false
+    },
+    "DrawingRef": {
+      "type": "object",
+      "properties": {
+        "file_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "page": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "bbox": {
+          "$ref": "#/$defs/Box"
+        },
+        "text_span_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          }
+        }
+      },
+      "required": [
+        "file_id",
+        "page",
+        "bbox",
+        "text_span_ids"
+      ],
+      "additionalProperties": false
+    },
+    "SourceRef": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "drawing"
+            },
+            "primary": {
+              "$ref": "#/$defs/DrawingRef"
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            }
+          },
+          "required": [
+            "kind",
+            "primary",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "synthetic"
+            },
+            "fixture_id": {
+              "$ref": "#/$defs/ID"
+            },
+            "generated_drawing": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/DrawingRef"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "fixture_id",
+            "generated_drawing"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "user_added"
+            },
+            "created_at": {
+              "$ref": "#/$defs/Timestamp"
+            },
+            "manually_marked_region": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/DrawingRef"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "created_at",
+            "manually_marked_region"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Provenance": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "source": {
+              "const": "drawing"
+            },
+            "confidence": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            },
+            "extraction_run_id": {
+              "$ref": "#/$defs/ID"
+            },
+            "reviewed": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "source",
+            "confidence",
+            "evidence",
+            "extraction_run_id",
+            "reviewed"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "source": {
+              "const": "user"
+            },
+            "changed_at": {
+              "$ref": "#/$defs/Timestamp"
+            },
+            "supersedes_path": {
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            }
+          },
+          "required": [
+            "source",
+            "changed_at",
+            "supersedes_path",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "source": {
+              "const": "library"
+            },
+            "library_id": {
+              "$ref": "#/$defs/ID"
+            },
+            "library_version": {
+              "type": "string"
+            },
+            "item_id": {
+              "$ref": "#/$defs/ID"
+            },
+            "accepted_at": {
+              "$ref": "#/$defs/Timestamp"
+            }
+          },
+          "required": [
+            "source",
+            "library_id",
+            "library_version",
+            "item_id",
+            "accepted_at"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "source": {
+              "const": "default"
+            },
+            "default_id": {
+              "$ref": "#/$defs/ID"
+            },
+            "default_version": {
+              "type": "string"
+            },
+            "accepted_at": {
+              "$ref": "#/$defs/Timestamp"
+            },
+            "rationale": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "source",
+            "default_id",
+            "default_version",
+            "accepted_at",
+            "rationale"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Derivation": {
+      "type": "object",
+      "properties": {
+        "rule_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "rule_version": {
+          "type": "string"
+        },
+        "input_paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "rule_id",
+        "rule_version",
+        "input_paths",
+        "description"
+      ],
+      "additionalProperties": false
+    },
+    "FieldNumber": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "missing"
+            },
+            "reason": {
+              "enum": [
+                "not_shown",
+                "unreadable",
+                "ambiguous",
+                "not_entered"
+              ]
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "reason",
+            "candidates",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "known"
+            },
+            "value": {
+              "type": "number"
+            },
+            "provenance": {
+              "$ref": "#/$defs/Provenance"
+            },
+            "derivation": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/Derivation"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "value",
+            "provenance",
+            "derivation"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FieldInteger": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "missing"
+            },
+            "reason": {
+              "enum": [
+                "not_shown",
+                "unreadable",
+                "ambiguous",
+                "not_entered"
+              ]
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "reason",
+            "candidates",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "known"
+            },
+            "value": {
+              "type": "integer"
+            },
+            "provenance": {
+              "$ref": "#/$defs/Provenance"
+            },
+            "derivation": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/Derivation"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "value",
+            "provenance",
+            "derivation"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FieldString": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "missing"
+            },
+            "reason": {
+              "enum": [
+                "not_shown",
+                "unreadable",
+                "ambiguous",
+                "not_entered"
+              ]
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "reason",
+            "candidates",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "known"
+            },
+            "value": {
+              "type": "string"
+            },
+            "provenance": {
+              "$ref": "#/$defs/Provenance"
+            },
+            "derivation": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/Derivation"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "value",
+            "provenance",
+            "derivation"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FieldBoolean": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "missing"
+            },
+            "reason": {
+              "enum": [
+                "not_shown",
+                "unreadable",
+                "ambiguous",
+                "not_entered"
+              ]
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "type": "boolean"
+              }
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "reason",
+            "candidates",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "known"
+            },
+            "value": {
+              "type": "boolean"
+            },
+            "provenance": {
+              "$ref": "#/$defs/Provenance"
+            },
+            "derivation": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/Derivation"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "value",
+            "provenance",
+            "derivation"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FieldID": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "missing"
+            },
+            "reason": {
+              "enum": [
+                "not_shown",
+                "unreadable",
+                "ambiguous",
+                "not_entered"
+              ]
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/ID"
+              }
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "reason",
+            "candidates",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "known"
+            },
+            "value": {
+              "$ref": "#/$defs/ID"
+            },
+            "provenance": {
+              "$ref": "#/$defs/Provenance"
+            },
+            "derivation": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/Derivation"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "value",
+            "provenance",
+            "derivation"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FieldNullableNumber": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "missing"
+            },
+            "reason": {
+              "enum": [
+                "not_shown",
+                "unreadable",
+                "ambiguous",
+                "not_entered"
+              ]
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "reason",
+            "candidates",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "known"
+            },
+            "value": {
+              "oneOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "provenance": {
+              "$ref": "#/$defs/Provenance"
+            },
+            "derivation": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/Derivation"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "value",
+            "provenance",
+            "derivation"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FieldNullableString": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "missing"
+            },
+            "reason": {
+              "enum": [
+                "not_shown",
+                "unreadable",
+                "ambiguous",
+                "not_entered"
+              ]
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "reason",
+            "candidates",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "known"
+            },
+            "value": {
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "provenance": {
+              "$ref": "#/$defs/Provenance"
+            },
+            "derivation": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/Derivation"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "value",
+            "provenance",
+            "derivation"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FieldNullableID": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "missing"
+            },
+            "reason": {
+              "enum": [
+                "not_shown",
+                "unreadable",
+                "ambiguous",
+                "not_entered"
+              ]
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "$ref": "#/$defs/ID"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "reason",
+            "candidates",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "known"
+            },
+            "value": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/ID"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "provenance": {
+              "$ref": "#/$defs/Provenance"
+            },
+            "derivation": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/Derivation"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "value",
+            "provenance",
+            "derivation"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FieldFrequency": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "missing"
+            },
+            "reason": {
+              "enum": [
+                "not_shown",
+                "unreadable",
+                "ambiguous",
+                "not_entered"
+              ]
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  50,
+                  60
+                ]
+              }
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "reason",
+            "candidates",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "known"
+            },
+            "value": {
+              "enum": [
+                50,
+                60
+              ]
+            },
+            "provenance": {
+              "$ref": "#/$defs/Provenance"
+            },
+            "derivation": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/Derivation"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "value",
+            "provenance",
+            "derivation"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FieldNetworkType": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "missing"
+            },
+            "reason": {
+              "enum": [
+                "not_shown",
+                "unreadable",
+                "ambiguous",
+                "not_entered"
+              ]
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "transmission_subtransmission",
+                  "industrial",
+                  "distribution"
+                ]
+              }
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "reason",
+            "candidates",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "known"
+            },
+            "value": {
+              "enum": [
+                "transmission_subtransmission",
+                "industrial",
+                "distribution"
+              ]
+            },
+            "provenance": {
+              "$ref": "#/$defs/Provenance"
+            },
+            "derivation": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/Derivation"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "value",
+            "provenance",
+            "derivation"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FieldSymbols": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "missing"
+            },
+            "reason": {
+              "enum": [
+                "not_shown",
+                "unreadable",
+                "ambiguous",
+                "not_entered"
+              ]
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "IEC",
+                  "ANSI_IEEE"
+                ]
+              }
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "reason",
+            "candidates",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "known"
+            },
+            "value": {
+              "enum": [
+                "IEC",
+                "ANSI_IEEE"
+              ]
+            },
+            "provenance": {
+              "$ref": "#/$defs/Provenance"
+            },
+            "derivation": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/Derivation"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "value",
+            "provenance",
+            "derivation"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FieldOrigin": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "missing"
+            },
+            "reason": {
+              "enum": [
+                "not_shown",
+                "unreadable",
+                "ambiguous",
+                "not_entered"
+              ]
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "uploaded",
+                  "sample",
+                  "manual"
+                ]
+              }
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "reason",
+            "candidates",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "known"
+            },
+            "value": {
+              "enum": [
+                "uploaded",
+                "sample",
+                "manual"
+              ]
+            },
+            "provenance": {
+              "$ref": "#/$defs/Provenance"
+            },
+            "derivation": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/Derivation"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "value",
+            "provenance",
+            "derivation"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FieldSwitchState": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "missing"
+            },
+            "reason": {
+              "enum": [
+                "not_shown",
+                "unreadable",
+                "ambiguous",
+                "not_entered"
+              ]
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "open",
+                  "closed"
+                ]
+              }
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "reason",
+            "candidates",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "known"
+            },
+            "value": {
+              "enum": [
+                "open",
+                "closed"
+              ]
+            },
+            "provenance": {
+              "$ref": "#/$defs/Provenance"
+            },
+            "derivation": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/Derivation"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "value",
+            "provenance",
+            "derivation"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FieldReactiveKind": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "missing"
+            },
+            "reason": {
+              "enum": [
+                "not_shown",
+                "unreadable",
+                "ambiguous",
+                "not_entered"
+              ]
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "leading",
+                  "lagging"
+                ]
+              }
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "reason",
+            "candidates",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "known"
+            },
+            "value": {
+              "enum": [
+                "leading",
+                "lagging"
+              ]
+            },
+            "provenance": {
+              "$ref": "#/$defs/Provenance"
+            },
+            "derivation": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/Derivation"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "value",
+            "provenance",
+            "derivation"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FieldGeneratorMode": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "missing"
+            },
+            "reason": {
+              "enum": [
+                "not_shown",
+                "unreadable",
+                "ambiguous",
+                "not_entered"
+              ]
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "pv",
+                  "slack"
+                ]
+              }
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "reason",
+            "candidates",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "known"
+            },
+            "value": {
+              "enum": [
+                "pv",
+                "slack"
+              ]
+            },
+            "provenance": {
+              "$ref": "#/$defs/Provenance"
+            },
+            "derivation": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/Derivation"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "value",
+            "provenance",
+            "derivation"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FieldGridMode": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "missing"
+            },
+            "reason": {
+              "enum": [
+                "not_shown",
+                "unreadable",
+                "ambiguous",
+                "not_entered"
+              ]
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "slack",
+                  "voltage_controlled"
+                ]
+              }
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "reason",
+            "candidates",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "known"
+            },
+            "value": {
+              "enum": [
+                "slack",
+                "voltage_controlled"
+              ]
+            },
+            "provenance": {
+              "$ref": "#/$defs/Provenance"
+            },
+            "derivation": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/Derivation"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "value",
+            "provenance",
+            "derivation"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FieldStaticTechnology": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "missing"
+            },
+            "reason": {
+              "enum": [
+                "not_shown",
+                "unreadable",
+                "ambiguous",
+                "not_entered"
+              ]
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "pv",
+                  "storage",
+                  "other"
+                ]
+              }
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "reason",
+            "candidates",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "known"
+            },
+            "value": {
+              "enum": [
+                "pv",
+                "storage",
+                "other"
+              ]
+            },
+            "provenance": {
+              "$ref": "#/$defs/Provenance"
+            },
+            "derivation": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/Derivation"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "value",
+            "provenance",
+            "derivation"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FieldShuntTechnology": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "missing"
+            },
+            "reason": {
+              "enum": [
+                "not_shown",
+                "unreadable",
+                "ambiguous",
+                "not_entered"
+              ]
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "capacitor",
+                  "reactor",
+                  "other"
+                ]
+              }
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "reason",
+            "candidates",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "known"
+            },
+            "value": {
+              "enum": [
+                "capacitor",
+                "reactor",
+                "other"
+              ]
+            },
+            "provenance": {
+              "$ref": "#/$defs/Provenance"
+            },
+            "derivation": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/Derivation"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "value",
+            "provenance",
+            "derivation"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FieldTapSide": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "missing"
+            },
+            "reason": {
+              "enum": [
+                "not_shown",
+                "unreadable",
+                "ambiguous",
+                "not_entered"
+              ]
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "hv",
+                  "lv"
+                ]
+              }
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "reason",
+            "candidates",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "known"
+            },
+            "value": {
+              "enum": [
+                "hv",
+                "lv"
+              ]
+            },
+            "provenance": {
+              "$ref": "#/$defs/Provenance"
+            },
+            "derivation": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/Derivation"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "value",
+            "provenance",
+            "derivation"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FieldTapChanger": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "missing"
+            },
+            "reason": {
+              "enum": [
+                "not_shown",
+                "unreadable",
+                "ambiguous",
+                "not_entered"
+              ]
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "ratio",
+                  "phase_shift"
+                ]
+              }
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "reason",
+            "candidates",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "known"
+            },
+            "value": {
+              "enum": [
+                "ratio",
+                "phase_shift"
+              ]
+            },
+            "provenance": {
+              "$ref": "#/$defs/Provenance"
+            },
+            "derivation": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/Derivation"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "value",
+            "provenance",
+            "derivation"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FieldElementTag": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "missing"
+            },
+            "reason": {
+              "enum": [
+                "not_shown",
+                "unreadable",
+                "ambiguous",
+                "not_entered"
+              ]
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "busbar",
+                  "line",
+                  "cable",
+                  "transformer_2w",
+                  "external_grid",
+                  "generator",
+                  "static_generator",
+                  "load",
+                  "motor",
+                  "shunt",
+                  "circuit_breaker",
+                  "disconnector",
+                  "fuse",
+                  "unknown"
+                ]
+              }
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "reason",
+            "candidates",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "known"
+            },
+            "value": {
+              "enum": [
+                "busbar",
+                "line",
+                "cable",
+                "transformer_2w",
+                "external_grid",
+                "generator",
+                "static_generator",
+                "load",
+                "motor",
+                "shunt",
+                "circuit_breaker",
+                "disconnector",
+                "fuse",
+                "unknown"
+              ]
+            },
+            "provenance": {
+              "$ref": "#/$defs/Provenance"
+            },
+            "derivation": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/Derivation"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "value",
+            "provenance",
+            "derivation"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FieldTapCapability": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "missing"
+            },
+            "reason": {
+              "enum": [
+                "not_shown",
+                "unreadable",
+                "ambiguous",
+                "not_entered"
+              ]
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "kind": {
+                        "const": "none"
+                      }
+                    },
+                    "required": [
+                      "kind"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "kind": {
+                        "const": "fixed"
+                      },
+                      "side": {
+                        "$ref": "#/$defs/FieldTapSide"
+                      },
+                      "neutral": {
+                        "$ref": "#/$defs/FieldInteger"
+                      },
+                      "min": {
+                        "$ref": "#/$defs/FieldInteger"
+                      },
+                      "max": {
+                        "$ref": "#/$defs/FieldInteger"
+                      },
+                      "position": {
+                        "$ref": "#/$defs/FieldInteger"
+                      },
+                      "step_percent": {
+                        "$ref": "#/$defs/FieldNumber"
+                      },
+                      "step_degree": {
+                        "$ref": "#/$defs/FieldNumber"
+                      },
+                      "changer_type": {
+                        "$ref": "#/$defs/FieldTapChanger"
+                      },
+                      "ratio_definition": {
+                        "$ref": "#/$defs/FieldString"
+                      }
+                    },
+                    "required": [
+                      "kind",
+                      "side",
+                      "neutral",
+                      "min",
+                      "max",
+                      "position",
+                      "step_percent",
+                      "step_degree",
+                      "changer_type",
+                      "ratio_definition"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "reason",
+            "candidates",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "known"
+            },
+            "value": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "const": "none"
+                    }
+                  },
+                  "required": [
+                    "kind"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "const": "fixed"
+                    },
+                    "side": {
+                      "$ref": "#/$defs/FieldTapSide"
+                    },
+                    "neutral": {
+                      "$ref": "#/$defs/FieldInteger"
+                    },
+                    "min": {
+                      "$ref": "#/$defs/FieldInteger"
+                    },
+                    "max": {
+                      "$ref": "#/$defs/FieldInteger"
+                    },
+                    "position": {
+                      "$ref": "#/$defs/FieldInteger"
+                    },
+                    "step_percent": {
+                      "$ref": "#/$defs/FieldNumber"
+                    },
+                    "step_degree": {
+                      "$ref": "#/$defs/FieldNumber"
+                    },
+                    "changer_type": {
+                      "$ref": "#/$defs/FieldTapChanger"
+                    },
+                    "ratio_definition": {
+                      "$ref": "#/$defs/FieldString"
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "side",
+                    "neutral",
+                    "min",
+                    "max",
+                    "position",
+                    "step_percent",
+                    "step_degree",
+                    "changer_type",
+                    "ratio_definition"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "provenance": {
+              "$ref": "#/$defs/Provenance"
+            },
+            "derivation": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/Derivation"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "value",
+            "provenance",
+            "derivation"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FieldTypeReference": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "missing"
+            },
+            "reason": {
+              "enum": [
+                "not_shown",
+                "unreadable",
+                "ambiguous",
+                "not_entered"
+              ]
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "library_id": {
+                        "$ref": "#/$defs/ID"
+                      },
+                      "version": {
+                        "type": "string"
+                      },
+                      "item_id": {
+                        "$ref": "#/$defs/ID"
+                      }
+                    },
+                    "required": [
+                      "library_id",
+                      "version",
+                      "item_id"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "reason",
+            "candidates",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "known"
+            },
+            "value": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "library_id": {
+                      "$ref": "#/$defs/ID"
+                    },
+                    "version": {
+                      "type": "string"
+                    },
+                    "item_id": {
+                      "$ref": "#/$defs/ID"
+                    }
+                  },
+                  "required": [
+                    "library_id",
+                    "version",
+                    "item_id"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "provenance": {
+              "$ref": "#/$defs/Provenance"
+            },
+            "derivation": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/Derivation"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "value",
+            "provenance",
+            "derivation"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CaseMeta": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/FieldString"
+        },
+        "network_type": {
+          "$ref": "#/$defs/FieldNetworkType"
+        },
+        "frequency_hz": {
+          "$ref": "#/$defs/FieldFrequency"
+        },
+        "symbol_set": {
+          "$ref": "#/$defs/FieldSymbols"
+        },
+        "base_mva": {
+          "$ref": "#/$defs/FieldNumber"
+        },
+        "case_origin": {
+          "$ref": "#/$defs/FieldOrigin"
+        },
+        "description": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "created_at": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "modified_at": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "fixture_id": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/ID"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "source_case_hash": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "network_type",
+        "frequency_hz",
+        "symbol_set",
+        "base_mva",
+        "case_origin",
+        "description",
+        "created_at",
+        "modified_at",
+        "fixture_id",
+        "source_case_hash"
+      ],
+      "additionalProperties": false
+    },
+    "StudySettings": {
+      "type": "object",
+      "properties": {
+        "slack_element_id": {
+          "$ref": "#/$defs/FieldID"
+        },
+        "slack_confirmed": {
+          "$ref": "#/$defs/FieldBoolean"
+        },
+        "base_confirmed": {
+          "$ref": "#/$defs/FieldBoolean"
+        },
+        "voltage_min_pu": {
+          "$ref": "#/$defs/FieldNumber"
+        },
+        "voltage_max_pu": {
+          "$ref": "#/$defs/FieldNumber"
+        },
+        "branch_warning_percent": {
+          "$ref": "#/$defs/FieldNumber"
+        },
+        "branch_alarm_percent": {
+          "$ref": "#/$defs/FieldNumber"
+        },
+        "transformer_z_min_percent": {
+          "$ref": "#/$defs/FieldNumber"
+        },
+        "transformer_z_max_percent": {
+          "$ref": "#/$defs/FieldNumber"
+        },
+        "nominal_voltage_tolerance_percent": {
+          "$ref": "#/$defs/FieldNumber"
+        },
+        "low_confidence_threshold": {
+          "$ref": "#/$defs/FieldNumber"
+        },
+        "voltage_unit_slip_ratio": {
+          "$ref": "#/$defs/FieldNumber"
+        },
+        "power_unit_slip_ratio": {
+          "$ref": "#/$defs/FieldNumber"
+        },
+        "slack_import_limit_mw": {
+          "$ref": "#/$defs/FieldNullableNumber"
+        },
+        "allow_slack_export": {
+          "$ref": "#/$defs/FieldBoolean"
+        },
+        "solver_tolerance_mva": {
+          "$ref": "#/$defs/FieldNumber"
+        },
+        "max_iterations": {
+          "$ref": "#/$defs/FieldInteger"
+        },
+        "enforce_q_limits": {
+          "$ref": "#/$defs/FieldBoolean"
+        },
+        "conventions": {
+          "$ref": "#/$defs/Conventions"
+        },
+        "additional_rule_thresholds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RuleThreshold"
+          }
+        }
+      },
+      "required": [
+        "slack_element_id",
+        "slack_confirmed",
+        "base_confirmed",
+        "voltage_min_pu",
+        "voltage_max_pu",
+        "branch_warning_percent",
+        "branch_alarm_percent",
+        "transformer_z_min_percent",
+        "transformer_z_max_percent",
+        "nominal_voltage_tolerance_percent",
+        "low_confidence_threshold",
+        "voltage_unit_slip_ratio",
+        "power_unit_slip_ratio",
+        "slack_import_limit_mw",
+        "allow_slack_export",
+        "solver_tolerance_mva",
+        "max_iterations",
+        "enforce_q_limits",
+        "conventions",
+        "additional_rule_thresholds"
+      ],
+      "additionalProperties": false
+    },
+    "RuleThreshold": {
+      "type": "object",
+      "properties": {
+        "rule_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "parameter_name": {
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/$defs/FieldNumber"
+        },
+        "unit": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "rule_id",
+        "parameter_name",
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "Conventions": {
+      "type": "object",
+      "properties": {
+        "positive_sequence": {
+          "const": true
+        },
+        "balanced": {
+          "const": true
+        },
+        "algorithm": {
+          "const": "newton_raphson"
+        },
+        "voltage_angles": {
+          "const": "degrees"
+        },
+        "branch_power_sign": {
+          "const": "positive_from_bus_into_element"
+        },
+        "generator_power_sign": {
+          "const": "positive_injection"
+        },
+        "load_power_sign": {
+          "const": "positive_consumption"
+        },
+        "shunt_power_sign": {
+          "const": "positive_consumption_inductive_q"
+        },
+        "bus_net_power_sign": {
+          "const": "positive_injection"
+        },
+        "transformer_equivalent": {
+          "const": "t"
+        },
+        "tap_control": {
+          "const": "fixed_user_position"
+        },
+        "distributed_slack": {
+          "const": false
+        }
+      },
+      "required": [
+        "positive_sequence",
+        "balanced",
+        "algorithm",
+        "voltage_angles",
+        "branch_power_sign",
+        "generator_power_sign",
+        "load_power_sign",
+        "shunt_power_sign",
+        "bus_net_power_sign",
+        "transformer_equivalent",
+        "tap_control",
+        "distributed_slack"
+      ],
+      "additionalProperties": false
+    },
+    "SourceFile": {
+      "type": "object",
+      "properties": {
+        "file_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "name": {
+          "type": "string"
+        },
+        "media_type": {
+          "enum": [
+            "application/pdf",
+            "image/png",
+            "image/jpeg",
+            "image/tiff"
+          ]
+        },
+        "sha256": {
+          "type": "string"
+        },
+        "byte_size": {
+          "type": "integer"
+        },
+        "browser_blob_key": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "pages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourcePage"
+          }
+        }
+      },
+      "required": [
+        "file_id",
+        "name",
+        "media_type",
+        "sha256",
+        "byte_size",
+        "browser_blob_key",
+        "pages"
+      ],
+      "additionalProperties": false
+    },
+    "SourcePage": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "original_width": {
+          "type": "number"
+        },
+        "original_height": {
+          "type": "number"
+        },
+        "original_unit": {
+          "enum": [
+            "pt",
+            "px"
+          ]
+        },
+        "raster_width": {
+          "type": "integer"
+        },
+        "raster_height": {
+          "type": "integer"
+        },
+        "raster_dpi": {
+          "type": "number"
+        },
+        "rotation_degree": {
+          "type": "number"
+        },
+        "deskew_transform": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 6,
+          "maxItems": 6
+        },
+        "title_block": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Box"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "legend": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Box"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "text_spans": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/TextSpan"
+          }
+        },
+        "tiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Tile"
+          }
+        }
+      },
+      "required": [
+        "page",
+        "original_width",
+        "original_height",
+        "original_unit",
+        "raster_width",
+        "raster_height",
+        "raster_dpi",
+        "rotation_degree",
+        "deskew_transform",
+        "title_block",
+        "legend",
+        "text_spans",
+        "tiles"
+      ],
+      "additionalProperties": false
+    },
+    "TextSpan": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "text": {
+          "type": "string"
+        },
+        "bbox": {
+          "$ref": "#/$defs/Box"
+        },
+        "source": {
+          "enum": [
+            "pdf_text",
+            "vision"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "bbox",
+        "source"
+      ],
+      "additionalProperties": false
+    },
+    "Tile": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "bbox": {
+          "$ref": "#/$defs/Box"
+        },
+        "raster_width": {
+          "type": "integer"
+        },
+        "raster_height": {
+          "type": "integer"
+        },
+        "overlap_fraction": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "scale": {
+          "type": "number"
+        },
+        "status": {
+          "enum": [
+            "queued",
+            "running",
+            "valid",
+            "failed"
+          ]
+        },
+        "extraction_run_id": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/ID"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "bbox",
+        "raster_width",
+        "raster_height",
+        "overlap_fraction",
+        "scale",
+        "status",
+        "extraction_run_id"
+      ],
+      "additionalProperties": false
+    },
+    "ExtractionRun": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "request_schema_version": {
+          "type": "string"
+        },
+        "prompt_version": {
+          "type": "string"
+        },
+        "started_at": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "ended_at": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Timestamp"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "tile_count": {
+          "type": "integer"
+        },
+        "success_count": {
+          "type": "integer"
+        },
+        "retry_count": {
+          "type": "integer"
+        },
+        "failures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "input_tokens": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "output_tokens": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reported_cost": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reported_cost_currency": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "provider",
+        "model",
+        "request_schema_version",
+        "prompt_version",
+        "started_at",
+        "ended_at",
+        "tile_count",
+        "success_count",
+        "retry_count",
+        "failures",
+        "input_tokens",
+        "output_tokens",
+        "reported_cost",
+        "reported_cost_currency"
+      ],
+      "additionalProperties": false
+    },
+    "ObservedAttribute": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            {
+              "$ref": "#/$defs/FieldString"
+            },
+            {
+              "$ref": "#/$defs/FieldBoolean"
+            }
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "Observation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "tile_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "detected_type": {
+          "$ref": "#/$defs/FieldElementTag"
+        },
+        "label": {
+          "$ref": "#/$defs/FieldString"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ObservedAttribute"
+          }
+        },
+        "source_ref": {
+          "$ref": "#/$defs/DrawingRef"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "terminals": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EndpointObservation"
+          }
+        },
+        "line_paths": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/Point"
+            }
+          }
+        }
+      },
+      "required": [
+        "id",
+        "tile_id",
+        "detected_type",
+        "label",
+        "attributes",
+        "source_ref",
+        "confidence",
+        "terminals",
+        "line_paths"
+      ],
+      "additionalProperties": false
+    },
+    "EndpointObservation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "observation_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "position": {
+          "$ref": "#/$defs/Point"
+        },
+        "source_ref": {
+          "$ref": "#/$defs/DrawingRef"
+        },
+        "attached_observation_id": {
+          "$ref": "#/$defs/FieldNullableID"
+        }
+      },
+      "required": [
+        "id",
+        "observation_id",
+        "position",
+        "source_ref",
+        "attached_observation_id"
+      ],
+      "additionalProperties": false
+    },
+    "TextObservation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "text": {
+          "$ref": "#/$defs/FieldString"
+        },
+        "source_ref": {
+          "$ref": "#/$defs/DrawingRef"
+        },
+        "associated_element_id": {
+          "$ref": "#/$defs/FieldNullableID"
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "source_ref",
+        "associated_element_id"
+      ],
+      "additionalProperties": false
+    },
+    "MergeDecision": {
+      "type": "object",
+      "properties": {
+        "observation_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          }
+        },
+        "outcome": {
+          "enum": [
+            "merged",
+            "kept_distinct",
+            "unresolved",
+            "human_corrected"
+          ]
+        },
+        "rule_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "element_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          }
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "observation_ids",
+        "outcome",
+        "rule_id",
+        "element_ids",
+        "description"
+      ],
+      "additionalProperties": false
+    },
+    "ExtractionWorkspace": {
+      "type": "object",
+      "properties": {
+        "runs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ExtractionRun"
+          }
+        },
+        "observations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Observation"
+          }
+        },
+        "unassociated_text": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/TextObservation"
+          }
+        },
+        "unresolved_endpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EndpointObservation"
+          }
+        },
+        "merge_decisions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MergeDecision"
+          }
+        },
+        "annotations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Annotation"
+          }
+        }
+      },
+      "required": [
+        "runs",
+        "observations",
+        "unassociated_text",
+        "unresolved_endpoints",
+        "merge_decisions",
+        "annotations"
+      ],
+      "additionalProperties": false
+    },
+    "ConnectivityPoint": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "position": {
+          "$ref": "#/$defs/Point"
+        },
+        "source_ref": {
+          "$ref": "#/$defs/SourceRef"
+        },
+        "kind": {
+          "enum": [
+            "junction",
+            "terminal_point"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DrawingRef"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "position",
+        "source_ref",
+        "kind",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "Layout": {
+      "type": "object",
+      "properties": {
+        "position": {
+          "$ref": "#/$defs/Point"
+        },
+        "rotation_degree": {
+          "type": "number"
+        },
+        "width": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "height": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "route_points": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Point"
+          }
+        },
+        "page_group": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "bay_group": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "updated_at": {
+          "$ref": "#/$defs/Timestamp"
+        }
+      },
+      "required": [
+        "position",
+        "rotation_degree",
+        "width",
+        "height",
+        "route_points",
+        "page_group",
+        "bay_group",
+        "updated_at"
+      ],
+      "additionalProperties": false
+    },
+    "ElementReview": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "unreviewed",
+            "confirmed",
+            "edited"
+          ]
+        },
+        "reviewed_revision": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Revision"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reviewed_at": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Timestamp"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "reviewed_revision",
+        "reviewed_at"
+      ],
+      "additionalProperties": false
+    },
+    "Annotation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "text": {
+          "type": "string"
+        },
+        "source_ref": {
+          "$ref": "#/$defs/SourceRef"
+        },
+        "layout": {
+          "$ref": "#/$defs/Layout"
+        },
+        "disposition": {
+          "enum": [
+            "annotation",
+            "legend",
+            "title_block"
+          ]
+        },
+        "review": {
+          "$ref": "#/$defs/ElementReview"
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "source_ref",
+        "layout",
+        "disposition",
+        "review"
+      ],
+      "additionalProperties": false
+    },
+    "FieldBusbarTag": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "const": "known"
+        },
+        "value": {
+          "const": "busbar"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "derivation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Derivation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "value",
+        "provenance",
+        "derivation"
+      ],
+      "additionalProperties": false
+    },
+    "Busbar": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "label": {
+          "$ref": "#/$defs/FieldString"
+        },
+        "in_service": {
+          "$ref": "#/$defs/FieldBoolean"
+        },
+        "source_ref": {
+          "$ref": "#/$defs/SourceRef"
+        },
+        "layout": {
+          "$ref": "#/$defs/Layout"
+        },
+        "review": {
+          "$ref": "#/$defs/ElementReview"
+        },
+        "station": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "bay": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "notes": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "type": {
+          "$ref": "#/$defs/FieldBusbarTag"
+        },
+        "terminals": {
+          "type": "object",
+          "properties": {
+            "bus": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "$ref": "#/$defs/ID"
+                },
+                "role": {
+                  "const": "bus"
+                },
+                "connection_point": {
+                  "$ref": "#/$defs/FieldID"
+                },
+                "source_ref": {
+                  "$ref": "#/$defs/SourceRef"
+                },
+                "drawn_anchor": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/Point"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "role",
+                "connection_point",
+                "source_ref",
+                "drawn_anchor"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "bus"
+          ],
+          "additionalProperties": false
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "nominal_kv": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "voltage_min_pu": {
+              "$ref": "#/$defs/FieldNullableNumber"
+            },
+            "voltage_max_pu": {
+              "$ref": "#/$defs/FieldNullableNumber"
+            }
+          },
+          "required": [
+            "nominal_kv",
+            "voltage_min_pu",
+            "voltage_max_pu"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "in_service",
+        "source_ref",
+        "layout",
+        "review",
+        "station",
+        "bay",
+        "notes",
+        "type",
+        "terminals",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    "FieldLineTag": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "const": "known"
+        },
+        "value": {
+          "const": "line"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "derivation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Derivation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "value",
+        "provenance",
+        "derivation"
+      ],
+      "additionalProperties": false
+    },
+    "Line": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "label": {
+          "$ref": "#/$defs/FieldString"
+        },
+        "in_service": {
+          "$ref": "#/$defs/FieldBoolean"
+        },
+        "source_ref": {
+          "$ref": "#/$defs/SourceRef"
+        },
+        "layout": {
+          "$ref": "#/$defs/Layout"
+        },
+        "review": {
+          "$ref": "#/$defs/ElementReview"
+        },
+        "station": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "bay": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "notes": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "type": {
+          "$ref": "#/$defs/FieldLineTag"
+        },
+        "terminals": {
+          "type": "object",
+          "properties": {
+            "from": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "$ref": "#/$defs/ID"
+                },
+                "role": {
+                  "const": "from"
+                },
+                "connection_point": {
+                  "$ref": "#/$defs/FieldID"
+                },
+                "source_ref": {
+                  "$ref": "#/$defs/SourceRef"
+                },
+                "drawn_anchor": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/Point"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "role",
+                "connection_point",
+                "source_ref",
+                "drawn_anchor"
+              ],
+              "additionalProperties": false
+            },
+            "to": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "$ref": "#/$defs/ID"
+                },
+                "role": {
+                  "const": "to"
+                },
+                "connection_point": {
+                  "$ref": "#/$defs/FieldID"
+                },
+                "source_ref": {
+                  "$ref": "#/$defs/SourceRef"
+                },
+                "drawn_anchor": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/Point"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "role",
+                "connection_point",
+                "source_ref",
+                "drawn_anchor"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "from",
+            "to"
+          ],
+          "additionalProperties": false
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "length_km": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "r_ohm_per_km": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "x_ohm_per_km": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "b_us_per_km": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "g_us_per_km": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "max_current_ka": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "derating_factor": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "parallel_count": {
+              "$ref": "#/$defs/FieldInteger"
+            },
+            "standard_type": {
+              "$ref": "#/$defs/FieldTypeReference"
+            },
+            "from_nominal_kv": {
+              "$ref": "#/$defs/FieldNullableNumber"
+            },
+            "to_nominal_kv": {
+              "$ref": "#/$defs/FieldNullableNumber"
+            }
+          },
+          "required": [
+            "length_km",
+            "r_ohm_per_km",
+            "x_ohm_per_km",
+            "b_us_per_km",
+            "g_us_per_km",
+            "max_current_ka",
+            "derating_factor",
+            "parallel_count",
+            "standard_type",
+            "from_nominal_kv",
+            "to_nominal_kv"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "in_service",
+        "source_ref",
+        "layout",
+        "review",
+        "station",
+        "bay",
+        "notes",
+        "type",
+        "terminals",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    "FieldCableTag": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "const": "known"
+        },
+        "value": {
+          "const": "cable"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "derivation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Derivation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "value",
+        "provenance",
+        "derivation"
+      ],
+      "additionalProperties": false
+    },
+    "Cable": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "label": {
+          "$ref": "#/$defs/FieldString"
+        },
+        "in_service": {
+          "$ref": "#/$defs/FieldBoolean"
+        },
+        "source_ref": {
+          "$ref": "#/$defs/SourceRef"
+        },
+        "layout": {
+          "$ref": "#/$defs/Layout"
+        },
+        "review": {
+          "$ref": "#/$defs/ElementReview"
+        },
+        "station": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "bay": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "notes": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "type": {
+          "$ref": "#/$defs/FieldCableTag"
+        },
+        "terminals": {
+          "type": "object",
+          "properties": {
+            "from": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "$ref": "#/$defs/ID"
+                },
+                "role": {
+                  "const": "from"
+                },
+                "connection_point": {
+                  "$ref": "#/$defs/FieldID"
+                },
+                "source_ref": {
+                  "$ref": "#/$defs/SourceRef"
+                },
+                "drawn_anchor": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/Point"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "role",
+                "connection_point",
+                "source_ref",
+                "drawn_anchor"
+              ],
+              "additionalProperties": false
+            },
+            "to": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "$ref": "#/$defs/ID"
+                },
+                "role": {
+                  "const": "to"
+                },
+                "connection_point": {
+                  "$ref": "#/$defs/FieldID"
+                },
+                "source_ref": {
+                  "$ref": "#/$defs/SourceRef"
+                },
+                "drawn_anchor": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/Point"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "role",
+                "connection_point",
+                "source_ref",
+                "drawn_anchor"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "from",
+            "to"
+          ],
+          "additionalProperties": false
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "length_km": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "r_ohm_per_km": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "x_ohm_per_km": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "b_us_per_km": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "g_us_per_km": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "max_current_ka": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "derating_factor": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "parallel_count": {
+              "$ref": "#/$defs/FieldInteger"
+            },
+            "standard_type": {
+              "$ref": "#/$defs/FieldTypeReference"
+            },
+            "from_nominal_kv": {
+              "$ref": "#/$defs/FieldNullableNumber"
+            },
+            "to_nominal_kv": {
+              "$ref": "#/$defs/FieldNullableNumber"
+            }
+          },
+          "required": [
+            "length_km",
+            "r_ohm_per_km",
+            "x_ohm_per_km",
+            "b_us_per_km",
+            "g_us_per_km",
+            "max_current_ka",
+            "derating_factor",
+            "parallel_count",
+            "standard_type",
+            "from_nominal_kv",
+            "to_nominal_kv"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "in_service",
+        "source_ref",
+        "layout",
+        "review",
+        "station",
+        "bay",
+        "notes",
+        "type",
+        "terminals",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    "FieldTransformer2WTag": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "const": "known"
+        },
+        "value": {
+          "const": "transformer_2w"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "derivation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Derivation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "value",
+        "provenance",
+        "derivation"
+      ],
+      "additionalProperties": false
+    },
+    "Transformer2W": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "label": {
+          "$ref": "#/$defs/FieldString"
+        },
+        "in_service": {
+          "$ref": "#/$defs/FieldBoolean"
+        },
+        "source_ref": {
+          "$ref": "#/$defs/SourceRef"
+        },
+        "layout": {
+          "$ref": "#/$defs/Layout"
+        },
+        "review": {
+          "$ref": "#/$defs/ElementReview"
+        },
+        "station": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "bay": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "notes": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "type": {
+          "$ref": "#/$defs/FieldTransformer2WTag"
+        },
+        "terminals": {
+          "type": "object",
+          "properties": {
+            "hv": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "$ref": "#/$defs/ID"
+                },
+                "role": {
+                  "const": "hv"
+                },
+                "connection_point": {
+                  "$ref": "#/$defs/FieldID"
+                },
+                "source_ref": {
+                  "$ref": "#/$defs/SourceRef"
+                },
+                "drawn_anchor": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/Point"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "role",
+                "connection_point",
+                "source_ref",
+                "drawn_anchor"
+              ],
+              "additionalProperties": false
+            },
+            "lv": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "$ref": "#/$defs/ID"
+                },
+                "role": {
+                  "const": "lv"
+                },
+                "connection_point": {
+                  "$ref": "#/$defs/FieldID"
+                },
+                "source_ref": {
+                  "$ref": "#/$defs/SourceRef"
+                },
+                "drawn_anchor": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/Point"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "role",
+                "connection_point",
+                "source_ref",
+                "drawn_anchor"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "hv",
+            "lv"
+          ],
+          "additionalProperties": false
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "sn_mva": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "vn_hv_kv": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "vn_lv_kv": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "vk_percent": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "vkr_percent": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "pfe_kw": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "i0_percent": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "phase_shift_degree": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "derating_factor": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "parallel_count": {
+              "$ref": "#/$defs/FieldInteger"
+            },
+            "standard_type": {
+              "$ref": "#/$defs/FieldTypeReference"
+            },
+            "tap": {
+              "$ref": "#/$defs/FieldTapCapability"
+            }
+          },
+          "required": [
+            "sn_mva",
+            "vn_hv_kv",
+            "vn_lv_kv",
+            "vk_percent",
+            "vkr_percent",
+            "pfe_kw",
+            "i0_percent",
+            "phase_shift_degree",
+            "derating_factor",
+            "parallel_count",
+            "standard_type",
+            "tap"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "in_service",
+        "source_ref",
+        "layout",
+        "review",
+        "station",
+        "bay",
+        "notes",
+        "type",
+        "terminals",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    "FieldExternalGridTag": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "const": "known"
+        },
+        "value": {
+          "const": "external_grid"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "derivation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Derivation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "value",
+        "provenance",
+        "derivation"
+      ],
+      "additionalProperties": false
+    },
+    "ExternalGrid": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "label": {
+          "$ref": "#/$defs/FieldString"
+        },
+        "in_service": {
+          "$ref": "#/$defs/FieldBoolean"
+        },
+        "source_ref": {
+          "$ref": "#/$defs/SourceRef"
+        },
+        "layout": {
+          "$ref": "#/$defs/Layout"
+        },
+        "review": {
+          "$ref": "#/$defs/ElementReview"
+        },
+        "station": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "bay": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "notes": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "type": {
+          "$ref": "#/$defs/FieldExternalGridTag"
+        },
+        "terminals": {
+          "type": "object",
+          "properties": {
+            "bus": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "$ref": "#/$defs/ID"
+                },
+                "role": {
+                  "const": "bus"
+                },
+                "connection_point": {
+                  "$ref": "#/$defs/FieldID"
+                },
+                "source_ref": {
+                  "$ref": "#/$defs/SourceRef"
+                },
+                "drawn_anchor": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/Point"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "role",
+                "connection_point",
+                "source_ref",
+                "drawn_anchor"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "bus"
+          ],
+          "additionalProperties": false
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "voltage_setpoint_kv": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "angle_degree": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "infeed_rating_mva": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "p_dispatch_mw": {
+              "$ref": "#/$defs/FieldNullableNumber"
+            },
+            "min_p_mw": {
+              "$ref": "#/$defs/FieldNullableNumber"
+            },
+            "max_p_mw": {
+              "$ref": "#/$defs/FieldNullableNumber"
+            },
+            "min_q_mvar": {
+              "$ref": "#/$defs/FieldNullableNumber"
+            },
+            "max_q_mvar": {
+              "$ref": "#/$defs/FieldNullableNumber"
+            },
+            "mode": {
+              "$ref": "#/$defs/FieldGridMode"
+            }
+          },
+          "required": [
+            "voltage_setpoint_kv",
+            "angle_degree",
+            "infeed_rating_mva",
+            "p_dispatch_mw",
+            "min_p_mw",
+            "max_p_mw",
+            "min_q_mvar",
+            "max_q_mvar",
+            "mode"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "in_service",
+        "source_ref",
+        "layout",
+        "review",
+        "station",
+        "bay",
+        "notes",
+        "type",
+        "terminals",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    "FieldGeneratorTag": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "const": "known"
+        },
+        "value": {
+          "const": "generator"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "derivation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Derivation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "value",
+        "provenance",
+        "derivation"
+      ],
+      "additionalProperties": false
+    },
+    "Generator": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "label": {
+          "$ref": "#/$defs/FieldString"
+        },
+        "in_service": {
+          "$ref": "#/$defs/FieldBoolean"
+        },
+        "source_ref": {
+          "$ref": "#/$defs/SourceRef"
+        },
+        "layout": {
+          "$ref": "#/$defs/Layout"
+        },
+        "review": {
+          "$ref": "#/$defs/ElementReview"
+        },
+        "station": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "bay": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "notes": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "type": {
+          "$ref": "#/$defs/FieldGeneratorTag"
+        },
+        "terminals": {
+          "type": "object",
+          "properties": {
+            "bus": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "$ref": "#/$defs/ID"
+                },
+                "role": {
+                  "const": "bus"
+                },
+                "connection_point": {
+                  "$ref": "#/$defs/FieldID"
+                },
+                "source_ref": {
+                  "$ref": "#/$defs/SourceRef"
+                },
+                "drawn_anchor": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/Point"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "role",
+                "connection_point",
+                "source_ref",
+                "drawn_anchor"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "bus"
+          ],
+          "additionalProperties": false
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "p_mw": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "voltage_setpoint_kv": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "sn_mva": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "min_p_mw": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "max_p_mw": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "min_q_mvar": {
+              "$ref": "#/$defs/FieldNullableNumber"
+            },
+            "max_q_mvar": {
+              "$ref": "#/$defs/FieldNullableNumber"
+            },
+            "mode": {
+              "$ref": "#/$defs/FieldGeneratorMode"
+            },
+            "slack_angle_degree": {
+              "$ref": "#/$defs/FieldNullableNumber"
+            }
+          },
+          "required": [
+            "p_mw",
+            "voltage_setpoint_kv",
+            "sn_mva",
+            "min_p_mw",
+            "max_p_mw",
+            "min_q_mvar",
+            "max_q_mvar",
+            "mode",
+            "slack_angle_degree"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "in_service",
+        "source_ref",
+        "layout",
+        "review",
+        "station",
+        "bay",
+        "notes",
+        "type",
+        "terminals",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    "FieldStaticGeneratorTag": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "const": "known"
+        },
+        "value": {
+          "const": "static_generator"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "derivation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Derivation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "value",
+        "provenance",
+        "derivation"
+      ],
+      "additionalProperties": false
+    },
+    "StaticGenerator": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "label": {
+          "$ref": "#/$defs/FieldString"
+        },
+        "in_service": {
+          "$ref": "#/$defs/FieldBoolean"
+        },
+        "source_ref": {
+          "$ref": "#/$defs/SourceRef"
+        },
+        "layout": {
+          "$ref": "#/$defs/Layout"
+        },
+        "review": {
+          "$ref": "#/$defs/ElementReview"
+        },
+        "station": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "bay": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "notes": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "type": {
+          "$ref": "#/$defs/FieldStaticGeneratorTag"
+        },
+        "terminals": {
+          "type": "object",
+          "properties": {
+            "bus": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "$ref": "#/$defs/ID"
+                },
+                "role": {
+                  "const": "bus"
+                },
+                "connection_point": {
+                  "$ref": "#/$defs/FieldID"
+                },
+                "source_ref": {
+                  "$ref": "#/$defs/SourceRef"
+                },
+                "drawn_anchor": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/Point"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "role",
+                "connection_point",
+                "source_ref",
+                "drawn_anchor"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "bus"
+          ],
+          "additionalProperties": false
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "p_mw": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "q_mvar": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "sn_mva": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "min_p_mw": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "max_p_mw": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "min_q_mvar": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "max_q_mvar": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "technology": {
+              "$ref": "#/$defs/FieldStaticTechnology"
+            }
+          },
+          "required": [
+            "p_mw",
+            "q_mvar",
+            "sn_mva",
+            "min_p_mw",
+            "max_p_mw",
+            "min_q_mvar",
+            "max_q_mvar",
+            "technology"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "in_service",
+        "source_ref",
+        "layout",
+        "review",
+        "station",
+        "bay",
+        "notes",
+        "type",
+        "terminals",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    "FieldLoadModel": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "missing"
+            },
+            "reason": {
+              "enum": [
+                "not_shown",
+                "unreadable",
+                "ambiguous",
+                "not_entered"
+              ]
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "const": "constant_pq"
+              }
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "reason",
+            "candidates",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "known"
+            },
+            "value": {
+              "const": "constant_pq"
+            },
+            "provenance": {
+              "$ref": "#/$defs/Provenance"
+            },
+            "derivation": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/Derivation"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "value",
+            "provenance",
+            "derivation"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FieldLoadTag": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "const": "known"
+        },
+        "value": {
+          "const": "load"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "derivation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Derivation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "value",
+        "provenance",
+        "derivation"
+      ],
+      "additionalProperties": false
+    },
+    "Load": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "label": {
+          "$ref": "#/$defs/FieldString"
+        },
+        "in_service": {
+          "$ref": "#/$defs/FieldBoolean"
+        },
+        "source_ref": {
+          "$ref": "#/$defs/SourceRef"
+        },
+        "layout": {
+          "$ref": "#/$defs/Layout"
+        },
+        "review": {
+          "$ref": "#/$defs/ElementReview"
+        },
+        "station": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "bay": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "notes": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "type": {
+          "$ref": "#/$defs/FieldLoadTag"
+        },
+        "terminals": {
+          "type": "object",
+          "properties": {
+            "bus": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "$ref": "#/$defs/ID"
+                },
+                "role": {
+                  "const": "bus"
+                },
+                "connection_point": {
+                  "$ref": "#/$defs/FieldID"
+                },
+                "source_ref": {
+                  "$ref": "#/$defs/SourceRef"
+                },
+                "drawn_anchor": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/Point"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "role",
+                "connection_point",
+                "source_ref",
+                "drawn_anchor"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "bus"
+          ],
+          "additionalProperties": false
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "p_mw": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "q_mvar": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "scaling_factor": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "sn_mva": {
+              "$ref": "#/$defs/FieldNullableNumber"
+            },
+            "power_factor": {
+              "$ref": "#/$defs/FieldNullableNumber"
+            },
+            "reactive_kind": {
+              "$ref": "#/$defs/FieldReactiveKind"
+            },
+            "model": {
+              "$ref": "#/$defs/FieldLoadModel"
+            }
+          },
+          "required": [
+            "p_mw",
+            "q_mvar",
+            "scaling_factor",
+            "sn_mva",
+            "power_factor",
+            "reactive_kind",
+            "model"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "in_service",
+        "source_ref",
+        "layout",
+        "review",
+        "station",
+        "bay",
+        "notes",
+        "type",
+        "terminals",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    "FieldMotorTag": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "const": "known"
+        },
+        "value": {
+          "const": "motor"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "derivation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Derivation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "value",
+        "provenance",
+        "derivation"
+      ],
+      "additionalProperties": false
+    },
+    "Motor": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "label": {
+          "$ref": "#/$defs/FieldString"
+        },
+        "in_service": {
+          "$ref": "#/$defs/FieldBoolean"
+        },
+        "source_ref": {
+          "$ref": "#/$defs/SourceRef"
+        },
+        "layout": {
+          "$ref": "#/$defs/Layout"
+        },
+        "review": {
+          "$ref": "#/$defs/ElementReview"
+        },
+        "station": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "bay": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "notes": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "type": {
+          "$ref": "#/$defs/FieldMotorTag"
+        },
+        "terminals": {
+          "type": "object",
+          "properties": {
+            "bus": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "$ref": "#/$defs/ID"
+                },
+                "role": {
+                  "const": "bus"
+                },
+                "connection_point": {
+                  "$ref": "#/$defs/FieldID"
+                },
+                "source_ref": {
+                  "$ref": "#/$defs/SourceRef"
+                },
+                "drawn_anchor": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/Point"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "role",
+                "connection_point",
+                "source_ref",
+                "drawn_anchor"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "bus"
+          ],
+          "additionalProperties": false
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "p_mw": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "q_mvar": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "scaling_factor": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "sn_mva": {
+              "$ref": "#/$defs/FieldNullableNumber"
+            },
+            "power_factor": {
+              "$ref": "#/$defs/FieldNullableNumber"
+            },
+            "reactive_kind": {
+              "$ref": "#/$defs/FieldReactiveKind"
+            },
+            "model": {
+              "$ref": "#/$defs/FieldLoadModel"
+            }
+          },
+          "required": [
+            "p_mw",
+            "q_mvar",
+            "scaling_factor",
+            "sn_mva",
+            "power_factor",
+            "reactive_kind",
+            "model"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "in_service",
+        "source_ref",
+        "layout",
+        "review",
+        "station",
+        "bay",
+        "notes",
+        "type",
+        "terminals",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    "FieldShuntModel": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "missing"
+            },
+            "reason": {
+              "enum": [
+                "not_shown",
+                "unreadable",
+                "ambiguous",
+                "not_entered"
+              ]
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "const": "constant_impedance"
+              }
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "reason",
+            "candidates",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "known"
+            },
+            "value": {
+              "const": "constant_impedance"
+            },
+            "provenance": {
+              "$ref": "#/$defs/Provenance"
+            },
+            "derivation": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/Derivation"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "value",
+            "provenance",
+            "derivation"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FieldShuntTag": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "const": "known"
+        },
+        "value": {
+          "const": "shunt"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "derivation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Derivation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "value",
+        "provenance",
+        "derivation"
+      ],
+      "additionalProperties": false
+    },
+    "Shunt": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "label": {
+          "$ref": "#/$defs/FieldString"
+        },
+        "in_service": {
+          "$ref": "#/$defs/FieldBoolean"
+        },
+        "source_ref": {
+          "$ref": "#/$defs/SourceRef"
+        },
+        "layout": {
+          "$ref": "#/$defs/Layout"
+        },
+        "review": {
+          "$ref": "#/$defs/ElementReview"
+        },
+        "station": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "bay": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "notes": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "type": {
+          "$ref": "#/$defs/FieldShuntTag"
+        },
+        "terminals": {
+          "type": "object",
+          "properties": {
+            "bus": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "$ref": "#/$defs/ID"
+                },
+                "role": {
+                  "const": "bus"
+                },
+                "connection_point": {
+                  "$ref": "#/$defs/FieldID"
+                },
+                "source_ref": {
+                  "$ref": "#/$defs/SourceRef"
+                },
+                "drawn_anchor": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/Point"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "role",
+                "connection_point",
+                "source_ref",
+                "drawn_anchor"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "bus"
+          ],
+          "additionalProperties": false
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "p_mw": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "q_mvar": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "nominal_kv": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "step": {
+              "$ref": "#/$defs/FieldInteger"
+            },
+            "max_step": {
+              "$ref": "#/$defs/FieldInteger"
+            },
+            "technology": {
+              "$ref": "#/$defs/FieldShuntTechnology"
+            },
+            "model": {
+              "$ref": "#/$defs/FieldShuntModel"
+            }
+          },
+          "required": [
+            "p_mw",
+            "q_mvar",
+            "nominal_kv",
+            "step",
+            "max_step",
+            "technology",
+            "model"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "in_service",
+        "source_ref",
+        "layout",
+        "review",
+        "station",
+        "bay",
+        "notes",
+        "type",
+        "terminals",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    "FieldSwitchModel": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "missing"
+            },
+            "reason": {
+              "enum": [
+                "not_shown",
+                "unreadable",
+                "ambiguous",
+                "not_entered"
+              ]
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "const": "ideal"
+              }
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DrawingRef"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "reason",
+            "candidates",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "known"
+            },
+            "value": {
+              "const": "ideal"
+            },
+            "provenance": {
+              "$ref": "#/$defs/Provenance"
+            },
+            "derivation": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/Derivation"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "value",
+            "provenance",
+            "derivation"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FieldCircuitBreakerTag": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "const": "known"
+        },
+        "value": {
+          "const": "circuit_breaker"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "derivation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Derivation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "value",
+        "provenance",
+        "derivation"
+      ],
+      "additionalProperties": false
+    },
+    "CircuitBreaker": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "label": {
+          "$ref": "#/$defs/FieldString"
+        },
+        "in_service": {
+          "$ref": "#/$defs/FieldBoolean"
+        },
+        "source_ref": {
+          "$ref": "#/$defs/SourceRef"
+        },
+        "layout": {
+          "$ref": "#/$defs/Layout"
+        },
+        "review": {
+          "$ref": "#/$defs/ElementReview"
+        },
+        "station": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "bay": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "notes": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "type": {
+          "$ref": "#/$defs/FieldCircuitBreakerTag"
+        },
+        "terminals": {
+          "type": "object",
+          "properties": {
+            "a": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "$ref": "#/$defs/ID"
+                },
+                "role": {
+                  "const": "a"
+                },
+                "connection_point": {
+                  "$ref": "#/$defs/FieldID"
+                },
+                "source_ref": {
+                  "$ref": "#/$defs/SourceRef"
+                },
+                "drawn_anchor": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/Point"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "role",
+                "connection_point",
+                "source_ref",
+                "drawn_anchor"
+              ],
+              "additionalProperties": false
+            },
+            "b": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "$ref": "#/$defs/ID"
+                },
+                "role": {
+                  "const": "b"
+                },
+                "connection_point": {
+                  "$ref": "#/$defs/FieldID"
+                },
+                "source_ref": {
+                  "$ref": "#/$defs/SourceRef"
+                },
+                "drawn_anchor": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/Point"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "role",
+                "connection_point",
+                "source_ref",
+                "drawn_anchor"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "a",
+            "b"
+          ],
+          "additionalProperties": false
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "state": {
+              "$ref": "#/$defs/FieldSwitchState"
+            },
+            "normal_state": {
+              "$ref": "#/$defs/FieldSwitchState"
+            },
+            "rated_current_ka": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "rated_voltage_kv": {
+              "$ref": "#/$defs/FieldNullableNumber"
+            },
+            "electrical_model": {
+              "$ref": "#/$defs/FieldSwitchModel"
+            }
+          },
+          "required": [
+            "state",
+            "normal_state",
+            "rated_current_ka",
+            "rated_voltage_kv",
+            "electrical_model"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "in_service",
+        "source_ref",
+        "layout",
+        "review",
+        "station",
+        "bay",
+        "notes",
+        "type",
+        "terminals",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    "FieldDisconnectorTag": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "const": "known"
+        },
+        "value": {
+          "const": "disconnector"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "derivation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Derivation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "value",
+        "provenance",
+        "derivation"
+      ],
+      "additionalProperties": false
+    },
+    "Disconnector": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "label": {
+          "$ref": "#/$defs/FieldString"
+        },
+        "in_service": {
+          "$ref": "#/$defs/FieldBoolean"
+        },
+        "source_ref": {
+          "$ref": "#/$defs/SourceRef"
+        },
+        "layout": {
+          "$ref": "#/$defs/Layout"
+        },
+        "review": {
+          "$ref": "#/$defs/ElementReview"
+        },
+        "station": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "bay": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "notes": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "type": {
+          "$ref": "#/$defs/FieldDisconnectorTag"
+        },
+        "terminals": {
+          "type": "object",
+          "properties": {
+            "a": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "$ref": "#/$defs/ID"
+                },
+                "role": {
+                  "const": "a"
+                },
+                "connection_point": {
+                  "$ref": "#/$defs/FieldID"
+                },
+                "source_ref": {
+                  "$ref": "#/$defs/SourceRef"
+                },
+                "drawn_anchor": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/Point"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "role",
+                "connection_point",
+                "source_ref",
+                "drawn_anchor"
+              ],
+              "additionalProperties": false
+            },
+            "b": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "$ref": "#/$defs/ID"
+                },
+                "role": {
+                  "const": "b"
+                },
+                "connection_point": {
+                  "$ref": "#/$defs/FieldID"
+                },
+                "source_ref": {
+                  "$ref": "#/$defs/SourceRef"
+                },
+                "drawn_anchor": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/Point"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "role",
+                "connection_point",
+                "source_ref",
+                "drawn_anchor"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "a",
+            "b"
+          ],
+          "additionalProperties": false
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "state": {
+              "$ref": "#/$defs/FieldSwitchState"
+            },
+            "normal_state": {
+              "$ref": "#/$defs/FieldSwitchState"
+            },
+            "rated_current_ka": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "rated_voltage_kv": {
+              "$ref": "#/$defs/FieldNullableNumber"
+            },
+            "electrical_model": {
+              "$ref": "#/$defs/FieldSwitchModel"
+            }
+          },
+          "required": [
+            "state",
+            "normal_state",
+            "rated_current_ka",
+            "rated_voltage_kv",
+            "electrical_model"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "in_service",
+        "source_ref",
+        "layout",
+        "review",
+        "station",
+        "bay",
+        "notes",
+        "type",
+        "terminals",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    "FieldFuseTag": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "const": "known"
+        },
+        "value": {
+          "const": "fuse"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "derivation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Derivation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "value",
+        "provenance",
+        "derivation"
+      ],
+      "additionalProperties": false
+    },
+    "Fuse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "label": {
+          "$ref": "#/$defs/FieldString"
+        },
+        "in_service": {
+          "$ref": "#/$defs/FieldBoolean"
+        },
+        "source_ref": {
+          "$ref": "#/$defs/SourceRef"
+        },
+        "layout": {
+          "$ref": "#/$defs/Layout"
+        },
+        "review": {
+          "$ref": "#/$defs/ElementReview"
+        },
+        "station": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "bay": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "notes": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "type": {
+          "$ref": "#/$defs/FieldFuseTag"
+        },
+        "terminals": {
+          "type": "object",
+          "properties": {
+            "a": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "$ref": "#/$defs/ID"
+                },
+                "role": {
+                  "const": "a"
+                },
+                "connection_point": {
+                  "$ref": "#/$defs/FieldID"
+                },
+                "source_ref": {
+                  "$ref": "#/$defs/SourceRef"
+                },
+                "drawn_anchor": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/Point"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "role",
+                "connection_point",
+                "source_ref",
+                "drawn_anchor"
+              ],
+              "additionalProperties": false
+            },
+            "b": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "$ref": "#/$defs/ID"
+                },
+                "role": {
+                  "const": "b"
+                },
+                "connection_point": {
+                  "$ref": "#/$defs/FieldID"
+                },
+                "source_ref": {
+                  "$ref": "#/$defs/SourceRef"
+                },
+                "drawn_anchor": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/Point"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "role",
+                "connection_point",
+                "source_ref",
+                "drawn_anchor"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "a",
+            "b"
+          ],
+          "additionalProperties": false
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "state": {
+              "$ref": "#/$defs/FieldSwitchState"
+            },
+            "normal_state": {
+              "$ref": "#/$defs/FieldSwitchState"
+            },
+            "rated_current_ka": {
+              "$ref": "#/$defs/FieldNumber"
+            },
+            "rated_voltage_kv": {
+              "$ref": "#/$defs/FieldNullableNumber"
+            },
+            "electrical_model": {
+              "$ref": "#/$defs/FieldSwitchModel"
+            }
+          },
+          "required": [
+            "state",
+            "normal_state",
+            "rated_current_ka",
+            "rated_voltage_kv",
+            "electrical_model"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "in_service",
+        "source_ref",
+        "layout",
+        "review",
+        "station",
+        "bay",
+        "notes",
+        "type",
+        "terminals",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    "FieldUnknownElementTag": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "const": "known"
+        },
+        "value": {
+          "const": "unknown"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "derivation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Derivation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "value",
+        "provenance",
+        "derivation"
+      ],
+      "additionalProperties": false
+    },
+    "UnknownElement": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "label": {
+          "$ref": "#/$defs/FieldString"
+        },
+        "in_service": {
+          "$ref": "#/$defs/FieldBoolean"
+        },
+        "source_ref": {
+          "$ref": "#/$defs/SourceRef"
+        },
+        "layout": {
+          "$ref": "#/$defs/Layout"
+        },
+        "review": {
+          "$ref": "#/$defs/ElementReview"
+        },
+        "station": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "bay": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "notes": {
+          "$ref": "#/$defs/FieldNullableString"
+        },
+        "type": {
+          "$ref": "#/$defs/FieldUnknownElementTag"
+        },
+        "terminals": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "raw_symbol_description": {
+              "$ref": "#/$defs/FieldString"
+            },
+            "raw_label": {
+              "$ref": "#/$defs/FieldString"
+            },
+            "possible_type": {
+              "$ref": "#/$defs/FieldElementTag"
+            }
+          },
+          "required": [
+            "raw_symbol_description",
+            "raw_label",
+            "possible_type"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "in_service",
+        "source_ref",
+        "layout",
+        "review",
+        "station",
+        "bay",
+        "notes",
+        "type",
+        "terminals",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    "Element": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/Busbar"
+        },
+        {
+          "$ref": "#/$defs/Line"
+        },
+        {
+          "$ref": "#/$defs/Cable"
+        },
+        {
+          "$ref": "#/$defs/Transformer2W"
+        },
+        {
+          "$ref": "#/$defs/ExternalGrid"
+        },
+        {
+          "$ref": "#/$defs/Generator"
+        },
+        {
+          "$ref": "#/$defs/StaticGenerator"
+        },
+        {
+          "$ref": "#/$defs/Load"
+        },
+        {
+          "$ref": "#/$defs/Motor"
+        },
+        {
+          "$ref": "#/$defs/Shunt"
+        },
+        {
+          "$ref": "#/$defs/CircuitBreaker"
+        },
+        {
+          "$ref": "#/$defs/Disconnector"
+        },
+        {
+          "$ref": "#/$defs/Fuse"
+        },
+        {
+          "$ref": "#/$defs/UnknownElement"
+        }
+      ]
+    },
+    "ReviewDecision": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "element_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          }
+        },
+        "input_paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "action": {
+          "type": "string"
+        },
+        "at": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "revision": {
+          "$ref": "#/$defs/Revision"
+        }
+      },
+      "required": [
+        "id",
+        "element_ids",
+        "input_paths",
+        "action",
+        "at",
+        "revision"
+      ],
+      "additionalProperties": false
+    },
+    "ReviewState": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "pending",
+            "confirmed"
+          ]
+        },
+        "confirmed_model_revision": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Revision"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "confirmed_input_hash": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "confirmed_at": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Timestamp"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "unresolved_element_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          }
+        },
+        "decisions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ReviewDecision"
+          }
+        }
+      },
+      "required": [
+        "status",
+        "confirmed_model_revision",
+        "confirmed_input_hash",
+        "confirmed_at",
+        "unresolved_element_ids",
+        "decisions"
+      ],
+      "additionalProperties": false
+    },
+    "JsonValue": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/JsonValue"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          }
+        }
+      ]
+    },
+    "DataSuggestion": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "target_path": {
+          "type": "string"
+        },
+        "candidate_value": {
+          "$ref": "#/$defs/JsonValue"
+        },
+        "source": {
+          "enum": [
+            "library",
+            "default"
+          ]
+        },
+        "source_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "source_version": {
+          "type": "string"
+        },
+        "rationale": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "offered",
+            "accepted",
+            "rejected"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "target_path",
+        "candidate_value",
+        "source",
+        "source_id",
+        "source_version",
+        "rationale",
+        "status"
+      ],
+      "additionalProperties": false
+    },
+    "MeasuredValue": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "Finding": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "rule_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "rule_version": {
+          "type": "string"
+        },
+        "stage": {
+          "enum": [
+            "drawing",
+            "topology",
+            "electrical",
+            "completeness",
+            "post_solve",
+            "solver_diagnostic"
+          ]
+        },
+        "severity": {
+          "enum": [
+            "info",
+            "warning",
+            "error",
+            "alarm"
+          ]
+        },
+        "blocks_solve": {
+          "type": "boolean"
+        },
+        "message": {
+          "type": "string"
+        },
+        "element_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          }
+        },
+        "field_paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DrawingRef"
+          }
+        },
+        "suggested_fix": {
+          "type": "string"
+        },
+        "observed_value": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/MeasuredValue"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "limit": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/MeasuredValue"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "model_revision": {
+          "$ref": "#/$defs/Revision"
+        },
+        "solution_run_id": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/ID"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "status": {
+          "enum": [
+            "active",
+            "resolved"
+          ]
+        },
+        "cause_finding_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "rule_id",
+        "rule_version",
+        "stage",
+        "severity",
+        "blocks_solve",
+        "message",
+        "element_ids",
+        "field_paths",
+        "locations",
+        "suggested_fix",
+        "observed_value",
+        "limit",
+        "model_revision",
+        "solution_run_id",
+        "status",
+        "cause_finding_ids"
+      ],
+      "additionalProperties": false
+    },
+    "ValidationRun": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "model_revision": {
+          "$ref": "#/$defs/Revision"
+        },
+        "input_hash": {
+          "type": "string"
+        },
+        "ruleset_version": {
+          "type": "string"
+        },
+        "started_at": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "ended_at": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Finding"
+          }
+        },
+        "passed_pre_solve": {
+          "type": "boolean"
+        },
+        "solver_diagnostics_version": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "model_revision",
+        "input_hash",
+        "ruleset_version",
+        "started_at",
+        "ended_at",
+        "findings",
+        "passed_pre_solve",
+        "solver_diagnostics_version"
+      ],
+      "additionalProperties": false
+    },
+    "BaseSnapshot": {
+      "type": "object",
+      "properties": {
+        "revision": {
+          "$ref": "#/$defs/Revision"
+        },
+        "input_hash": {
+          "type": "string"
+        },
+        "meta": {
+          "$ref": "#/$defs/CaseMeta"
+        },
+        "settings": {
+          "$ref": "#/$defs/StudySettings"
+        },
+        "connectivity_points": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ConnectivityPoint"
+          }
+        },
+        "elements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Element"
+          }
+        }
+      },
+      "required": [
+        "revision",
+        "input_hash",
+        "meta",
+        "settings",
+        "connectivity_points",
+        "elements"
+      ],
+      "additionalProperties": false
+    },
+    "Change": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "before": {
+          "$ref": "#/$defs/JsonValue"
+        },
+        "after": {
+          "$ref": "#/$defs/JsonValue"
+        }
+      },
+      "required": [
+        "path",
+        "before",
+        "after"
+      ],
+      "additionalProperties": false
+    },
+    "Event": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "time": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "kind": {
+          "enum": [
+            "switch",
+            "setpoint",
+            "tap",
+            "service",
+            "reset",
+            "compare",
+            "solve",
+            "review",
+            "edit"
+          ]
+        },
+        "selected_element_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          }
+        },
+        "changes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Change"
+          }
+        },
+        "previous_revision": {
+          "$ref": "#/$defs/Revision"
+        },
+        "new_revision": {
+          "$ref": "#/$defs/Revision"
+        },
+        "solver_run_id": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/ID"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "outcome": {
+          "enum": [
+            "requested",
+            "confirmed",
+            "cancelled",
+            "succeeded",
+            "failed"
+          ]
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "time",
+        "kind",
+        "selected_element_ids",
+        "changes",
+        "previous_revision",
+        "new_revision",
+        "solver_run_id",
+        "outcome",
+        "message"
+      ],
+      "additionalProperties": false
+    },
+    "AlarmAcknowledgement": {
+      "type": "object",
+      "properties": {
+        "finding_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "finding_fingerprint": {
+          "type": "string"
+        },
+        "acknowledged_at": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "acknowledged_revision": {
+          "$ref": "#/$defs/Revision"
+        }
+      },
+      "required": [
+        "finding_id",
+        "finding_fingerprint",
+        "acknowledged_at",
+        "acknowledged_revision"
+      ],
+      "additionalProperties": false
+    },
+    "TablePreference": {
+      "type": "object",
+      "properties": {
+        "table": {
+          "enum": [
+            "buses",
+            "lines",
+            "transformers",
+            "generators",
+            "loads",
+            "alarms",
+            "events"
+          ]
+        },
+        "sort_key": {
+          "type": "string"
+        },
+        "sort_direction": {
+          "enum": [
+            "asc",
+            "desc"
+          ]
+        },
+        "filter": {
+          "type": "string"
+        },
+        "visible_columns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "table",
+        "sort_key",
+        "sort_direction",
+        "filter",
+        "visible_columns"
+      ],
+      "additionalProperties": false
+    },
+    "DisplayPreferences": {
+      "type": "object",
+      "properties": {
+        "theme": {
+          "enum": [
+            "dark",
+            "light"
+          ]
+        },
+        "breaker_colour_convention": {
+          "enum": [
+            "shape_only",
+            "closed_red",
+            "closed_green"
+          ]
+        },
+        "voltage_colouring": {
+          "type": "boolean"
+        },
+        "tables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/TablePreference"
+          }
+        },
+        "viewport": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "zoom": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "x",
+            "y",
+            "zoom"
+          ],
+          "additionalProperties": false
+        },
+        "display_revision": {
+          "$ref": "#/$defs/Revision"
+        }
+      },
+      "required": [
+        "theme",
+        "breaker_colour_convention",
+        "voltage_colouring",
+        "tables",
+        "viewport",
+        "display_revision"
+      ],
+      "additionalProperties": false
+    },
+    "IslandPolicy": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "enum": [
+            "preparation_strict",
+            "intentional_outage"
+          ]
+        },
+        "authorized_isolated_element_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          }
+        },
+        "authorizing_event_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          }
+        },
+        "energized_island_slacks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "connectivity_point_ids": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/ID"
+                }
+              },
+              "slack_element_id": {
+                "$ref": "#/$defs/ID"
+              }
+            },
+            "required": [
+              "connectivity_point_ids",
+              "slack_element_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "mode",
+        "authorized_isolated_element_ids",
+        "authorizing_event_ids",
+        "energized_island_slacks"
+      ],
+      "additionalProperties": false
+    },
+    "OperationState": {
+      "type": "object",
+      "properties": {
+        "base_snapshot": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/BaseSnapshot"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Event"
+          }
+        },
+        "acknowledgements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AlarmAcknowledgement"
+          }
+        },
+        "display_preferences": {
+          "$ref": "#/$defs/DisplayPreferences"
+        },
+        "island_policy": {
+          "$ref": "#/$defs/IslandPolicy"
+        }
+      },
+      "required": [
+        "base_snapshot",
+        "events",
+        "acknowledgements",
+        "display_preferences",
+        "island_policy"
+      ],
+      "additionalProperties": false
+    },
+    "ResultNumber": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "available"
+            },
+            "value": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "status",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "unavailable"
+            },
+            "reason": {
+              "enum": [
+                "deenergized",
+                "nonconverged",
+                "not_applicable",
+                "failed",
+                "not_reported"
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "reason"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "BusResult": {
+      "type": "object",
+      "properties": {
+        "busbar_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          }
+        },
+        "solver_bus_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "energized": {
+          "type": "boolean"
+        },
+        "voltage_pu": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "voltage_kv": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "angle_degree": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "net_p_mw": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "net_q_mvar": {
+          "$ref": "#/$defs/ResultNumber"
+        }
+      },
+      "required": [
+        "busbar_ids",
+        "solver_bus_id",
+        "energized",
+        "voltage_pu",
+        "voltage_kv",
+        "angle_degree",
+        "net_p_mw",
+        "net_q_mvar"
+      ],
+      "additionalProperties": false
+    },
+    "LineResult": {
+      "type": "object",
+      "properties": {
+        "element_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "energized": {
+          "type": "boolean"
+        },
+        "p_from_mw": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "q_from_mvar": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "p_to_mw": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "q_to_mvar": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "i_from_ka": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "i_to_ka": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "loading_percent": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "p_loss_mw": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "q_loss_mvar": {
+          "$ref": "#/$defs/ResultNumber"
+        }
+      },
+      "required": [
+        "element_id",
+        "energized",
+        "p_from_mw",
+        "q_from_mvar",
+        "p_to_mw",
+        "q_to_mvar",
+        "i_from_ka",
+        "i_to_ka",
+        "loading_percent",
+        "p_loss_mw",
+        "q_loss_mvar"
+      ],
+      "additionalProperties": false
+    },
+    "TransformerResult": {
+      "type": "object",
+      "properties": {
+        "element_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "energized": {
+          "type": "boolean"
+        },
+        "p_hv_mw": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "q_hv_mvar": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "p_lv_mw": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "q_lv_mvar": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "i_hv_ka": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "i_lv_ka": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "loading_percent": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "p_loss_mw": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "q_loss_mvar": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "tap_position": {
+          "$ref": "#/$defs/ResultNumber"
+        }
+      },
+      "required": [
+        "element_id",
+        "energized",
+        "p_hv_mw",
+        "q_hv_mvar",
+        "p_lv_mw",
+        "q_lv_mvar",
+        "i_hv_ka",
+        "i_lv_ka",
+        "loading_percent",
+        "p_loss_mw",
+        "q_loss_mvar",
+        "tap_position"
+      ],
+      "additionalProperties": false
+    },
+    "GeneratorResult": {
+      "type": "object",
+      "properties": {
+        "element_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "energized": {
+          "type": "boolean"
+        },
+        "at_q_min": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "at_q_max": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "p_mw": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "q_mvar": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "voltage_kv": {
+          "$ref": "#/$defs/ResultNumber"
+        }
+      },
+      "required": [
+        "element_id",
+        "energized",
+        "at_q_min",
+        "at_q_max",
+        "p_mw",
+        "q_mvar",
+        "voltage_kv"
+      ],
+      "additionalProperties": false
+    },
+    "DemandResult": {
+      "type": "object",
+      "properties": {
+        "element_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "energized": {
+          "type": "boolean"
+        },
+        "p_mw": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "q_mvar": {
+          "$ref": "#/$defs/ResultNumber"
+        }
+      },
+      "required": [
+        "element_id",
+        "energized",
+        "p_mw",
+        "q_mvar"
+      ],
+      "additionalProperties": false
+    },
+    "SystemResult": {
+      "type": "object",
+      "properties": {
+        "converged": {
+          "type": "boolean"
+        },
+        "iterations": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "energized_bus_count": {
+          "type": "integer"
+        },
+        "total_generation_mw": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "total_generation_mvar": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "total_served_load_mw": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "total_served_load_mvar": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "total_unserved_load_mw": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "total_unserved_load_mvar": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "total_loss_mw": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "total_loss_mvar": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "slack_p_mw": {
+          "$ref": "#/$defs/ResultNumber"
+        },
+        "slack_q_mvar": {
+          "$ref": "#/$defs/ResultNumber"
+        }
+      },
+      "required": [
+        "converged",
+        "iterations",
+        "energized_bus_count",
+        "total_generation_mw",
+        "total_generation_mvar",
+        "total_served_load_mw",
+        "total_served_load_mvar",
+        "total_unserved_load_mw",
+        "total_unserved_load_mvar",
+        "total_loss_mw",
+        "total_loss_mvar",
+        "slack_p_mw",
+        "slack_q_mvar"
+      ],
+      "additionalProperties": false
+    },
+    "SolutionResults": {
+      "type": "object",
+      "properties": {
+        "buses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/BusResult"
+          }
+        },
+        "lines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/LineResult"
+          }
+        },
+        "transformers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/TransformerResult"
+          }
+        },
+        "generators": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/GeneratorResult"
+          }
+        },
+        "external_grids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/GeneratorResult"
+          }
+        },
+        "loads": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DemandResult"
+          }
+        },
+        "shunts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DemandResult"
+          }
+        },
+        "system": {
+          "$ref": "#/$defs/SystemResult"
+        }
+      },
+      "required": [
+        "buses",
+        "lines",
+        "transformers",
+        "generators",
+        "external_grids",
+        "loads",
+        "shunts",
+        "system"
+      ],
+      "additionalProperties": false
+    },
+    "SolverInfo": {
+      "type": "object",
+      "properties": {
+        "backend": {
+          "enum": [
+            "pandapower",
+            "typescript_newton_raphson",
+            "numpy_scipy_newton_raphson"
+          ]
+        },
+        "backend_version": {
+          "type": "string"
+        },
+        "runtime": {
+          "type": "string"
+        },
+        "runtime_version": {
+          "type": "string"
+        },
+        "package_lock_digest": {
+          "type": "string"
+        },
+        "algorithm": {
+          "const": "newton_raphson"
+        },
+        "tolerance_mva": {
+          "type": "number"
+        },
+        "max_iterations": {
+          "type": "integer"
+        },
+        "enforce_q_limits": {
+          "type": "boolean"
+        },
+        "transformer_equivalent": {
+          "const": "t"
+        }
+      },
+      "required": [
+        "backend",
+        "backend_version",
+        "runtime",
+        "runtime_version",
+        "package_lock_digest",
+        "algorithm",
+        "tolerance_mva",
+        "max_iterations",
+        "enforce_q_limits",
+        "transformer_equivalent"
+      ],
+      "additionalProperties": false
+    },
+    "SolverMapping": {
+      "type": "object",
+      "properties": {
+        "solver_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "solver_kind": {
+          "enum": [
+            "bus",
+            "branch",
+            "generator",
+            "load",
+            "shunt"
+          ]
+        },
+        "canonical_element_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          }
+        },
+        "canonical_point_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          }
+        },
+        "terminal_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          }
+        }
+      },
+      "required": [
+        "solver_id",
+        "solver_kind",
+        "canonical_element_ids",
+        "canonical_point_ids",
+        "terminal_ids"
+      ],
+      "additionalProperties": false
+    },
+    "ResultDependency": {
+      "type": "object",
+      "properties": {
+        "result_path": {
+          "type": "string"
+        },
+        "input_paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "method": {
+          "enum": [
+            "direct",
+            "conservative_connected_component"
+          ]
+        }
+      },
+      "required": [
+        "result_path",
+        "input_paths",
+        "method"
+      ],
+      "additionalProperties": false
+    },
+    "ResultQuality": {
+      "type": "object",
+      "properties": {
+        "defaulted_input_paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "library_input_paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "user_input_paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ResultDependency"
+          }
+        }
+      },
+      "required": [
+        "defaulted_input_paths",
+        "library_input_paths",
+        "user_input_paths",
+        "dependencies"
+      ],
+      "additionalProperties": false
+    },
+    "SolveTiming": {
+      "type": "object",
+      "properties": {
+        "queue_ms": {
+          "type": "number"
+        },
+        "conversion_ms": {
+          "type": "number"
+        },
+        "solve_ms": {
+          "type": "number"
+        },
+        "result_transfer_ms": {
+          "type": "number"
+        },
+        "redraw_ms": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "total_ms": {
+          "type": "number"
+        },
+        "runtime_warm": {
+          "type": "boolean"
+        },
+        "measurement_environment": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "queue_ms",
+        "conversion_ms",
+        "solve_ms",
+        "result_transfer_ms",
+        "redraw_ms",
+        "total_ms",
+        "runtime_warm",
+        "measurement_environment"
+      ],
+      "additionalProperties": false
+    },
+    "SolutionRun": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "model_revision": {
+          "$ref": "#/$defs/Revision"
+        },
+        "input_hash": {
+          "type": "string"
+        },
+        "requested_at": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "completed_at": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Timestamp"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "status": {
+          "enum": [
+            "running",
+            "converged",
+            "nonconverged",
+            "failed",
+            "superseded"
+          ]
+        },
+        "solver": {
+          "$ref": "#/$defs/SolverInfo"
+        },
+        "iterations": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "timing": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/SolveTiming"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Finding"
+          }
+        },
+        "mappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SolverMapping"
+          }
+        },
+        "energized_point_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          }
+        },
+        "deenergized_point_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          }
+        },
+        "quality": {
+          "$ref": "#/$defs/ResultQuality"
+        },
+        "results": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/SolutionResults"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "model_revision",
+        "input_hash",
+        "requested_at",
+        "completed_at",
+        "status",
+        "solver",
+        "iterations",
+        "timing",
+        "diagnostics",
+        "mappings",
+        "energized_point_ids",
+        "deenergized_point_ids",
+        "quality",
+        "results"
+      ],
+      "additionalProperties": false
+    },
+    "ExportRecord": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "timestamp": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "model_revision": {
+          "$ref": "#/$defs/Revision"
+        },
+        "solution_run_id": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/ID"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "format": {
+          "enum": [
+            "canonical_json",
+            "pandapower_json",
+            "matpower_mat",
+            "psse_raw_33",
+            "xlsx",
+            "csv",
+            "pdf"
+          ]
+        },
+        "exporter_version": {
+          "type": "string"
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "round_trip_status": {
+          "enum": [
+            "not_run",
+            "passed",
+            "failed",
+            "not_applicable"
+          ]
+        },
+        "max_voltage_delta_pu": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "independent_reader": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "timestamp",
+        "model_revision",
+        "solution_run_id",
+        "format",
+        "exporter_version",
+        "warnings",
+        "round_trip_status",
+        "max_voltage_delta_pu",
+        "independent_reader"
+      ],
+      "additionalProperties": false
+    },
+    "StudyDocument": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0.0"
+        },
+        "case_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "revision": {
+          "$ref": "#/$defs/Revision"
+        },
+        "meta": {
+          "$ref": "#/$defs/CaseMeta"
+        },
+        "settings": {
+          "$ref": "#/$defs/StudySettings"
+        },
+        "source_files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceFile"
+          }
+        },
+        "extraction": {
+          "$ref": "#/$defs/ExtractionWorkspace"
+        },
+        "connectivity_points": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ConnectivityPoint"
+          }
+        },
+        "elements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Element"
+          }
+        },
+        "review": {
+          "$ref": "#/$defs/ReviewState"
+        },
+        "data_suggestions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DataSuggestion"
+          }
+        },
+        "validation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/ValidationRun"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "operation": {
+          "$ref": "#/$defs/OperationState"
+        },
+        "solution": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/SolutionRun"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "export_history": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ExportRecord"
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "case_id",
+        "revision",
+        "meta",
+        "settings",
+        "source_files",
+        "extraction",
+        "connectivity_points",
+        "elements",
+        "review",
+        "data_suggestions",
+        "validation",
+        "operation",
+        "solution",
+        "export_history"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

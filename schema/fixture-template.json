@@ -1,0 +1,368 @@
+{
+  "schema_version": "1.0.0",
+  "case_id": "fixture-template",
+  "revision": 0,
+  "meta": {
+    "name": {
+      "status": "known",
+      "value": "Fixture template",
+      "provenance": {
+        "source": "library",
+        "library_id": "ieee-reference-fixtures",
+        "library_version": "1",
+        "item_id": "case-template",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "network_type": {
+      "status": "known",
+      "value": "transmission_subtransmission",
+      "provenance": {
+        "source": "library",
+        "library_id": "ieee-reference-fixtures",
+        "library_version": "1",
+        "item_id": "case-template",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "frequency_hz": {
+      "status": "known",
+      "value": 50,
+      "provenance": {
+        "source": "library",
+        "library_id": "ieee-reference-fixtures",
+        "library_version": "1",
+        "item_id": "case-template",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "symbol_set": {
+      "status": "known",
+      "value": "IEC",
+      "provenance": {
+        "source": "library",
+        "library_id": "ieee-reference-fixtures",
+        "library_version": "1",
+        "item_id": "case-template",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "base_mva": {
+      "status": "known",
+      "value": 100,
+      "provenance": {
+        "source": "library",
+        "library_id": "ieee-reference-fixtures",
+        "library_version": "1",
+        "item_id": "case-template",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "case_origin": {
+      "status": "known",
+      "value": "sample",
+      "provenance": {
+        "source": "library",
+        "library_id": "ieee-reference-fixtures",
+        "library_version": "1",
+        "item_id": "case-template",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "description": {
+      "status": "known",
+      "value": "A schema-valid empty envelope for reference-fixture conversion.",
+      "provenance": {
+        "source": "library",
+        "library_id": "ieee-reference-fixtures",
+        "library_version": "1",
+        "item_id": "case-template",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "created_at": "2026-11-13T00:00:00Z",
+    "modified_at": "2026-11-13T00:00:00Z",
+    "fixture_id": "template",
+    "source_case_hash": null
+  },
+  "settings": {
+    "slack_element_id": {
+      "status": "missing",
+      "reason": "not_entered",
+      "candidates": [],
+      "evidence": []
+    },
+    "slack_confirmed": {
+      "status": "known",
+      "value": false,
+      "provenance": {
+        "source": "library",
+        "library_id": "ieee-reference-fixtures",
+        "library_version": "1",
+        "item_id": "case-template",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "base_confirmed": {
+      "status": "known",
+      "value": true,
+      "provenance": {
+        "source": "library",
+        "library_id": "ieee-reference-fixtures",
+        "library_version": "1",
+        "item_id": "case-template",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "voltage_min_pu": {
+      "status": "known",
+      "value": 0.95,
+      "provenance": {
+        "source": "library",
+        "library_id": "ieee-reference-fixtures",
+        "library_version": "1",
+        "item_id": "case-template",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "voltage_max_pu": {
+      "status": "known",
+      "value": 1.05,
+      "provenance": {
+        "source": "library",
+        "library_id": "ieee-reference-fixtures",
+        "library_version": "1",
+        "item_id": "case-template",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "branch_warning_percent": {
+      "status": "known",
+      "value": 80,
+      "provenance": {
+        "source": "library",
+        "library_id": "ieee-reference-fixtures",
+        "library_version": "1",
+        "item_id": "case-template",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "branch_alarm_percent": {
+      "status": "known",
+      "value": 100,
+      "provenance": {
+        "source": "library",
+        "library_id": "ieee-reference-fixtures",
+        "library_version": "1",
+        "item_id": "case-template",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "transformer_z_min_percent": {
+      "status": "known",
+      "value": 2,
+      "provenance": {
+        "source": "library",
+        "library_id": "ieee-reference-fixtures",
+        "library_version": "1",
+        "item_id": "case-template",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "transformer_z_max_percent": {
+      "status": "known",
+      "value": 25,
+      "provenance": {
+        "source": "library",
+        "library_id": "ieee-reference-fixtures",
+        "library_version": "1",
+        "item_id": "case-template",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "nominal_voltage_tolerance_percent": {
+      "status": "known",
+      "value": 1,
+      "provenance": {
+        "source": "library",
+        "library_id": "ieee-reference-fixtures",
+        "library_version": "1",
+        "item_id": "case-template",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "low_confidence_threshold": {
+      "status": "known",
+      "value": 0.85,
+      "provenance": {
+        "source": "library",
+        "library_id": "ieee-reference-fixtures",
+        "library_version": "1",
+        "item_id": "case-template",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "voltage_unit_slip_ratio": {
+      "status": "known",
+      "value": 1000,
+      "provenance": {
+        "source": "library",
+        "library_id": "ieee-reference-fixtures",
+        "library_version": "1",
+        "item_id": "case-template",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "power_unit_slip_ratio": {
+      "status": "known",
+      "value": 1000,
+      "provenance": {
+        "source": "library",
+        "library_id": "ieee-reference-fixtures",
+        "library_version": "1",
+        "item_id": "case-template",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "slack_import_limit_mw": {
+      "status": "known",
+      "value": null,
+      "provenance": {
+        "source": "library",
+        "library_id": "ieee-reference-fixtures",
+        "library_version": "1",
+        "item_id": "case-template",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "allow_slack_export": {
+      "status": "known",
+      "value": false,
+      "provenance": {
+        "source": "library",
+        "library_id": "ieee-reference-fixtures",
+        "library_version": "1",
+        "item_id": "case-template",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "solver_tolerance_mva": {
+      "status": "known",
+      "value": 1e-08,
+      "provenance": {
+        "source": "library",
+        "library_id": "ieee-reference-fixtures",
+        "library_version": "1",
+        "item_id": "case-template",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "max_iterations": {
+      "status": "known",
+      "value": 30,
+      "provenance": {
+        "source": "library",
+        "library_id": "ieee-reference-fixtures",
+        "library_version": "1",
+        "item_id": "case-template",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "enforce_q_limits": {
+      "status": "known",
+      "value": false,
+      "provenance": {
+        "source": "library",
+        "library_id": "ieee-reference-fixtures",
+        "library_version": "1",
+        "item_id": "case-template",
+        "accepted_at": "2026-11-13T00:00:00Z"
+      },
+      "derivation": null
+    },
+    "conventions": {
+      "positive_sequence": true,
+      "balanced": true,
+      "algorithm": "newton_raphson",
+      "voltage_angles": "degrees",
+      "branch_power_sign": "positive_from_bus_into_element",
+      "generator_power_sign": "positive_injection",
+      "load_power_sign": "positive_consumption",
+      "shunt_power_sign": "positive_consumption_inductive_q",
+      "bus_net_power_sign": "positive_injection",
+      "transformer_equivalent": "t",
+      "tap_control": "fixed_user_position",
+      "distributed_slack": false
+    },
+    "additional_rule_thresholds": []
+  },
+  "source_files": [],
+  "extraction": {
+    "runs": [],
+    "observations": [],
+    "unassociated_text": [],
+    "unresolved_endpoints": [],
+    "merge_decisions": [],
+    "annotations": []
+  },
+  "connectivity_points": [],
+  "elements": [],
+  "review": {
+    "status": "pending",
+    "confirmed_model_revision": null,
+    "confirmed_input_hash": null,
+    "confirmed_at": null,
+    "unresolved_element_ids": [],
+    "decisions": []
+  },
+  "data_suggestions": [],
+  "validation": null,
+  "operation": {
+    "base_snapshot": null,
+    "events": [],
+    "acknowledgements": [],
+    "display_preferences": {
+      "theme": "dark",
+      "breaker_colour_convention": "shape_only",
+      "voltage_colouring": false,
+      "tables": [],
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "zoom": 1
+      },
+      "display_revision": 0
+    },
+    "island_policy": {
+      "mode": "preparation_strict",
+      "authorized_isolated_element_ids": [],
+      "authorizing_event_ids": [],
+      "energized_island_slacks": []
+    }
+  },
+  "solution": null,
+  "export_history": []
+}

@@ -1,0 +1,15 @@
+{
+  "generated_at": "2026-11-13T10:20:42.926390Z",
+  "tests": [
+    {
+      "fixture": "case9",
+      "maximum_voltage_error_pu": 3.3306690738754696e-16,
+      "native_round_trip": "passed"
+    },
+    {
+      "fixture": "case14",
+      "maximum_voltage_error_pu": 0.0,
+      "native_round_trip": "passed"
+    }
+  ]
+}
