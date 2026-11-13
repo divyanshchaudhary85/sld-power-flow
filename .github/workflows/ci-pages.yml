@@ -62,6 +62,9 @@ jobs:
       - name: Pyodide numerical parity in the Node WASM runtime
         run: npm run test:runtime
 
+      - name: Independently re-import actual-WASM RAW exports
+        run: python tests/python/verify_runtime_raw.py
+
       - name: Ensure tests did not rewrite committed reference fixtures
         run: git diff --exit-code -- public/fixtures
 
