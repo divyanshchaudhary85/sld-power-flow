@@ -90,16 +90,19 @@ export default function App() {
   };
   const importCase = async (file?: File) => {
     if (!file) return;
-    ++loadSequence.current; adapter.invalidate(); setError('');
+    const sequence = ++loadSequence.current;
+    adapter.invalidate(); setLoading(true); setError('');
     try {
       if (file.size > 10 * 1024 * 1024) throw new Error('The canonical JSON limit is 10 MB.');
-      const document = parseStudyDocument(await file.text());
+      const text = await file.text();
+      if (sequence !== loadSequence.current) return;
+      const document = parseStudyDocument(text);
       document.solution = null;
       document.review = { ...document.review, status: 'pending', confirmed_model_revision: null, confirmed_input_hash: null, confirmed_at: null };
       setSample('imported'); setReference(null); studyRef.current = document; setStudy(document); setElapsed(null);
       log('Imported canonical case · inspect and confirm the exact inputs before solving');
-    } catch (e) { setError(e instanceof Error ? e.message : 'The file could not be imported.'); }
-    finally { setLoading(false); }
+    } catch (e) { if (sequence === loadSequence.current) setError(e instanceof Error ? e.message : 'The file could not be imported.'); }
+    finally { if (sequence === loadSequence.current) setLoading(false); }
   };
   const reviewCurrent = async () => {
     const current = studyRef.current;

@@ -156,6 +156,8 @@ def to_pandapower(document):
     for point in point_ids:
         groups.setdefault(uf.find(point), []).append(point)
     roots = list(groups)
+    if len(roots) > 50:
+        raise ModelError("Version 1 supports at most 50 reduced electrical buses")
     nominal = {}
 
     def set_voltage(point, kv, origin):

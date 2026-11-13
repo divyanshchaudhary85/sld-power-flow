@@ -161,3 +161,37 @@ def test_native_zip_is_not_silently_approximated():
     template = json.loads((ROOT / "schema/fixture-template.json").read_text())
     with pytest.raises(ModelError, match="voltage-dependent"):
         from_pandapower(native, "invalid-zip", template)
+
+
+def test_bus_limit_counts_reduced_nodes_not_only_busbars_or_raw_points():
+    _, doc = fixture()
+    line_template = next(e for e in doc["elements"] if e["type"]["value"] == "line")
+    # These are valid connected terminal nodes, not additional drawn busbars.
+    # Nine existing nodes plus 42 branch endpoints exceed the numerical limit.
+    for index in range(42):
+        point = copy.deepcopy(doc["connectivity_points"][0])
+        point["id"] = f"terminal-node-{index}"
+        doc["connectivity_points"].append(point)
+        line = copy.deepcopy(line_template)
+        line["id"] = f"radial-line-{index}"
+        for role, terminal in line["terminals"].items():
+            terminal["id"] = f"{line['id']}:{role}"
+        line["terminals"]["to"]["connection_point"] = known(point["id"])
+        doc["elements"].append(line)
+    assert sum(e["type"]["value"] == "busbar" for e in doc["elements"]) == 9
+    with pytest.raises(ModelError, match="at most 50 reduced electrical buses"):
+        to_pandapower(doc)
+
+    # A closed coupler fuses two branch-end nodes: 51 raw points now represent
+    # exactly 50 numerical buses and must be accepted.
+    switch = copy.deepcopy(line_template)
+    switch.update(id="terminal-coupler", type=known("circuit_breaker"))
+    switch["data"] = {"state": known("closed"), "normal_state": known("closed"),
+        "rated_current_ka": known(1.0), "rated_voltage_kv": known(None), "electrical_model": known("ideal")}
+    switch["terminals"] = {role: {"id": f"terminal-coupler:{role}", "role": role,
+        "connection_point": known(f"terminal-node-{index}"), "source_ref": switch["source_ref"], "drawn_anchor": None}
+        for role, index in (("a", 40), ("b", 41))}
+    doc["elements"].append(switch)
+    adapted = to_pandapower(doc)
+    assert len(doc["connectivity_points"]) == 51
+    assert len(adapted["net"].bus) == 50
